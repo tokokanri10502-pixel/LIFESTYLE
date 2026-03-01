@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOKO Life Trend NEWS | 暮らしのトレンド情報集約サイト</title>
+    <title>TOKO Food Trend NEWS | 食品業界のトレンド情報集約サイト</title>
     <link rel="stylesheet" href="style.css">
     <!-- Google Fonts: Noto Sans JP for readability, Oswald for headings -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Oswald:wght@500;700&family=Inter:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Oswald:wght@500;700&display=swap"
         rel="stylesheet">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -20,8 +20,8 @@
     <header class="site-header">
         <div class="container">
             <a href="#" class="logo" id="site-logo">
-                <i class="fa-solid fa-compass"></i>
-                <h1><span class="logo-toko">TOKO</span> Life Trend NEWS</h1>
+                <i class="fa-solid fa-utensils"></i>
+                <h1><span class="logo-toko">TOKO</span> Food Trend NEWS</h1>
             </a>
             <nav class="main-nav">
                 <ul>
@@ -51,7 +51,7 @@
     <!-- ランキングセクション（今週の急上昇） -->
     <section class="ranking-section">
         <div class="container">
-            <p class="section-lead">日常をアップデートする最新トレンドを毎日お届け</p>
+            <p class="section-lead">食品のトレンド情報を毎日更新！</p>
             <h2 class="section-title"><i class="fa-solid fa-crown" style="color: #f1c40f;"></i> 今週の急上昇トレンド</h2>
             <div class="ranking-grid" id="ranking-grid">
                 <!-- JSでランキングカードを生成 -->
@@ -59,16 +59,16 @@
         </div>
     </section>
 
-    <!-- ヒーロー / ピックアップ -->
+    <!-- ヒット習慣予報セクション -->
     <section class="forecast-section">
         <div class="container">
             <div class="forecast-banner">
                 <div class="forecast-info">
                     <span class="forecast-label">PICKUP</span>
-                    <h2 class="forecast-title">未来の暮らし習慣予報</h2>
-                    <p>ライフスタイルに変化をもたらす最新の兆しを分析</p>
+                    <h2 class="forecast-title">ヒット習慣予報</h2>
+                    <p>博報堂が分析する次のヒット予測コラム</p>
                 </div>
-                <a href="#" class="btn-forecast">
+                <a href="https://www.hakuhodo.co.jp/magazine/series/hit-shukan/" target="_blank" class="btn-forecast">
                     詳しく見る <i class="fa-solid fa-arrow-up-right-from-square"></i>
                 </a>
             </div>
@@ -78,22 +78,26 @@
     <!-- カテゴリフィルター & 検索 -->
     <section class="filter-section">
         <div class="container">
+            <!-- 検索バー -->
             <div class="search-container">
-                <input type="text" id="search-input" placeholder="トレンドを検索（例：AI、マインドフルネス）">
+                <input type="text" id="search-input" placeholder="キーワードで検索...（例：プロテイン、AI）">
             </div>
 
             <div class="filter-buttons">
                 <button class="filter-btn active" data-category="all">すべて</button>
-                <button class="filter-btn" data-category="wellness">ウェルネス</button>
-                <button class="filter-btn" data-category="mens">メンズ</button>
-                <button class="filter-btn" data-category="ladies">レディス</button>
-                <button class="filter-btn" data-category="kids">キッズ</button>
-                <button class="filter-btn" data-category="baby">ベビー</button>
-                <button class="filter-btn" data-category="work">ワークスタイル</button>
-                <button class="filter-btn" data-category="living">リビング</button>
-                <button class="filter-btn" data-category="sns">SNS</button>
-                <button class="filter-btn" data-category="shoes">シューズ</button>
-                <button class="filter-btn" data-category="cosme">コスメ</button>
+                <button class="filter-btn" data-category="retail">小売・流通</button>
+                <button class="filter-btn" data-category="sweets">スイーツ</button>
+                <button class="filter-btn" data-category="beverage">飲料</button>
+                <button class="filter-btn" data-category="gaishoku">外食</button>
+                <button class="filter-btn" data-category="nakashoku">中食</button>
+                <button class="filter-btn" data-category="health">健康</button>
+                <button class="filter-btn" data-category="saving">節約</button>
+                <button class="filter-btn" data-category="z_gen">Z世代</button>
+                <button class="filter-btn" data-category="asian">韓国・アジア料理</button>
+                <button class="filter-btn" data-category="sns">SNSトレンド</button>
+                <button class="filter-btn" data-category="hiroshima">広島県</button>
+                <button class="filter-btn" data-category="fukuoka">福岡県</button>
+                <button class="filter-btn" data-category="hokkaido">北海道</button>
             </div>
         </div>
     </section>
@@ -105,9 +109,10 @@
                 <!-- JavaScriptでここに記事カードを生成 -->
             </div>
 
+            <!-- アーカイブ表示ボタン -->
             <div class="archive-action" id="archive-action">
                 <button id="load-archive-btn" class="btn-archive">
-                    過去のトレンドを見る <i class="fa-solid fa-chevron-down"></i>
+                    過去の記事をもっと見る <i class="fa-solid fa-chevron-down"></i>
                 </button>
             </div>
         </div>
@@ -116,9 +121,9 @@
     <!-- コラムセクション -->
     <section class="column-section" id="column-section">
         <div class="container">
-            <h2 class="section-title"><i class="fa-solid fa-lightbulb" style="color: #3498db;"></i> ライフスタイル・ビジョン
+            <h2 class="section-title"><i class="fa-solid fa-pen-nib" style="color: var(--secondary-color);"></i> 専門家コラム
             </h2>
-            <p class="section-subtitle">専門家が提案する、一歩先の「心地よい暮らし」</p>
+            <p class="section-subtitle">食品業界のプロが読み解く、トレンドの深層</p>
             <div class="column-grid" id="column-grid">
                 <!-- JavaScriptでここにコラムカードを生成 -->
             </div>
@@ -128,13 +133,8 @@
     <!-- フッター -->
     <footer class="site-footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <span class="logo-accent">Life</span> Trend Monitor
-                </div>
-                <div class="copyright">
-                    &copy; 2026 Life Trend Monitor. All Rights Reserved.
-                </div>
+            <div class="copyright">
+                &copy; 2026 TOKO Food Trend. All Rights Reserved.
             </div>
         </div>
     </footer>
