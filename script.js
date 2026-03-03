@@ -8,1144 +8,821 @@ function getRelativeDate(daysOffset = 0) {
     return `${y}.${m}.${day}`;
 }
 
-// モックデータ：ライフスタイルトレンドニュース
+// モックデータ：食品トレンドニュース
 const newsData = [
     {
-        id: 1206,
-        title: "2026年のトレンドカラー発表、静寂を象徴する『クラウドダンサー』が選出",
-        category: "color",
-        categoryLabel: "カラー",
-        date: "2026.03.03",
-        summary: "PANTONE社が発表した2026年の色は、柔らかな白色『Cloud Dancer』。情報過多なデジタル社会における「心の再起動」と「静けさ」を象徴する色が、ファッションからインテリアまで席巻する。",
-        source: "Design News",
-        sourceUrl: "#",
-        icon: "fa-palette",
-        gradient: "linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)",
-        viewCount: 5200
-    },
-    {
-        id: 1207,
-        title: "JAFCA、2026年のメッセージカラーに『ハートフェルト・ピンク』を決定",
-        category: "color",
-        categoryLabel: "カラー",
-        date: "2026.03.03",
-        summary: "日本流行色協会が選んだのは、活力を感じさせる明るいピンク。停滞から変化へ、実体験の価値を呼び覚ますようなポジティブなエネルギーが、ライフスタイルのあらゆる場面で取り入れられる。",
-        source: "Color Institute",
-        sourceUrl: "#",
-        icon: "fa-fill-drip",
-        gradient: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)",
-        viewCount: 4800
-    },
-    {
-        id: 1201,
-        title: "ZOZOTOWN、『AIサイズ推論』がさらに進化。試着不要の精度99%へ",
-        category: "ladies",
-        categoryLabel: "レディス",
-        date: "2026.03.03",
-        summary: "数枚の写真から全身のミリ単位の数値を計測。AIがブランドごとの個体差まで計算し、購入後の「サイズ不一致」をゼロにする新サービスを開始。",
-        source: "ZOZO プレス",
-        sourceUrl: "https://corp.zozo.com/news/",
-        icon: "fa-camera",
-        gradient: "linear-gradient(135deg, #000000 0%, #434343 100%)",
-        viewCount: 4500
-    },
-    {
-        id: 1202,
-        title: "IKEA、日本の狭小住宅に特化した『トランスフォーマー家具』を発表",
-        category: "living",
-        categoryLabel: "リビング",
-        date: "2026.03.03",
-        summary: "日中はデスク、夜はベッドへ。AIが居住者の生活リズムを学習し、自動で家具の配置や形状を最適化する次世代の居住体験を提案。",
-        source: "IKEA Japan News",
-        sourceUrl: "https://www.ikea.com/jp/ja/newsroom/",
-        icon: "fa-couch",
-        gradient: "linear-gradient(135deg, #0051ba 0%, #ffda1a 100%)",
-        viewCount: 3800
-    },
-    {
-        id: 1203,
-        title: "アシックス、疲労回復を加速させる『次世代リカバリーシューズ』発売",
-        category: "shoes",
-        categoryLabel: "シューズ",
-        date: "2026.03.02",
-        summary: "歩くたびに足裏をマッサージし、血流を促進する特殊素材を採用。ビジネスシーンでも違和感のないデザインで、働きながら回復を図る。",
-        source: "ASICS ニュース",
-        sourceUrl: "https://corp.asics.com/jp/press/",
-        icon: "fa-shoe-prints",
-        gradient: "linear-gradient(135deg, #001e62 0%, #3498db 100%)",
-        viewCount: 3200
-    },
-    {
-        id: 1204,
-        title: "楽天、サステナブル購入でポイント3倍『グリーン・ポイント』制度を開始",
-        category: "wellness",
-        categoryLabel: "ウェルネス",
-        date: "2026.03.02",
-        summary: "環境負荷の低い商品を選択することでポイント還元率がアップ。消費者の「応援買い」を促進させ、EC市場全体の脱炭素化を加速させる。",
-        source: "楽天グループ プレス",
-        sourceUrl: "https://corp.rakuten.co.jp/news/",
-        icon: "fa-leaf",
-        gradient: "linear-gradient(135deg, #bfd833 0%, #009944 100%)",
-        viewCount: 2900
-    },
-    {
-        id: 1205,
-        title: "SoftBank、全家屋対応の『スマートホームAIハブ』を標準提供へ",
-        category: "living",
-        categoryLabel: "リビング",
-        date: "2026.03.02",
-        summary: "既存の家電をそのままスマート化。音声操作だけでなく、AIが家族の健康状態を察知して室温や照明を自動調節する「見守り」機能を強化。",
-        source: "ソフトバンク ニュース",
-        sourceUrl: "https://www.softbank.jp/corp/news/",
-        icon: "fa-house-signal",
-        gradient: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
-        viewCount: 4100
-    },
-    {
-        id: 2,
-        title: "『マインドフル・ネスティング』、自宅を最高の癒やし空間にする新習慣",
-        category: "wellness",
-        categoryLabel: "ウェルネス",
-        date: "2026.02.28",
-        summary: "外の世界の喧騒を断ち切り、自宅のインテリアや香りを整えることで精神的安定を図る。北欧のヒュッゲを超えた、より戦略的なセルフケアが注目される。",
-        source: "Living Well",
-        sourceUrl: "https://prtimes.jp/lifestyle/",
-        icon: "fa-spa",
-        gradient: "linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)",
-        viewCount: 1820
-    },
-    {
-        id: 3,
-        title: "生成AIによる「自分専用キャリアコーチ」が仕事の常識を変える",
-        category: "work",
-        categoryLabel: "ワークスタイル",
-        date: "2026.02.28",
-        summary: "個人のスキルと志向を学習し、最適なネクストアクションを提案するパーソナルAI。2026年は、上司よりもAIに相談するビジネスパーソンが多数派に。",
-        source: "Career Weekly",
-        sourceUrl: "https://xtrend.nikkei.com/",
-        icon: "fa-user-tie",
-        gradient: "linear-gradient(135deg, #2c3e50 0%, #4ca1af 100%)",
-        viewCount: 2100
-    },
-    {
-        id: 1101,
-        title: "洋服の青山、全世代向け『みんなのスーツ』がヒット。軽さとコスパを両立",
-        category: "work",
-        categoryLabel: "ワークスタイル",
-        date: "2026.03.01",
-        summary: "着用時の軽さと柔らかさを追求しつつ、きちんとした見た目を維持。物価高の中で圧倒的なコストパフォーマンスが全世代に支持されている。",
-        source: "青山プレスリリース",
-        sourceUrl: "https://www.y-aoyama.jp/news/",
-        icon: "fa-user-tie",
-        gradient: "linear-gradient(135deg, #2c3e50 0%, #000000 100%)",
-        viewCount: 3400
-    },
-    {
-        id: 1102,
-        title: "AOKI、パジャマスーツが累計販売数更新。ハイブリッドワークの定義へ",
-        category: "work",
-        categoryLabel: "ワークスタイル",
-        date: "2026.02.28",
-        summary: "「見ためスーツ、着心地パジャマ」のコンセプトが完全に定着。自宅とオフィスを行き来する現代の多様な働き方を支える一着として選ばれ続けている。",
-        source: "AOKI ニュース",
-        sourceUrl: "https://www.aoki-style.com/press/",
-        icon: "fa-user-tie",
-        gradient: "linear-gradient(135deg, #1d4ede 0%, #4ca1af 100%)",
-        viewCount: 3100
-    },
-    {
-        id: 1103,
-        title: "はるやま、丸ごと洗える『完全ウォッシャブルスーツ』2026年モデル予約開始",
-        category: "work",
-        categoryLabel: "ワークスタイル",
-        date: "2026.02.27",
-        summary: "家庭用洗濯機での耐久性がさらに向上。防シワ・速乾機能に加え、360度ストレッチで「ストレスフリー」な着心地を追求した最新作。",
-        source: "はるやま Online",
-        sourceUrl: "https://haruyama.jp/news/",
-        icon: "fa-user-tie",
-        gradient: "linear-gradient(135deg, #24c6dc 0%, #514a9d 100%)",
-        viewCount: 2800
-    },
-    {
-        id: 1104,
-        title: "スーツセレクト、Z世代向け『ワイドパンツスーツ』で新しいビジネス像を提案",
-        category: "work",
-        categoryLabel: "ワークスタイル",
-        date: "2026.03.01",
-        summary: "従来のタイトなシルエットから一変、リラックス感のあるワイドシルエットが登場。ファッション性とフォーマルさを両立させ、若年層のニーズを開拓。",
-        source: "SUIT SELECT News",
-        sourceUrl: "https://www.suit-select.com/news/",
-        icon: "fa-user-tie",
-        gradient: "linear-gradient(135deg, #000000 0%, #333333 100%)",
-        viewCount: 4200
-    },
-    {
-        id: 1105,
-        title: "『スーツスクエア』への屋号変更が全国で加速。4ブランド融合の新体験",
-        category: "work",
-        categoryLabel: "ワークスタイル",
-        date: "2026.02.28",
-        summary: "ザ・スーツカンパニーが次世代型店舗へ進化。あらゆるビジネスウェアのニーズに一拠点で対応するOMO店舗が、主要都市を中心に続々とリニューアル。",
-        source: "SUIT SQUARE プレス",
-        sourceUrl: "https://www.uktsc.com/info/",
-        icon: "fa-user-tie",
-        gradient: "linear-gradient(135deg, #bdc3c7 0%, #2c3e50 100%)",
-        viewCount: 2950
-    },
-    {
-        id: 5,
-        title: "『スマートミラー』が実現する、美容のパーソナライズ化",
-        category: "living",
-        categoryLabel: "リビング",
-        date: "2026.02.27",
-        summary: "鏡に映る肌の状態を分析し、その日の最適なスキンケアやメイクを提案。AIがコンシェルジュのように暮らしをサポートするデバイスの普及。",
-        source: "Tech Lifestyle",
-        sourceUrl: "https://prtimes.jp/technology/",
-        icon: "fa-magic",
-        gradient: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
-        viewCount: 1290
-    },
-    {
-        id: 7,
-        title: "睡眠を科学する『スリープテック』が第二フェーズへ",
-        category: "wellness",
-        categoryLabel: "ウェルネス",
-        date: "2026.02.26",
-        summary: "単なる計測から、脳波誘導による深い眠りへの能動的な介入へ。より効率的で質の高い休息がパフォーマンスの鍵を握る。",
-        source: "Health Daily",
-        sourceUrl: "#",
-        icon: "fa-moon",
-        gradient: "linear-gradient(135deg, #302b63 0%, #24243e 100%)",
-        viewCount: 1980
-    },
-    {
-        id: 210,
-        title: "アダストリア『Andemiu』、土屋巴瑞季を迎え2026春夏アンバサダー就任",
-        category: "ladies",
-        categoryLabel: "レディス",
-        date: "2026.03.01",
-        summary: "働く女性向けブランドAndemiuが春夏アンバサダーを公開。洗練されたトレンドLOOKとともに、オンオフ問わず活躍する新作コレクションを展開。",
-        source: "アダストリア プレス",
-        sourceUrl: "https://www.adastria.co.jp/news/",
-        icon: "fa-gem",
-        gradient: "linear-gradient(135deg, #fceabb 0%, #f8b500 100%)",
-        viewCount: 3800
-    },
-    {
-        id: 101,
-        title: "テックウェアの進化：都市生活を最適化する高機能アウター",
-        category: "mens",
-        categoryLabel: "メンズ",
-        date: "2026.02.28",
-        summary: "透湿防水性だけでなく、デバイスの収納や温度調節機能を備えたウェアが一般層にも普及。実用性とスタイルを高度に両立。",
-        source: "Urban Mode",
-        sourceUrl: "#",
-        icon: "fa-person-rays",
-        gradient: "linear-gradient(135deg, #2c3e50 0%, #4ca1af 100%)",
-        viewCount: 1650
-    },
-    {
-        id: 102,
-        title: "サステナブルな『おさがり』プラットフォーム、キッズ市場で急成長",
-        category: "kids",
-        categoryLabel: "キッズ",
-        date: "2026.02.27",
-        summary: "成長の早い子供服を、品質を維持したまま循環させる新サービス。親世代の環境意識の高まりを受け、リユースが当たり前の選択肢に。",
-        source: "Family Tech",
-        sourceUrl: "#",
-        icon: "fa-child",
-        gradient: "linear-gradient(135deg, #f6d365 0%, #fda085 100%)",
-        viewCount: 1420
-    },
-    {
-        id: 103,
-        title: "オーガニックコットンと竹炭繊維、ベビー肌着の新基準",
-        category: "baby",
-        categoryLabel: "ベビー",
-        date: "2026.03.01",
-        summary: "究極の低刺激と抗菌性を求めた新素材。敏感な赤ちゃんの肌を守るだけでなく、土に還る素材としてギフト需要も独占。",
-        source: "Baby Journal",
-        sourceUrl: "#",
-        icon: "fa-baby",
-        gradient: "linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%)",
-        viewCount: 1300
-    },
-    {
-        id: 201,
-        title: "ユニクロ『次世代ライフウェア』、AI分析による究極のフィット感",
-        category: "mens",
-        categoryLabel: "メンズ",
-        date: "2026.03.01",
-        summary: "100万人の体型データから導き出した、誰にでも似合う黄金シルエット。ベーシックの枠を超えた「機能美」の到達点。",
-        source: "Uniqlo Press",
-        sourceUrl: "https://www.uniqlo.com/jp/ja/news/topics/2026020601/",
-        icon: "fa-shirt",
-        gradient: "linear-gradient(135deg, #ff0000 0%, #cc0000 100%)",
-        viewCount: 3200
-    },
-    {
-        id: 202,
-        title: "ユナイテッドアローズ別注、伝統技術とモダンデザインの融合",
-        category: "mens",
-        categoryLabel: "メンズ",
-        date: "2026.02.28",
-        summary: "国内の老舗工場と連携した限定シリーズ。高価格帯ながら、本物志向の若年層から絶大な支持を集める。",
-        source: "UA Style",
-        sourceUrl: "https://store.united-arrows.co.jp/brand/ua/news/",
-        icon: "fa-crown",
-        gradient: "linear-gradient(135deg, #2c3e50 0%, #000000 100%)",
-        viewCount: 1800
-    },
-    {
-        id: 203,
-        title: "GU『1分で完売』、インフルエンサーとの超限定コラボが話題",
-        category: "ladies",
-        categoryLabel: "レディス",
-        date: "2026.03.01",
-        summary: "最新トレンドを最速で具現化。アプリ予約で即完売した新作は、リセール市場でも価格が高騰するほどの人気。",
-        source: "GU News",
-        sourceUrl: "https://www.gu-global.com/jp/ja/feature/cms/gu-news/",
-        icon: "fa-bolt",
-        gradient: "linear-gradient(135deg, #1d4ede 0%, #002691 100%)",
-        viewCount: 4100
-    },
-    {
-        id: 204,
-        title: "しまむら『骨格診断』対応ライン、セルフプロデュース需要を独占",
-        category: "ladies",
-        categoryLabel: "レディス",
-        date: "2026.02.27",
-        summary: "自分の骨格に合わせた「着痩せ」が叶う新シリーズ。手頃な価格でセルフプロデュースが楽しめるとSNSで爆発的に拡散。",
-        source: "Shimamura Life",
-        sourceUrl: "https://www.shimamura.gr.jp/shimamura/flier/",
-        icon: "fa-users",
-        gradient: "linear-gradient(135deg, #ff6b6b 0%, #ee5253 100%)",
-        viewCount: 2900
-    },
-    {
-        id: 205,
-        title: "イオン『トップバリュ』、汚れが落ちやすい機能性通学着がヒット",
-        category: "kids",
-        categoryLabel: "キッズ",
-        date: "2026.02.28",
-        summary: "泥汚れや油性ペンも洗濯で落ちやすい新素材を採用。働く親の負担を軽減する「家事ラク」アパレルとしてイオンが総力を結集。",
-        source: "Aeon Living",
-        sourceUrl: "https://www.topvalu.net/news/",
-        icon: "fa-school",
-        gradient: "linear-gradient(135deg, #8c429c 0%, #632a6f 100%)",
-        viewCount: 2500
-    },
-    {
-        id: 301,
-        title: "TikTok発『10秒時短メイク』、全世代で空前のブームに",
-        category: "sns",
-        categoryLabel: "SNS",
-        date: "2026.03.01",
-        summary: "短時間で劇的な変化を生むテクニックがバズ。関連グッズの売上が前年比200%を記録するなど、購買行動に直結する現象。",
-        source: "TikTok Trends",
-        sourceUrl: "#",
-        icon: "fa-brands fa-tiktok",
-        gradient: "linear-gradient(135deg, #000000 0%, #25f4ee 50%, #fe2c55 100%)",
-        viewCount: 5800
-    },
-    {
-        id: 302,
-        title: "Instagramで話題の『淡色カフェ』、全国各地で集客記録を更新",
-        category: "sns",
-        categoryLabel: "SNS",
-        date: "2026.02.28",
-        summary: "ベージュや白を基調とした内装。写真映えだけでなく、その空間での「体験」を共有することがステータスとなるカルチャーの定着。",
-        source: "Insta Vibes",
-        sourceUrl: "#",
-        icon: "fa-brands fa-instagram",
-        gradient: "linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)",
-        viewCount: 4200
-    },
-    {
-        id: 303,
-        title: "Xでバズった『究極の睡眠枕』、数分で予約枠が埋まる事態に",
-        category: "sns",
-        categoryLabel: "SNS",
-        date: "2026.03.01",
-        summary: "一個人のレビューツイートが数万リツイートされ、一夜にして完売。リアルな口コミが既存の広告を凌駕する拡散力を見せつけた。",
-        source: "X Buzz",
-        sourceUrl: "#",
-        icon: "fa-brands fa-x-twitter",
-        gradient: "linear-gradient(135deg, #000000 0%, #333333 100%)",
-        viewCount: 4900
-    },
-    {
-        id: 401,
-        title: "Nike『Air Max』最新作、再生素材を50%以上使用した環境対応モデル",
-        category: "shoes",
-        categoryLabel: "シューズ",
-        date: "2026.03.01",
-        summary: "圧倒的なクッション性はそのままに、製造工程を見直し環境負荷を低減。機能性と持続可能性を両立させた次世代のアイコン。",
-        source: "Nike News",
-        sourceUrl: "https://about.nike.com/en/newsroom/",
-        icon: "fa-bolt",
-        gradient: "linear-gradient(135deg, #f39c12 0%, #d35400 100%)",
-        viewCount: 3500
-    },
-    {
-        id: 402,
-        title: "Adidas『Stan Smith』、天然レザーを廃止しヴィーガン素材へ完全移行",
-        category: "shoes",
-        categoryLabel: "シューズ",
-        date: "2026.02.28",
-        summary: "不朽の名作が未来へと進化。ブランドを象徴する定番モデルが、環境への配慮を最優先した新しいスタンダードを提示する。",
-        source: "Adidas Style",
-        sourceUrl: "https://news.adidas.com/",
-        icon: "fa-leaf",
-        gradient: "linear-gradient(135deg, #2ecc71 0%, #27ae60 100%)",
-        viewCount: 3100
-    },
-    {
-        id: 403,
-        title: "New Balance『990』シリーズ、快適性を極めたメイド・イン・USA新作",
-        category: "shoes",
-        categoryLabel: "シューズ",
-        date: "2026.02.27",
-        summary: "「1000点満点中990点」の伝統。卓越したサポート性とクッション性が、タウンユースから本格的なウォーキングまで幅広く支持される。",
-        source: "NB Journal",
-        sourceUrl: "https://shop.newbalance.jp/shop/e/eEnb-news",
-        icon: "fa-shoe-prints",
-        gradient: "linear-gradient(135deg, #bdc3c7 0%, #2c3e50 100%)",
-        viewCount: 2800
-    },
-    {
-        id: 404,
-        title: "スケッチャーズ『ハンズフリースリップインズ』、立ったまま履ける利便性が話題",
-        category: "shoes",
-        categoryLabel: "シューズ",
-        date: "2026.03.01",
-        summary: "靴べら不要、手を使わずに履ける。シニア層だけでなく、忙しい現役世代や子育て層からも「革命的」との口コミが殺到。",
-        source: "Footwear Today",
-        sourceUrl: "#",
-        icon: "fa-clock",
-        gradient: "linear-gradient(135deg, #3498db 0%, #2980b9 100%)",
-        viewCount: 4200
-    },
-    {
-        id: 405,
-        title: "ABCマート限定『VANSコラボ』、ストリートから支持される限定カラー",
-        category: "shoes",
-        categoryLabel: "シューズ",
-        date: "2026.02.28",
-        summary: "店舗に行かないと買えない希少性。地域密着型のABCマートが仕掛ける、特定ターゲットに向けた戦略的モデルが好調。",
-        source: "Store Trends",
-        sourceUrl: "https://www.abc-mart.net/shop/e/e-news/",
-        icon: "fa-store",
-        gradient: "linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)",
-        viewCount: 2600
-    },
-    {
-        id: 501,
-        title: "BEAMS『別注アークテリクス』、即完売の兆しを見せる2026春夏の新作",
-        category: "mens",
-        categoryLabel: "メンズ",
-        date: "2026.03.01",
-        summary: "独特のカラーパレットと都会的な機能美。BEAMSが仕掛ける「都会で着るアウトドア」が、ファッションギークのみならず幅広い層を魅了。",
-        source: "BEAMS News",
-        sourceUrl: "https://www.beams.co.jp/news/",
-        icon: "fa-tshirt",
-        gradient: "linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%)",
-        viewCount: 3800
-    },
-    {
-        id: 502,
-        title: "JOURNAL STANDARD『テック・テーラリング』、仕事と日常をシームレスに繋ぐ新定番",
-        category: "mens",
-        categoryLabel: "メンズ",
-        date: "2026.02.28",
-        summary: "高機能素材を用いたセットアップ。見た目はフォーマルだが、着心地はスポーティ。多様化する働き方に寄り添うベイクルーズ流のスタンダード提案。",
-        source: "Baycrew's Group",
-        sourceUrl: "https://baycrews.jp/news",
-        icon: "fa-briefcase",
-        gradient: "linear-gradient(135deg, #485563 0%, #29323c 100%)",
-        viewCount: 2950
-    },
-    {
-        id: 503,
-        title: "IENA『フレンチシック・モダン』、春を彩るパステルツイードがレディスの主役に",
-        category: "ladies",
-        categoryLabel: "レディス",
-        date: "2026.03.01",
-        summary: "伝統的なツイードを現代的に再編集。上品でありながらも抜け感のあるスタイルが、都会で働く自立した女性から圧倒的な支持。",
-        source: "Baycrew's Group",
-        sourceUrl: "https://baycrews.jp/news",
-        icon: "fa-gem",
-        gradient: "linear-gradient(135deg, #fceabb 0%, #f8b500 100%)",
-        viewCount: 3100
-    },
-    {
-        id: 504,
-        title: "ZARA『スタジオ・コレクション』、ハイブランド級のクオリティを誇る限定ラインが話題",
-        category: "ladies",
-        categoryLabel: "レディス",
-        date: "2026.02.28",
-        summary: "マテリアルとシルエットに徹底的にこだわった特別ライン。手に取りやすい価格帯でハイファッションを体験できる「民主化」の最前線。",
-        source: "ZARA Global",
-        sourceUrl: "https://www.zara.com/jp/ja/",
-        icon: "fa-shopping-bag",
-        gradient: "linear-gradient(135deg, #000000 0%, #434343 100%)",
-        viewCount: 4500
-    },
-    {
-        id: 505,
-        title: "WWDJAPAN予測『クワイエット・ラグジュアリー』から『ネオ・ビンテージ』への潮流",
-        category: "ladies",
-        categoryLabel: "レディス",
-        date: "2026.03.01",
-        summary: "控えめな高級感から、個性を主張するアーカイブ再評価へ。業界最高峰の メディアが解き明かす、2026年後半のトレンドマップ。",
-        source: "WWD JAPAN",
-        sourceUrl: "https://www.wwdjapan.com/",
-        icon: "fa-newspaper",
-        gradient: "linear-gradient(135deg, #000000 0%, #ff0000 100%)",
-        viewCount: 5200
-    },
-    {
-        id: 601,
-        title: "資生堂『SHISEIDO エッセンス スキングロウ』、美容液処方のファンデがベストコスメを席巻",
-        category: "cosme",
-        categoryLabel: "コスメ",
-        date: "2026.03.01",
-        summary: "メイクをしながらスキンケア。資生堂が誇る最新の皮膚科学を結集したハイブリッドファンデーションが、圧倒的な支持で上半期1位に。",
-        source: "Shiseido Beauty",
-        sourceUrl: "https://corp.shiseido.com/jp/releaselist/",
-        icon: "fa-magic",
-        gradient: "linear-gradient(135deg, #ff0000 0%, #b20000 100%)",
-        viewCount: 6800
-    },
-    {
-        id: 602,
-        title: "KANEBO『ライブリースキン ウェア』、素肌化けする素肌への追求が極まる",
-        category: "cosme",
-        categoryLabel: "コスメ",
-        date: "2026.02.28",
-        summary: "「絶頂肌」を継続。カネボウが提案する、生命感あふれるツヤと、肌そのものが美しくなったかのような仕上がりが話題。",
-        source: "Kanebo Global",
-        sourceUrl: "https://www.kanebo-global.com/jp/ja/",
-        icon: "fa-heart",
-        gradient: "linear-gradient(135deg, #222222 0%, #444444 100%)",
-        viewCount: 4200
-    },
-    {
-        id: 603,
-        title: "コーセー『デコルテ リポソーム』、進化し続ける保湿テクノロジーの金字塔",
-        category: "cosme",
-        categoryLabel: "コスメ",
-        date: "2026.02.27",
-        summary: "多重層リポソームが24時間、潤いを放ち続ける。コーセーを代表する名品が、時代を超えて愛される理由を再証明したヒット作。",
-        source: "KOSE Beauty",
-        sourceUrl: "https://www.kose.co.jp/company/ja/news/",
-        icon: "fa-tint",
-        gradient: "linear-gradient(135deg, #0e2a47 0%, #1c508a 100%)",
-        viewCount: 5100
-    },
-    {
-        id: 604,
-        title: "CANMAKE『むにゅっとハイライター』、プチプラとは思えない繊細なツヤがバズり中",
-        category: "cosme",
-        categoryLabel: "コスメ",
-        date: "2026.03.01",
-        summary: "生レアな質感。指で塗るだけで内側から発光するようなツヤが完成。キャンメイクならではのトレンドキャッチ力が爆発。",
-        source: "CANMAKE Official",
-        sourceUrl: "https://www.canmake.com/news/",
-        icon: "fa-star",
-        gradient: "linear-gradient(135deg, #ffc0cb 0%, #ff69b4 100%)",
-        viewCount: 5900
-    },
-    {
-        id: 605,
-        title: "CEZANNE『リップカラーシールド』、落ちにくさと潤いを両立した新定番が完売続出",
-        category: "cosme",
-        categoryLabel: "コスメ",
-        date: "2026.02.28",
-        summary: "セザンヌから待望の耐久リップ。色持ちの良さと、とろけるような塗り心地が評価され、バラエティショップでの欠品が相次ぐ。",
-        source: "CEZANNE Lab",
-        sourceUrl: "https://www.cezanne.co.jp/news/",
-        icon: "fa-smile",
-        gradient: "linear-gradient(135deg, #fceabb 0%, #f8b500 100%)",
-        viewCount: 3800
-    },
-    {
-        id: 606,
-        title: "最新韓国コスメ『PDRNスキンケア』、サーモン成分による肌再生ブームが日本上陸",
-        category: "cosme",
-        categoryLabel: "コスメ",
-        date: "2026.03.01",
-        summary: "次世代のエイジングケア。美容大国・韓国から発信された「刺さない美容液」が、透明感を求めるユーザーの間で爆発的な人気に。",
-        source: "K-Beauty Trends",
-        sourceUrl: "#",
-        icon: "fa-leaf",
-        gradient: "linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)",
-        viewCount: 6200
-    },
-    {
-        id: 607,
-        title: "@cosme『2026上半期ベスコス』発表。リアルな口コミが選ぶ真のヒットアイテム",
-        category: "cosme",
-        categoryLabel: "コスメ",
-        date: "2026.03.01",
-        summary: "忖度なしの評価。アットコスメユーザーの膨大なデータから算出されたランキングが、コスメ業界の最前線を映し出す。",
-        source: "@cosme Media",
-        sourceUrl: "https://www.cosme.net/bestcosme/",
-        icon: "fa-award",
-        gradient: "linear-gradient(135deg, #27ae60 0%, #2ecc71 100%)",
-        viewCount: 7500
-    },
-    {
-        id: 608,
-        title: "PLAZA・LOFT限定『先行販売』、今しか買えない注目ブランドが店頭を彩る",
-        category: "cosme",
-        categoryLabel: "コスメ",
-        date: "2026.02.28",
-        summary: "宝探しのような体験。バラエティショップならではの目利きで、アジア圏の人気ブランドやサステナブルな新作がいち早く登場。",
-        source: "Variety Shop Hub",
-        sourceUrl: "#",
-        icon: "fa-gift",
-        gradient: "linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%)",
-        viewCount: 4600
-    },
-    {
-        id: 701,
-        title: "西川『新生活応援キャンペーン』、睡眠を科学した高機能マットレスが話題",
-        category: "wellness",
-        categoryLabel: "ウェルネス",
-        date: "2026.03.01",
-        summary: "大谷翔平選手のアドバイスから着想を得たという最新の快眠寝具群。春の新生活に向け、投資効果が最も高い健康アイテムとして注目を集める。",
-        source: "西川株式会社 プレス",
-        sourceUrl: "https://www.nishikawa1566.com/",
-        icon: "fa-bed",
-        gradient: "linear-gradient(135deg, #a8c0ff 0%, #3f2b96 100%)",
-        viewCount: 3200
-    },
-    {
-        id: 702,
-        title: "ニトリ『AIマットレス＆スマートベッド』、最新テクノロジーで睡眠環境を自動最適化",
-        category: "living",
-        categoryLabel: "リビング",
-        date: "2026.02.28",
-        summary: "睡眠中の動きを感知して角度や硬さを自動調整。近未来の寝室体験を、ニトリならではの「お、ねだん以上。」な価格設定で実現した渾身の新商品。",
-        source: "ニトリ ニュースリリース",
-        sourceUrl: "https://www.nitori.co.jp/",
-        icon: "fa-robot",
-        gradient: "linear-gradient(135deg, #0cebeb 0%, #20e3b2 50%, #29ffc6 100%)",
-        viewCount: 4500
-    },
-    {
-        id: 703,
-        title: "無印良品『猫用家具』本格展開、インテリアに溶け込むペットとの新しい暮らし",
-        category: "living",
-        categoryLabel: "リビング",
-        date: "2026.02.27",
-        summary: "木製シェルフやユニット家具と完全に調和する、爪とぎや隠れ家。人間もペットも心地よい、新しい「無印良品の家」のあり方を提示している。",
-        source: "無印良品 公式",
-        sourceUrl: "https://www.muji.com/jp/ja/store",
-        icon: "fa-cat",
-        gradient: "linear-gradient(135deg, #d3cce3 0%, #e9e4f0 100%)",
-        viewCount: 5200
-    },
-    {
-        id: 704,
-        title: "Francfranc 2026春夏『花と蝶のモチーフ』、スペパ重視の華やかインテリア",
-        category: "living",
-        categoryLabel: "リビング",
-        date: "2026.03.01",
-        summary: "丸めるとブーケになるブランケットや、限られた空間を有効活用する「スペースパフォーマンス（スペパ）」アイテム。春の訪れを感じるコレクションが話題。",
-        source: "Francfranc プレス",
-        sourceUrl: "https://francfranc.com/",
-        icon: "fa-spa",
-        gradient: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%)",
-        viewCount: 3800
-    },
-    {
-        id: 705,
-        title: "イオン・ホームコーディ『新生活900品目』、機能と価格の両立で圧倒的存在感",
-        category: "living",
-        categoryLabel: "リビング",
-        date: "2026.02.28",
-        summary: "積み重ね可能なカラーボックスや、ベッドのヘッドボードを選べるカスタマイズ性。生活者の細やかなニーズに応える商品群を一挙投入。",
-        source: "イオン ホームコーディ",
-        sourceUrl: "https://www.topvalu.net/homecoordy/",
-        icon: "fa-couch",
-        gradient: "linear-gradient(135deg, #b3ffab 0%, #12fff7 100%)",
-        viewCount: 2900
-    },
-    {
-        id: 2001,
-        title: "UNIQLO 2026春夏展示会レポート。キーワードは『究極の快適性』",
-        category: "mens",
-        categoryLabel: "メンズ",
-        date: "2026.02.15",
-        summary: "今シーズンのユニクロは、軽量で通気性の高い新素材を全ラインナップに採用。都市生活に馴染むシックなカラー展開が話題。",
-        source: "Fashion Press",
-        sourceUrl: "https://www.fashion-press.net/",
-        icon: "fa-tshirt",
-        gradient: "linear-gradient(135deg, #2c3e50 0%, #000000 100%)",
-        viewCount: 3100
-    },
-    {
-        id: 2002,
-        title: "春の新作コスメ、トレンドは『シアー＆メタリック』の融合",
-        category: "cosme",
-        categoryLabel: "コスメ",
-        date: "2026.02.10",
-        summary: "内側から発光するような透明感と、ポイントで効かせるメタリックな輝き。各ブランドから発表された春の新色を独断レビュー。",
-        source: "Beauty Online",
-        sourceUrl: "https://maquia.hpplus.jp/",
-        icon: "fa-magic",
-        gradient: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
-        viewCount: 4200
-    },
-    {
-        id: 2003,
-        title: "『サステナブル・ファッション・ウィーク 2026』東京で開催",
-        category: "ladies",
-        categoryLabel: "レディス",
-        date: "2026.02.05",
-        summary: "再利用素材や廃棄ゼロの製造プロセス。これからのファッションに求められる「責任」と「美しさ」を両立させたデザイナーたちが集結。",
-        source: "Eco Life News",
-        sourceUrl: "#",
-        icon: "fa-leaf",
-        gradient: "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)",
-        viewCount: 2800
-    },
-    // 2月の追加アーカイブ
-    {
-        id: 4001,
-        title: "ワークマン、『超撥水・防汚オフィスシューズ』がビジネスパーソンに激刺さり",
-        category: "shoes",
-        categoryLabel: "シューズ",
-        date: "2026.02.20",
-        summary: "雨の日の通勤も怖くない。圧倒的な撥水性能と疲れにくいソールを3000円台で実現。SNSで「実用性最強」と拡散され、品薄状態に。",
-        source: "Workman Press",
-        sourceUrl: "https://www.workman.co.jp/news",
-        icon: "fa-shoe-prints",
-        gradient: "linear-gradient(135deg, #2c3e50 0%, #000000 100%)",
-        viewCount: 3800
-    },
-    {
-        id: 4002,
-        title: "『自宅サウナ』が一般家庭へ。10万円台の省スペースモデルがヒット中",
-        category: "wellness",
-        categoryLabel: "ウェルネス",
-        date: "2026.02.18",
-        summary: "サウナブームは「通う」から「自宅でも」へ。コンセント一つで設置できる小型ボックス型が、新築やリフォームの注目設備として急浮上。",
-        source: "Sauna Life",
-        sourceUrl: "#",
-        icon: "fa-fire",
-        gradient: "linear-gradient(135deg, #f83600 0%, #f9d423 100%)",
-        viewCount: 2900
-    },
-    {
-        id: 4003,
-        title: "ソニー、居住者の情緒を読み取る『AIエモーショナル・リビング』を発表",
-        category: "living",
-        categoryLabel: "リビング",
-        date: "2026.02.12",
-        summary: "カメラとセンサーで家族の「表情」や「声のトーン」を分析。落ち込んでいる時にはリラックス効果のある音楽と照明に自動で切り替える未来型システム。",
-        source: "Sony Global News",
-        sourceUrl: "https://www.sony.com/ja/SonyInfo/News/",
-        icon: "fa-brain",
-        gradient: "linear-gradient(135deg, #21d4fd 0%, #b721ff 100%)",
-        viewCount: 4100
-    },
-    {
-        id: 4004,
-        title: "2026年春の新作コスメ『美容液リップ』が予約分で完売続出",
-        category: "cosme",
-        categoryLabel: "コスメ",
-        date: "2026.02.01",
-        summary: "カラーを楽しみながら、唇の微細な荒れを24時間ケア。各ブランドから発表された「インナーケア発想」の新作が、マスクオフの時代に爆発的な支持。",
-        source: "Beauty Online",
-        sourceUrl: "https://www.cosme.net/",
-        icon: "fa-magic",
-        gradient: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)",
-        viewCount: 3500
-    },
-    // 1月の追加アーカイブ
-    {
-        id: 4005,
-        title: "『メタバース出社』が当たり前に。大手企業の3割が仮想空間オフィスを導入",
-        category: "work",
-        categoryLabel: "ワークスタイル",
-        date: "2026.01.28",
-        summary: "アバターによる偶発的な会話が「孤独感」を解消。従来のZoom会議よりもチームの一体感が高まると、リモートワークの課題解決策として定着。",
-        source: "Tech Career",
-        sourceUrl: "#",
-        icon: "fa-vr-cardboard",
-        gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-        viewCount: 5200
-    },
-    {
-        id: 4006,
-        title: "パステルカラーの『フェムテック・ウェア』、春を先取りする機能服が流行",
-        category: "ladies",
-        categoryLabel: "レディス",
-        date: "2026.01.25",
-        summary: "女性特有の悩みに寄り添う構造と、春らしい明るいカラーを両立。都市生活に馴染む「機能性フェミニン」がファッション界の新たな主役に。",
-        source: "Style Media",
-        sourceUrl: "#",
-        icon: "fa-gem",
-        gradient: "linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%)",
-        viewCount: 2800
-    },
-    {
-        id: 4007,
-        title: "子どもの感性を育てる『知育VR絵本』、教育現場での導入が加速",
-        category: "kids",
-        categoryLabel: "キッズ",
-        date: "2026.01.18",
-        summary: "物語の主人公として中に入れる体験。歴史や宇宙を「体験」として学習することで、理解度と探求心が飛躍的に向上すると話題に。",
-        source: "Education Today",
-        sourceUrl: "#",
-        icon: "fa-book-open",
-        gradient: "linear-gradient(135deg, #f6d365 0%, #fda085 100%)",
-        viewCount: 3100
-    },
-    {
-        id: 4008,
-        title: "Instagramで話題の『究極の朝食セット』、産直ECの売上が前年比2倍",
-        category: "sns",
-        categoryLabel: "SNS",
-        date: "2026.01.15",
-        summary: "「丁寧な暮らし」の再評価。地方の農家から直接届く土付き野菜や卵をSNSに投稿し、その背景にある「ストーリー」を味わう消費が一般化。",
-        source: "SNS Report",
-        sourceUrl: "#",
-        icon: "fa-camera-retro",
-        gradient: "linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)",
-        viewCount: 4500
-    },
-    {
-        id: 4009,
-        title: "『スマートベビーカー』登場。自動ブレーキと温度調整機能を搭載",
-        category: "baby",
-        categoryLabel: "ベビー",
-        date: "2026.01.08",
-        summary: "AIが坂道を検知し出力をアシスト。急な手放しには自動ブレーキが作動。赤ちゃんが寝付く最適な温度をシート内部で保つなど、親の不安に寄り添う。",
-        source: "Family News",
-        sourceUrl: "#",
-        icon: "fa-baby-carriage",
-        gradient: "linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%)",
-        viewCount: 2300
-    },
-    {
-        id: 4010,
-        title: "新年の抱負第1位は『睡眠改善』。1月の寝具売上が過去最高を記録",
-        category: "wellness",
-        categoryLabel: "ウェルネス",
-        date: "2026.01.02",
-        summary: "「パフォーマンス向上のための休息」が共通認識に。パーソナライズ枕や高級マットレスへの投資が、20代〜30代の間でも一般的となった1月の商戦。",
-        source: "Store Trends",
-        sourceUrl: "#",
-        icon: "fa-bed",
-        gradient: "linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)",
-        viewCount: 3900
-    },
-    {
-        id: 4011,
-        title: "2026年、暮らしのキーワードは『自分回帰』。パーソナライズ化が加速",
-        category: "living",
-        categoryLabel: "リビング",
-        date: "2026.01.01",
-        summary: "年初のトレンド予測。他人の評価より「自分に合うかどうか」。インドア、健康、キャリア、あらゆる面で自分基準の選択をする傾向が強まる1年に。",
-        source: "Trend Forecast",
-        sourceUrl: "#",
-        icon: "fa-compass",
-        gradient: "linear-gradient(135deg, #cfd9df 0%, #e2ebf0 100%)",
-        viewCount: 5800
-    },
-    // 既存アーカイブ
-    {
-        id: 1001,
-        title: "2026年、ウェルネスの新定番は『デジタル・デトックス・リトリート』",
-        category: "wellness",
-        categoryLabel: "ウェルネス",
-        date: "2026.01.20",
-        summary: "新年の抱負として注目される「切断」の重要性。スマホを預け、自然の中で五感を取り戻すプログラムが予約殺到中。",
-        source: "Zen Journal",
-        sourceUrl: "#",
-        icon: "fa-mountain",
-        gradient: "linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)",
-        viewCount: 3540
-    },
-    {
-        id: 1002,
-        title: "CES 2026報告：未来の暮らしを変える『パーソナル・ヘルス・ロボット』",
-        category: "living",
-        categoryLabel: "暮らし",
-        date: "2026.01.12",
-        summary: "ラスベガスで開催されたCESから。家族の健康を見守り、食事のアドバイスから非常時の通報までこなすAIロボットが多数登場。",
-        source: "Tech Gadget",
-        sourceUrl: "https://wired.jp/",
-        icon: "fa-robot",
-        gradient: "linear-gradient(135deg, #302b63 0%, #24243e 100%)",
-        viewCount: 5100
-    },
-    {
-        id: 1003,
-        title: "伝統工芸×3Dプリント。京都発の新しい『道具』が世界で高く評価",
-        category: "living",
-        categoryLabel: "暮らし",
-        date: "2026.01.05",
-        summary: "職人の技と最新技術の融合。伝統的な文様を3Dプリントで繊細に再現した茶道具が、海外のデザイン賞を総なめに。",
-        source: "Design Times",
-        sourceUrl: "#",
-        icon: "fa-brush",
-        gradient: "linear-gradient(135deg, #6a11cb 0%, #2575fc 100%)",
-        viewCount: 1980
-    }
-];
-
-// ========================================
-// コラムデータ（固定4件 ＋ ストックの中から日付で2件選択）
-// ========================================
-const staticColumns = [
-    {
         id: 1,
-        tag: "市場分析",
-        title: "2026年、暮らしのキーワードは『自分回帰』",
-        body: `物価高や技術の進化が加速する中、消費者の関心は「他人の評価」から「自分自身の心地よさ」へと明確にシフトしています。
-        
-        かつての「映え」を追求する消費から、自分の体調や精神状態に合わせたパーソナライズされた体験への投資。この『自分回帰』の流れは、住居、ワークスタイル、ウェルネスのあらゆる場面で顕在化しています。
-        
-        特に「家」は単なる居住スペースを超え、AIが健康管理をサポートし、心身を整えるリトリートの場としての役割を深めています。このパラダイムシフトが、2026年のビジネスとライフスタイルのあり方を根本から変えていくでしょう。`,
-        author: { name: "佐藤 健二", title: "トレンドリサーチ所長", initials: "佐", color: "#34495e" },
-        readTime: 6,
-        headerColor: "linear-gradient(to right, #4b6cb7, #182848)"
+        title: "「飲むわらび餅」が進化？ 次世代テクスチャードリンクの台頭",
+        category: "beverage",
+        categoryLabel: "飲料",
+        date: "2026.02.26",
+        summary: "タピオカブーム以降、食感を楽しむドリンクが定着。最新のトレンドは、和素材とフルーツを組み合わせた「飲むスイーツ」の進化形。",
+        source: "PR TIMES",
+        sourceUrl: "https://prtimes.jp/main/html/rd/p/000000030.000063255.html",
+        icon: "fa-glass-water",
+        gradient: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%)",
+        imageColor: "#e74c3c",
+        viewCount: 1540
     },
     {
         id: 2,
-        tag: "テクノロジー",
-        title: "AIと共創する、新しい『余白』の楽しみ方",
-        body: `AIが日々のルーチンワークを代替することで生まれる、私たち自身の「余白」。2026年は、この時間をどう使うかが幸福度の鍵を握ります。
-        
-        単なる時短ではなく、AIをクリエイティブなパートナーとして活用し、人間特有の五感を刺激する活動に没頭する。例えば、AIが提案する栄養バランスを元に、あえて時間をかけて手料理を楽しむといった「不便さの再定義」が注目されています。
-        
-        効率を追求するテクノロジーの影で、私たちが人間らしさを取り戻すための新しいライフスタイルが芽吹いています。`,
-        author: { name: "田中 雅也", title: "テックライフ・ジャーナリスト", initials: "田", color: "#3498db" },
-        readTime: 5,
-        headerColor: "linear-gradient(to right, #24c6dc, #514a9d)"
-    },
-    {
-        id: 3,
-        tag: "ワークスタイル",
-        title: "『ノマド・バン』が変える、場所を選ばない働き方の終着点",
-        body: `高速衛星通信と高容量バッテリーの普及により、真の意味で場所の制約がなくなりました。今、注目されているのは、居住と仕事、そして旅を完全に融合させた「ノマド・バン」によるライフスタイルです。
-        
-        都市の利便性を享受しながら、時には大自然の真ん中で重要な会議を開く。この柔軟性が、個人の生産性と精神的充足感を最大化させています。
-        
-        「定住」という従来の概念が揺らぎ、地図そのものが自分自身のオフィスであり家となる。そんな自由な働き方が、2026年の新しいスタンダードになりつつあります。`,
-        author: { name: "鈴木 直樹", title: "ライフスタイル・デザイナー", initials: "鈴", color: "#27ae60" },
-        readTime: 7,
-        headerColor: "linear-gradient(to right, #43e97b, #38f9d7)"
+        title: "コンビニ各社、高タンパク・低糖質スイーツを拡充",
+        category: "sweets",
+        categoryLabel: "スイーツ",
+        date: "2026.02.25",
+        summary: "罪悪感なく食べられる「ギルトフリー」スイーツの需要増に対応。大豆粉やオート米を使用した新商品が続々登場。",
+        source: "日本食糧新聞",
+        sourceUrl: "https://nissyoku.co.jp/news/kawamura20210604085458025",
+        icon: "fa-cookie-bite",
+        gradient: "linear-gradient(120deg, #f6d365 0%, #fda085 100%)",
+        imageColor: "#f1c40f",
+        viewCount: 1280
     },
     {
         id: 4,
-        tag: "ウェルネス",
-        title: "『スリープテック』が解き明かす、究極の休息の科学",
-        body: `2026年のウェルネス市場において、最も革新的な進化を遂げたのは「睡眠」です。単なる計測を超え、脳波誘導や環境の自動調整により、短時間で深い眠りを実現する技術が一般的になりました。
-        
-        しかし、技術以上に重要なのは「休息を投資と捉える」意識の変容です。パフォーマンス向上のために戦略的に眠る。この合理的なアプローチが、現代人のメンタルヘルスと創造性を根底から支えています。
-        
-        科学に基づいた休息術が、私たちのポテンシャルをどこまで引き出せるのか。最新の研究事例を紐解きます。`,
-        author: { name: "小林 恵", title: "ウェルネス研究家", initials: "小", color: "#e84393" },
-        readTime: 8,
-        headerColor: "linear-gradient(to right, #f093fb, #f5576c)"
-    }
-];
-
-const rollingColumnsStock = [
+        title: "冷凍食品の高級化が進む、有名シェフ監修シリーズがヒット",
+        category: "retail",
+        categoryLabel: "小売・流通",
+        date: "2026.02.24",
+        summary: "自宅でレストランの味を楽しめる「プレミアム冷凍食品」の売上が好調。デパ地下グルメに匹敵するクオリティが支持されている。",
+        source: "CREO ニュース",
+        sourceUrl: "https://creo-plus.net/distribution-frozen-food-high-class/",
+        icon: "fa-snowflake",
+        gradient: "linear-gradient(to top, #5f72bd 0%, #9b23ea 100%)",
+        imageColor: "#9b59b6",
+        viewCount: 950
+    },
     {
         id: 5,
-        tag: "サステナブル",
-        title: "『循環型クローゼット』——捨てるから循環するアパレルへ",
-        body: `ファッションの価値は「所有」から「循環」へと大きく舵を切りました。2026年の最先端は、AIが自分のワードローブを把握し、最適なタイミングで中古市場やアップサイクルへ誘導する仕組みです。
-        
-        新品を買うことが悪ではなく、それをいかに美しく使い切り、次へと繋ぐか。この意識がZ世代を中心に広がり、中古品のステータスが新品を凌駕する場面も増えています。
-        
-        クローゼットそのものが生きているように呼吸し、常に自分に最適な形で循環し続ける。そんな新しいお洒落の形を紹介します。`,
-        author: { name: "中村 美咲", title: "サステナブル衣生活アドバイザー", initials: "中", color: "#16a085" },
-        readTime: 6,
-        headerColor: "linear-gradient(135deg, #a1c4fd, #c2e9fb)"
+        title: "ピスタチオの次はこれ！ 2026年注目のナッツフレーバー",
+        category: "sweets",
+        categoryLabel: "スイーツ",
+        date: "2026.02.24",
+        summary: "数年続いたピスタチオブームに次ぐ素材として「黒ゴマ」と「ピーカンナッツ」が急上昇中。香ばしさと健康効果がキーワード。",
+        source: "スイーツ・メディア",
+        sourceUrl: "https://www.sweets-media.jp/article/2026-nuts-trend/",
+        icon: "fa-seedling",
+        gradient: "linear-gradient(to top, #0ba360 0%, #3cba92 100%)",
+        imageColor: "#e67e22",
+        viewCount: 420
     },
     {
         id: 6,
-        tag: "SNS文化",
-        title: "『スロー・ソーシャル』——繋がりすぎをあえて断つ豊かさ",
-        body: `常に誰かと繋がっている状態に、人々が疲れを感じ始めています。2026年のSNSトレンドは、あえて返信を求めない、あるいは限られた親しい人だけと静かに時間を共有する「スロー・ソーシャル」です。
-        
-        「いいね」の数に一喜一憂するのではなく、自分の感じたことを丁寧に記録し、残す。この日記のような活用法が、メンタルヘルスの安定に繋がると評価されています。
-        
-        デジタルな繋がりの中に、自分だけの静かな場所を確保する。そんな新しいメディアとの付き合い方を提案します。`,
-        author: { name: "渡辺 裕太", title: "メディア文化論研究者", initials: "渡", color: "#f39c12" },
-        readTime: 5,
-        headerColor: "linear-gradient(to right, #ff9a9e, #fecfef)"
+        title: "「ゴーストレストラン」から「実店舗回帰」へ、外食産業の揺り戻し",
+        category: "gaishoku",
+        categoryLabel: "外食",
+        date: "2026.02.23",
+        summary: "デリバリー専門店ブームが一段落し、体験価値を提供する実店舗への投資が再開。エンタメ要素を取り入れた新業態が注目される。",
+        source: "外食ビジネスOnline",
+        sourceUrl: "https://www.gaishoku-biz.jp/article/restaurant-trend-2026/",
+        icon: "fa-store",
+        gradient: "linear-gradient(to right, #43e97b 0%, #38f9d7 100%)",
+        imageColor: "#c0392b",
+        viewCount: 310
+    },
+    {
+        id: 11,
+        title: "麹ブーム再燃、手軽に使える「液体塩こうじ」が人気",
+        category: "health",
+        categoryLabel: "健康",
+        date: "2026.02.23",
+        summary: "発酵食品への関心の高まりとともに、調味料としての麹が見直されている。腸活意識の高い層にヒット。",
+        source: "ヘルスケア・フード",
+        sourceUrl: "https://www.healthcare-food.jp/news/koji-boom-2026/",
+        icon: "fa-heart-pulse",
+        gradient: "linear-gradient(to top, #ff9a9e 0%, #fecfef 99%, #fecfef 100%)",
+        imageColor: "#e84393",
+        viewCount: 560
+    },
+    {
+        id: 13,
+        title: "「昭和レトロ」喫茶がZ世代に大ウケ、クリームソーダの色を変えて推し活に",
+        category: "z_gen",
+        categoryLabel: "Z世代",
+        date: "2026.02.23",
+        summary: "純喫茶の懐かしい雰囲気が逆に新しいと若者に人気。カラフルなドリンクがSNS映えし、アイドルのメンバーカラーを楽しむファン層に刺さっている。",
+        source: "トレンド探偵団",
+        sourceUrl: "https://www.trend-tantei.jp/zgen-showa-retro/",
+        icon: "fa-camera-retro",
+        gradient: "linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)",
+        imageColor: "#a29bfe",
+        viewCount: 1100
+    },
+    {
+        id: 14,
+        title: "第4次韓流ブームで「ポチャ（屋台）」スタイルが定着",
+        category: "asian",
+        categoryLabel: "韓国・アジア",
+        date: "2026.02.22",
+        summary: "韓国ドラマの影響で、本場の屋台の雰囲気を再現した飲食店が増加。若者を中心にマッコリやソジュ（焼酎）の消費が伸びている。",
+        source: "アジアグルメ通信",
+        sourceUrl: "https://www.asia-gourmet.jp/korean-pocha-boom/",
+        icon: "fa-bowl-rice",
+        gradient: "linear-gradient(to right, #fa709a 0%, #fee140 100%)",
+        imageColor: "#ff0099",
+        viewCount: 780
+    },
+    {
+        id: 111,
+        title: "完全栄養食パン、サブスク市場でシェア拡大",
+        category: "retail",
+        categoryLabel: "小売・流通",
+        date: "2026.02.22",
+        summary: "忙しい朝の救世主として、1枚で1食分の栄養が摂れるパンの定期購入サービスが20代〜30代を中心に利用者を伸ばしている。",
+        source: "日経クロストレンド",
+        sourceUrl: "https://xtrend.nikkei.com/atcl/contents/casestudy/00012/1000780/",
+        icon: "fa-bread-slice",
+        gradient: "linear-gradient(to right, #ffecd2 0%, #fcb69f 100%)",
+        imageColor: "#2ecc71",
+        viewCount: 620
+    },
+    {
+        id: 8,
+        title: "デパ地下惣菜の「個食化」進む、単身世帯ターゲット",
+        category: "nakashoku",
+        categoryLabel: "中食",
+        date: "2026.02.21",
+        summary: "ファミリー向けの大容量パックから、一人でも楽しめる少量多品種セットへ。仕事帰りの「プチ贅沢」需要を取り込む。",
+        source: "デリ・ニュース",
+        sourceUrl: "https://www.deli-news.jp/article/single-dish-trend/",
+        icon: "fa-box-open",
+        gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+        imageColor: "#16a085",
+        viewCount: 450
+    },
+    {
+        id: 12,
+        title: "物価高で「訳あり商品」のEC販売が急増",
+        category: "saving",
+        categoryLabel: "節約",
+        date: "2026.02.21",
+        summary: "味は変わらないが形が不揃いな野菜や、賞味期限間近の加工食品をお得に購入できるサイトへのアクセスが増加中。",
+        source: "家計の味方ニュース",
+        sourceUrl: "https://www.kakei-mikata.jp/article/wakesari-ec-growth/",
+        icon: "fa-piggy-bank",
+        gradient: "linear-gradient(to top, #fcc5e4 0%, #fda34b 15%, #ff7882 35%, #c8699e 52%, #7046aa 71%, #0c1db8 87%, #020f75 100%)",
+        imageColor: "#f39c12",
+        viewCount: 890
+    },
+    {
+        id: 9,
+        title: "クラフトコーラブームは地方へ、ご当地素材の活用加速",
+        category: "beverage",
+        categoryLabel: "飲料",
+        date: "2026.02.20",
+        summary: "スパイスや柑橘類など、地域特産の農産物を使用した「ご当地クラフトコーラ」が観光お土産としても人気に。",
+        source: "地域創生マガジン",
+        sourceUrl: "https://www.chiiki-saisei.jp/",
+        icon: "fa-bottle-water",
+        gradient: "linear-gradient(to top, #d299c2 0%, #fef9d7 100%)",
+        imageColor: "#d35400",
+        viewCount: 340
+    },
+    {
+        id: 15,
+        title: "台湾・ベトナムに続き「タイの屋台メシ」がブームの予感",
+        category: "asian",
+        categoryLabel: "韓国・アジア",
+        date: "2026.02.20",
+        summary: "本格的なスパイス使いとヘルシーなイメージで、タイ料理のミールキットや冷凍食品がスーパーの棚を席巻しつつある。",
+        source: "ワールドフードレポート",
+        sourceUrl: "https://www.world-food-report.jp/",
+        icon: "fa-pepper-hot",
+        gradient: "linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%)",
+        imageColor: "#27ae60",
+        viewCount: 510
+    },
+    {
+        id: 16,
+        title: "「#究極の朝ごはん」がTiktok for Businessで話題、簡単アレンジレシピが拡散中",
+        category: "sns",
+        categoryLabel: "SNSトレンド",
+        date: "2026.02.25",
+        summary: "コンビニ食材だけで作る豪華な朝食動画が600万再生を突破。真似して投稿するユーザーが急増。",
+        source: "TikTokトレンド",
+        sourceUrl: "https://www.tiktok.com/",
+        icon: "fa-mobile-screen",
+        gradient: "linear-gradient(to right, #00dbde 0%, #fc00ff 100%)",
+        imageColor: "#e056fd",
+        viewCount: 2100
+    },
+    {
+        id: 17,
+        title: "X(旧Twitter)で「#無限ピーマン」に次ぐ「#無限ニンジン」がバズり中",
+        category: "sns",
+        categoryLabel: "SNSトレンド",
+        date: "2026.02.24",
+        summary: "大量のニンジン消費に困った農家の投稿がきっかけ。シンプルながら中毒性のある味が評判。",
+        source: "X (Twitter)",
+        sourceUrl: "https://x.com/",
+        icon: "fa-hashtag",
+        gradient: "linear-gradient(to right, #4facfe 0%, #00f2fe 100%)",
+        imageColor: "#3498db",
+        viewCount: 1800
+    },
+    {
+        id: 18,
+        title: "広島の「汁なし担々麺」が都心でブーム、シメの『追い飯』が定番化",
+        category: "hiroshima",
+        categoryLabel: "広島県",
+        date: "2026.02.25",
+        summary: "広島のご当地グルメである汁なし担々麺。山椒の痺れと複雑なスパイスが都内のオフィス街でも人気。最後にライスを投入するスタイルが若者の胃袋を掴んでいる。",
+        source: "中四国グルメナビ",
+        sourceUrl: "https://www.chushikoku-gourmet.jp/",
+        icon: "fa-fire",
+        gradient: "linear-gradient(135deg, #FF512F 0%, #DD2476 100%)",
+        imageColor: "#e74c3c",
+        viewCount: 920
+    },
+    {
+        id: 19,
+        title: "博多の「明太フランス」が全国区に？ 冷凍販売で全国から注文殺到",
+        category: "fukuoka",
+        categoryLabel: "福岡県",
+        date: "2026.02.26",
+        summary: "福岡の人気ベーカリー発祥の明太フランス。焼き立てを急速冷凍する技術により、全国どこでも本場の味が楽しめるように。おつまみ需要としても急上昇中。",
+        source: "九州食紀行",
+        sourceUrl: "https://www.kyushu-food.jp/",
+        icon: "fa-bread-slice",
+        gradient: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+        imageColor: "#ff4d6d",
+        viewCount: 1650
+    },
+    {
+        id: 20,
+        title: "福岡「あまおう」スイーツの最高峰、有名パティスリーとのコラボが話題",
+        category: "fukuoka",
+        categoryLabel: "福岡県",
+        date: "2026.02.24",
+        summary: "ブランド苺「あまおう」を贅沢に使用した期間限定パフェがSNSで拡散。一皿3000円を超える『ご褒美スイーツ』市場の底堅さを見せている。",
+        source: "スイーツ・タイムズ",
+        sourceUrl: "https://www.sweets-times.jp/",
+        icon: "fa-strawberry",
+        gradient: "linear-gradient(to top, #ff9a9e 0%, #fecfef 99%, #fecfef 100%)",
+        imageColor: "#ff0000",
+        viewCount: 1400
+    },
+    {
+        id: 301,
+        title: "北海道産「白いトウモロコシ」が高級スイーツ食材として人気急上昇",
+        category: "hokkaido",
+        categoryLabel: "北海道",
+        date: "2026.02.25",
+        summary: "糖度が極めて高く生でも食べられる北海道産の白いトウモロコシ「ピュアホワイト」が、パティスリーやジェラート専門店で引き合いが急増。本州への産直ECも活況を呈している。",
+        source: "北海道農業新報",
+        sourceUrl: "https://www.hokkaido-agri.jp/",
+        icon: "fa-snowflake",
+        gradient: "linear-gradient(to right, #a8edea 0%, #fed6e3 100%)",
+        imageColor: "#4a90d9",
+        viewCount: 1230
+    },
+    {
+        id: 302,
+        title: "函館「塩ラーメン」の洗練化が進む、出汁の多層化で新世代店舗が注目",
+        category: "hokkaido",
+        categoryLabel: "北海道",
+        date: "2026.02.23",
+        summary: "昆布・ホタテ・鶏のトリプル出汁を丁寧に重ねた新世代の塩ラーメンが、食通の間で話題に。外国人観光客が増加する函館で、新たな「食の聖地」化が加速している。",
+        source: "ご当地ラーメン図鑑",
+        sourceUrl: "https://www.ramen-zukan.jp/",
+        icon: "fa-fire",
+        gradient: "linear-gradient(to right, #48c6ef 0%, #6f86d6 100%)",
+        imageColor: "#4a90d9",
+        viewCount: 970
+    },
+    // --- アーカイブ用データ ---
+    {
+        id: 303,
+        title: "北海道産バター不足が再燃、業務用需要増でスーパー棚が空に",
+        category: "hokkaido",
+        categoryLabel: "北海道",
+        date: "2026.02.08",
+        summary: "インバウンド回復による菓子需要の急回復と、酪農家の減少が重なりバター不足が再発。製菓業界では代替油脂の研究が加速している。",
+        source: "酪農・乳業速報",
+        sourceUrl: "https://www.dairy-news.jp/",
+        icon: "fa-cow",
+        gradient: "linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)",
+        imageColor: "#4a90d9",
+        viewCount: 840
+    },
+    {
+        id: 101,
+        title: "冬の定番「おでん」に異変？ トッピングにアボカドが流行した兆し",
+        category: "gaishoku",
+        categoryLabel: "外食",
+        date: "2026.02.16",
+        summary: "昨今のヘルシー志向を受け、意外な組み合わせがヒット。変わり種おでんのブームを振り返る。",
+        source: "トレンド回顧録",
+        sourceUrl: "#",
+        icon: "fa-bowl-food",
+        gradient: "linear-gradient(to right, #6a11cb 0%, #2575fc 100%)",
+        viewCount: 300
+    },
+    {
+        id: 102,
+        title: "2025年ヒット予測：昆虫食は「パウダー」から「姿」へ？",
+        category: "health",
+        categoryLabel: "健康",
+        date: "2026.02.06",
+        summary: "サステナブルフードとして注目された昆虫食。昨年の議論と市場の変化をアーカイブから読み解く。",
+        source: "未来食通信",
+        sourceUrl: "#",
+        icon: "fa-bug",
+        gradient: "linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%)",
+        viewCount: 150
+    },
+    {
+        id: 103,
+        title: "2026年元旦：健康寿命を延ばす「最強のおせち」が話題に",
+        category: "health",
+        categoryLabel: "健康",
+        date: "2026.01.07",
+        summary: "塩分控えめながら旨味を最大限に引き出した進化形おせち。高タンパク素材をふんだんに使用し、アクティブシニア層に大ヒット。",
+        source: "健康日本21ニュース",
+        sourceUrl: "#",
+        icon: "fa-sun",
+        gradient: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+        viewCount: 420
+    },
+    {
+        id: 104,
+        title: "「ヴィーガニュアリー」日本でも浸透、プラントベース肉の売上が1.5倍に",
+        category: "health",
+        categoryLabel: "健康",
+        date: "2026.01.12",
+        summary: "1月を菜食で過ごす世界的なキャンペーンが日本でも注目。コンビニ各社が相次いで大豆ミート商品を発表。健康と環境を意識する若年層が牽引。",
+        source: "エコライフ・マガジン",
+        sourceUrl: "#",
+        icon: "fa-leaf",
+        gradient: "linear-gradient(to right, #43e97b 0%, #38f9d7 100%)",
+        viewCount: 580
+    },
+    {
+        id: 105,
+        title: "余ったお餅をフレンチに？ SNSで「餅リメイク」が大バズり",
+        category: "sns",
+        categoryLabel: "SNSトレンド",
+        date: "2026.01.17",
+        summary: "正月明けの定番悩み「余った餅」を解決するレシピ動画がTikTokで拡散。特に『餅ラザニア』や『餅ワッフル』など、洋風アレンジが人気。",
+        source: "レシピ・パトロール",
+        sourceUrl: "#",
+        icon: "fa-hashtag",
+        gradient: "linear-gradient(to top, #ff9a9e 0%, #fecfef 100%)",
+        viewCount: 1950
+    },
+    {
+        id: 106,
+        title: "高騰する光熱費に対抗！「非加熱レシピ」が節約層に支持される",
+        category: "saving",
+        categoryLabel: "節約",
+        date: "2026.01.22",
+        summary: "ガス・電気代の削減のため、電子レンジだけで完結する料理や、火を使わない和え物レシピが注目。カット野菜を活用した時短テクも併せて流行。",
+        source: "家計の知恵袋",
+        sourceUrl: "#",
+        icon: "fa-bolt-slash",
+        gradient: "linear-gradient(to top, #fcc5e4 0%, #fda34b 100%)",
+        viewCount: 720
+    },
+    {
+        id: 107,
+        title: "「一人鍋」専用の高級家電が登場、独身世帯の『おうち外食』が加速",
+        category: "retail",
+        categoryLabel: "小売・流通",
+        date: "2026.01.27",
+        summary: "卓上で手軽に本格的な煮込み料理ができる小型調理器がヒット。デパ地下の高級鍋セットとの抱き合わせ販売も好調。",
+        source: "家電トレンド報",
+        sourceUrl: "#",
+        icon: "fa-plug",
+        gradient: "linear-gradient(to right, #92fe9d 0%, #00c9ff 100%)",
+        viewCount: 480
+    },
+    {
+        id: 108,
+        title: "バレンタイン異変、チョコではなく「高級ナッツ」を贈るスタイルが急上昇",
+        category: "sweets",
+        categoryLabel: "スイーツ",
+        date: "2026.02.01",
+        summary: "甘いものが苦手な層や健康意識の高いパートナーへ、トリュフがけナッツや燻製ミックスナッツを贈るのが新常態に。酒のつまみ需要も。 ",
+        source: "ギフトジャーナル",
+        sourceUrl: "#",
+        icon: "fa-heart",
+        gradient: "linear-gradient(to bottom, #f77062 0%, #fe5196 100%)",
+        viewCount: 1250
+    },
+    {
+        id: 109,
+        title: "AIが献立を提案するスマート冷蔵庫、普及率が10%を突破",
+        category: "retail",
+        categoryLabel: "小売・流通",
+        date: "2026.02.11",
+        summary: "庫内の食材から最適なレシピを提案し、不足分を自動発注する機能。食品ロス削減への貢献が期待され、共働き世帯からの導入が進む。",
+        source: "テックフード・デイリー",
+        sourceUrl: "#",
+        icon: "fa-microchip",
+        gradient: "linear-gradient(to right, #4facfe 0%, #00f2fe 100%)",
+        viewCount: 840
+    },
+    {
+        id: 110,
+        title: "広島ブランドの「牡蠣」に新展開、世界初の陸上養殖に成功か",
+        category: "hiroshima",
+        categoryLabel: "広島県",
+        date: "2026.02.14",
+        summary: "海の環境変化を受け、安定供給を目指す新プロジェクト。寄生虫リスクを抑えた『当たる心配のない牡蠣』として輸出市場も視野に。",
+        source: "瀬戸内経済Web",
+        sourceUrl: "#",
+        icon: "fa-water",
+        gradient: "linear-gradient(to right, #48c6ef 0%, #6f86d6 100%)",
+        viewCount: 660
     }
 ];
 
-// コラム描画
-function renderColumns() {
-    if (!columnGrid) return;
-    columnGrid.innerHTML = '';
+// DOM要素
 
-    // 日付に基づいてローテーション枠を選択（3日周期）
-    const rotationPeriod = 3 * 24 * 60 * 60 * 1000;
-    const now = Date.now();
-    const sequenceIndex = Math.floor(now / rotationPeriod);
 
-    const stockSize = rollingColumnsStock.length;
-    const startIndex = (sequenceIndex * 2) % stockSize;
-
-    const pickedRollingColumns = [];
-    if (stockSize > 0) {
-        pickedRollingColumns.push(rollingColumnsStock[startIndex]);
-        if (stockSize > 1) {
-            pickedRollingColumns.push(rollingColumnsStock[(startIndex + 1) % stockSize]);
-        }
-    }
-
-    // 固定 + 動的を結合
-    const displayColumns = [...staticColumns, ...pickedRollingColumns];
-
-    displayColumns.forEach(item => {
-        const card = document.createElement('article');
-        card.className = 'column-card';
-
-        // 改行を処理
-        const formattedBody = item.body.replace(/\n\s+/g, '<br>');
-
-        card.innerHTML = `
-            <div class="column-card-header" style="background: ${item.headerColor};"></div>
-            <div class="column-card-body">
-                <span class="column-tag"># ${item.tag}</span>
-                <h3>${item.title}</h3>
-                <p class="column-text-content">${formattedBody}</p>
-                
-                <div class="column-action">
-                    <button class="btn-column-toggle">
-                        <span class="btn-label">全文を詳しく読む</span> <i class="fa-solid fa-chevron-down"></i>
-                    </button>
-                </div>
-
-                <div class="column-card-footer">
-                    <div class="column-author">
-                        <div class="author-avatar" style="background-color: ${item.author.color};">${item.author.initials}</div>
-                        <div class="author-info">
-                            <span class="author-name">${item.author.name}</span>
-                            <span class="author-title">${item.author.title}</span>
-                        </div>
-                    </div>
-                    <span class="column-read-time">
-                        <i class="fa-regular fa-clock"></i> 約${item.readTime}分
-                    </span>
-                </div>
-            </div>
-        `;
-
-        // 展開・格納イベント
-        const toggleBtn = card.querySelector('.btn-column-toggle');
-        toggleBtn.addEventListener('click', () => {
-            const isExpanded = card.classList.toggle('expanded');
-            const icon = toggleBtn.querySelector('i');
-            const label = toggleBtn.querySelector('.btn-label');
-
-            if (isExpanded) {
-                label.textContent = '内容を閉じる';
-                icon.className = 'fa-solid fa-chevron-up';
-            } else {
-                label.textContent = '全文を詳しく読む';
-                icon.className = 'fa-solid fa-chevron-down';
-                card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            }
-        });
-
-        columnGrid.appendChild(card);
-    });
-}
-
+// DOM要素
 const newsGrid = document.getElementById('news-grid');
 const rankingGrid = document.getElementById('ranking-grid');
 const filterBtns = document.querySelectorAll('.filter-btn');
 const searchInput = document.getElementById('search-input');
-const columnGrid = document.getElementById('column-grid');
-
-// 他のDOM要素
-const siteLogo = document.getElementById('site-logo');
-const homeLink = document.getElementById('home-link');
 
 // 状態管理
 let currentCategory = 'all';
 let currentSearchTerm = '';
-let favoriteIds = JSON.parse(localStorage.getItem('life_trend_favorites') || '[]');
-let showFavoritesOnly = false; // お気に入り表示フラグ
+let favoriteIds = JSON.parse(localStorage.getItem('food_trend_favorites') || '[]');
+let showFavoritesOnly = false;
 let showArchive = false; // アーカイブ表示フラグ
 
-// 初期化
+// 初期表示
 document.addEventListener('DOMContentLoaded', () => {
-    init();
-});
-
-function init() {
-    injectDailyArticle(); // デイリー記事を追加（最初に行う）
-    renderNews();
+    injectDailyArticle(); // デイリー記事をnewsDataに追加（必ず最初に実行）
     renderRanking();
-    renderColumns();
+    renderColumns(); // コラムセクションを描画
+    applyFilters();
     setupFilters();
     setupSearch();
-    setupMobileMenu();
-    setupHomeButton();
-    setupArchive();
-    setupFavoritesNav();
-    checkDailyUpdate();
-}
+    checkDailyUpdate(); // 7時更新チェック
+    setupMobileMenu(); // モバイルメニューの設定
+    setupFavoritesNav(); // お気に入りナビの設定
+    setupArchive(); // アーカイブの設定
+    setupHomeButton(); // ホーム/ロゴボタンの設定
+});
 
-// ホーム/ロゴボタンの設定
+// ホーム/ロゴボタンの設定（状態リセットとトップ移動）
 function setupHomeButton() {
+    const logo = document.getElementById('site-logo');
+    const homeLink = document.getElementById('home-link');
+
     const resetView = (e) => {
         e.preventDefault();
+
+        // 状態のリセット
         currentCategory = 'all';
         currentSearchTerm = '';
         showFavoritesOnly = false;
         showArchive = false;
 
-        if (searchInput) searchInput.value = '';
+        // UIのリセット
+        searchInput.value = '';
         filterBtns.forEach(b => b.classList.remove('active'));
         const allFilter = document.querySelector('.filter-btn[data-category="all"]');
         if (allFilter) allFilter.classList.add('active');
 
-        // ナビゲーションのactive状態をリセット
-        if (homeLink) homeLink.classList.add('active');
-        const navArchiveLink = document.getElementById('nav-archive');
-        if (navArchiveLink) navArchiveLink.classList.remove('active');
+        const favoritesBtn = document.getElementById('view-favorites');
+        if (favoritesBtn) {
+            favoritesBtn.classList.remove('active');
+            favoritesBtn.innerHTML = '<i class="fa-solid fa-heart"></i> お気に入り';
+        }
 
-        updateFavoritesUI(); // UI表示をリセット
-        renderNews();
+        const archiveBtn = document.getElementById('load-archive-btn');
+        if (archiveBtn) archiveBtn.classList.remove('active');
+
+        // フィルタ適用と最上部へのスクロール
+        applyFilters();
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    if (siteLogo) siteLogo.addEventListener('click', resetView);
+    if (logo) logo.addEventListener('click', resetView);
     if (homeLink) homeLink.addEventListener('click', resetView);
 }
 
-// ニュース描画
-function renderNews() {
-    newsGrid.innerHTML = '';
+// モバイルメニューの設定
+function setupMobileMenu() {
+    const toggle = document.getElementById('mobile-menu-toggle');
+    const nav = document.querySelector('.main-nav');
+    if (!toggle || !nav) return;
 
-    // フィルタリング
-    const filteredData = newsData.filter(item => {
-        const matchesCategory = currentCategory === 'all' || item.category === currentCategory;
-        const matchesSearch = item.title.toLowerCase().includes(currentSearchTerm.toLowerCase()) ||
-            item.summary.toLowerCase().includes(currentSearchTerm.toLowerCase());
-        const matchesFavorites = !showFavoritesOnly || favoriteIds.includes(item.id);
-        return matchesCategory && matchesSearch && matchesFavorites;
+    toggle.addEventListener('click', () => {
+        nav.classList.toggle('active');
+        const icon = toggle.querySelector('i');
+        if (nav.classList.contains('active')) {
+            icon.classList.replace('fa-bars', 'fa-xmark');
+        } else {
+            icon.classList.replace('fa-xmark', 'fa-bars');
+        }
     });
 
-    // 新着とアーカイブを分ける (isArchiveDateは7日前かどうかで判定)
-    const recentNews = filteredData.filter(item => !isArchiveDate(item.date));
-    const archiveNews = filteredData.filter(item => isArchiveDate(item.date));
+    // メニューリンククリック時に閉じる
+    const navLinks = nav.querySelectorAll('a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            nav.classList.remove('active');
+            toggle.querySelector('i').classList.replace('fa-xmark', 'fa-bars');
+        });
+    });
+}
+
+// お気に入りナビの設定
+function setupFavoritesNav() {
+    const favoritesBtn = document.getElementById('view-favorites');
+    const favoritesOnlyBtn = document.getElementById('filter-favorites-only');
+    const showAllBtn = document.getElementById('filter-show-all');
+
+    if (!favoritesBtn) return;
+
+    // 「お気に入りのみ」を選択
+    if (favoritesOnlyBtn) {
+        favoritesOnlyBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            showFavoritesOnly = true;
+            showArchive = false;
+            updateFavoritesUI();
+            applyFilters();
+
+            // フィルターのリセット
+            resetOtherFilters();
+        });
+    }
+
+    // 「すべて表示」を選択
+    if (showAllBtn) {
+        showAllBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            showFavoritesOnly = false;
+            updateFavoritesUI();
+            applyFilters();
+        });
+    }
+
+    // 親ボタン自体のクリック（トグル動作）
+    favoritesBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        // 従来のトグル動作（表示内容の切り替え）も継続
+        showFavoritesOnly = !showFavoritesOnly;
+        showArchive = false;
+        updateFavoritesUI();
+        applyFilters();
+        if (showFavoritesOnly) resetOtherFilters();
+    });
+}
+
+// お気に入り関連のUI表示更新
+function updateFavoritesUI() {
+    const favoritesBtn = document.getElementById('view-favorites');
+    const favoritesOnlyBtn = document.getElementById('filter-favorites-only');
+    const showAllBtn = document.getElementById('filter-show-all');
+    const archiveLoadBtn = document.getElementById('load-archive-btn');
+
+    if (showFavoritesOnly) {
+        if (favoritesBtn) favoritesBtn.classList.add('active');
+        if (favoritesOnlyBtn) favoritesOnlyBtn.classList.add('active');
+        if (showAllBtn) showAllBtn.classList.remove('active');
+        if (archiveLoadBtn) archiveLoadBtn.classList.remove('active');
+    } else {
+        if (favoritesBtn) favoritesBtn.classList.remove('active');
+        if (favoritesOnlyBtn) favoritesOnlyBtn.classList.remove('active');
+        if (showAllBtn) showAllBtn.classList.add('active');
+    }
+}
+
+// お気に入り表示時の他フィルターリセット
+function resetOtherFilters() {
+    currentCategory = 'all';
+    currentSearchTerm = '';
+    searchInput.value = '';
+    filterBtns.forEach(b => b.classList.remove('active'));
+    const allFilter = document.querySelector('.filter-btn[data-category="all"]');
+    if (allFilter) allFilter.classList.add('active');
+}
+
+// お気に入りの切り替え
+function toggleFavorite(id, event) {
+    if (event) {
+        event.stopPropagation();
+    }
+
+    const index = favoriteIds.indexOf(id);
+    if (index === -1) {
+        favoriteIds.push(id);
+    } else {
+        favoriteIds.splice(index, 1);
+    }
+
+    localStorage.setItem('food_trend_favorites', JSON.stringify(favoriteIds));
+
+    // UI更新
+    const btns = document.querySelectorAll(`.favorite-btn[data-id="${id}"]`);
+    btns.forEach(btn => {
+        btn.classList.toggle('active');
+        const icon = btn.querySelector('i');
+        if (icon.classList.contains('fa-solid')) {
+            icon.classList.replace('fa-solid', 'fa-regular');
+        } else {
+            icon.classList.replace('fa-regular', 'fa-solid');
+        }
+    });
+
+    // お気に入り一覧表示中の場合は再描画
+    if (showFavoritesOnly) {
+        applyFilters();
+    }
+}
+
+// アーカイブの設定
+function setupArchive() {
+    const archiveBtn = document.getElementById('load-archive-btn');
+    const navArchiveLink = document.getElementById('nav-archive');
+
+    const expandArchive = () => {
+        showArchive = true;
+        if (archiveBtn) archiveBtn.classList.add('active');
+        applyFilters();
+
+        // 少し遅らせて描画を待ってからスクロール
+        setTimeout(() => {
+            const divider = document.querySelector('.archive-divider');
+            if (divider) {
+                divider.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }, 100);
+    };
+
+    if (archiveBtn) {
+        archiveBtn.addEventListener('click', expandArchive);
+    }
+
+    if (navArchiveLink) {
+        navArchiveLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            // お気に入り表示中の場合は解除
+            if (showFavoritesOnly) {
+                const favoritesBtn = document.getElementById('view-favorites');
+                showFavoritesOnly = false;
+                if (favoritesBtn) {
+                    favoritesBtn.classList.remove('active');
+                    favoritesBtn.innerHTML = '<i class="fa-solid fa-heart"></i> お気に入り';
+                }
+            }
+            expandArchive();
+        });
+    }
+}
+
+// 日付が7日以上前かチェックするヘルパー
+function isArchiveDate(dateStr) {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    // dateStr "YYYY.MM.DD" を Date オブジェクトに変換
+    const parts = dateStr.split('.');
+    const itemDate = new Date(parts[0], parts[1] - 1, parts[2]);
+
+    const diffTime = today - itemDate;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    return diffDays > 7;
+}
+
+
+// 共通：記事へのスクロールとハイライト
+function scrollToArticle(articleId) {
+    // 検索とカテゴリをリセットして全表示
+    searchInput.value = '';
+    currentSearchTerm = '';
+    currentCategory = 'all';
+
+    // ボタンの表示もリセット
+    filterBtns.forEach(b => b.classList.remove('active'));
+    const allFilter = document.querySelector('.filter-btn[data-category="all"]');
+    if (allFilter) allFilter.classList.add('active');
+
+    applyFilters();
+
+    // 該当記事を探して詳細までスクロール
+    const targetCard = newsGrid.querySelector(`.news-card[data-id="${articleId}"]`);
+    if (targetCard) {
+        targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        targetCard.style.animation = "none"; // アニメーションリセット
+        setTimeout(() => {
+            targetCard.style.animation = "flash 1s";
+        }, 10);
+    }
+}
+
+// 朝7時の更新チェック
+function checkDailyUpdate() {
+    const now = new Date();
+    const currentHour = now.getHours();
+    const todayStr = getRelativeDate(0);
+
+    // ローカルストレージで最後に更新通知を出した日を記録
+    const lastUpdateDate = localStorage.getItem('last_daily_update_notified');
+
+    // 7時以降かつ、今日まだ通知を出していない場合
+    if (currentHour >= 7 && lastUpdateDate !== todayStr) {
+        showUpdateNotification();
+        localStorage.setItem('last_daily_update_notified', todayStr);
+    }
+}
+
+// 更新通知の表示
+function showUpdateNotification() {
+    const notification = document.createElement('div');
+    notification.id = 'daily-update-notification';
+    notification.innerHTML = `
+        <div class="notif-content">
+            <i class="fa-solid fa-bell"></i>
+            <span>本日のトレンド情報をピックアップしました（07:00更新）</span>
+            <button onclick="this.parentElement.parentElement.remove()">OK</button>
+        </div>
+    `;
+    document.body.appendChild(notification);
+
+    // 10秒後に自動消去
+    setTimeout(() => {
+        if (notification.parentElement) notification.remove();
+    }, 10000);
+}
+
+/* simulateNewArticle and showNotification removed */
+
+// ========================================
+// トレンドスコアの計算（毎日変動する急上昇ランキング用）
+// 3要素を合成：
+//   1. ベーススコア  : viewCount（基本人気度）
+//   2. 新着ブースト  : 記事が新しいほど高い（最大2倍、7日で減衰）
+//   3. 日次変動係数  : 「今日の日付 × 記事ID」を元にした擬似乱数（0.5〜1.5倍）
+//                      ⇒ 日が変わるごとに各記事の係数が変わり順位が入れ替わる
+// ========================================
+function calculateTrendScore(item) {
+    // --- 1. ベーススコア ---
+    const base = item.viewCount || 0;
+
+    // --- 2. 新着ブースト（最大2倍、日数に応じて線形減衰）---
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const parts = item.date.split('.');
+    const articleDate = new Date(parts[0], parts[1] - 1, parts[2]);
+    const ageDays = Math.max(0, Math.floor((today - articleDate) / (1000 * 60 * 60 * 24)));
+    const recencyBoost = Math.max(1.0, 2.0 - ageDays * (1.0 / 7)); // 0〜7日で2.0→1.0
+
+    // --- 3. 日次変動係数（シード付き擬似乱数）---
+    // 今日の日付を整数に変換（YYYYMMDD形式）してシードとして使う
+    const y = today.getFullYear();
+    const m = String(today.getMonth() + 1).padStart(2, '0');
+    const d = String(today.getDate()).padStart(2, '0');
+    const dateSeed = Number(`${y}${m}${d}`);
+
+    // LCG（線形合同法）による擬似乱数生成（記事IDとdateSeedを組み合わせ）
+    const seed = (dateSeed * 31 + item.id * 1000003) % 2147483647;
+    const lcg = ((seed * 1664525 + 1013904223) & 0xffffffff) >>> 0;
+    // 0.5〜1.5の範囲に正規化
+    const dailyFactor = 0.5 + (lcg / 0xffffffff);
+
+    return base * recencyBoost * dailyFactor;
+}
+
+// ランキング表示（トップ3）
+function renderRanking() {
+    // トレンドスコアで毎日変動するランキングを生成（アーカイブ除外）
+    const rankingData = newsData
+        .filter(item => item.viewCount && !isArchiveDate(item.date))
+        .sort((a, b) => calculateTrendScore(b) - calculateTrendScore(a))
+        .slice(0, 3);
+
+    rankingGrid.innerHTML = '';
+
+    rankingData.forEach((item, index) => {
+        const card = createNewsCard(item, true, index + 1); // index + 1 = 実際の順位
+
+        // クリックでその記事に飛ぶ
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', () => {
+            scrollToArticle(item.id);
+        });
+
+        rankingGrid.appendChild(card);
+    });
+}
+
+// ニュース記事の描画
+function renderNews(data) {
+    newsGrid.innerHTML = '';
+
+    // 新着とアーカイブを分ける（もしアーカイブ表示モードなら）
+    const recentNews = data.filter(item => !isArchiveDate(item.date));
+    const archiveNews = data.filter(item => isArchiveDate(item.date));
 
     // 新着の描画
     recentNews.forEach(item => {
@@ -1185,549 +862,850 @@ function renderNews() {
     // アーカイブボタンの表示制御
     const archiveBtnAction = document.getElementById('archive-action');
     if (archiveBtnAction) {
-        // アーカイブ記事があり、かつ現在は表示していない場合にボタンを出す
+        // アーカイブ記事があり、かつまだ表示していない場合にボタンを出す
         if (archiveNews.length > 0 && !showArchive) {
-            archiveBtnAction.style.display = 'flex';
+            archiveBtnAction.style.display = 'block';
         } else {
             archiveBtnAction.style.display = 'none';
         }
     }
-
-    // 検索結果がない場合の表示
-    if (filteredData.length === 0) {
-        newsGrid.innerHTML = '<p style="text-align:center; width:100%; color:#666; padding: 40px 0;">該当する記事が見見つかりませんでした。</p>';
-    }
 }
 
-// カテゴリに応じた色を返す
-function getCategoryColor(category) {
-    switch (category) {
-        case 'wellness': return '#27ae60';
-        case 'work': return '#2c3e50';
-        case 'living': return '#f39c12';
-        case 'ladies': return '#e84393';
-        case 'mens': return '#3498db';
-        case 'kids': return '#f1c40f';
-        case 'baby': return '#9b59b6';
-        case 'sns': return '#e056fd';
-        case 'shoes': return '#d35400';
-        case 'cosme': return '#ff4d6d';
-        case 'color': return '#ff6b81'; // ハートフェルト・ピンク
-        default: return '#333';
-    }
-}
-
-// お気に入りの切り替え
-function toggleFavorite(id, event) {
-    if (event) {
-        event.stopPropagation();
-    }
-
-    const index = favoriteIds.indexOf(id);
-    if (index === -1) {
-        favoriteIds.push(id);
-    } else {
-        favoriteIds.splice(index, 1);
-    }
-
-    localStorage.setItem('life_trend_favorites', JSON.stringify(favoriteIds));
-
-    // 全ての該当カードのUI更新
-    const btns = document.querySelectorAll(`.favorite-btn[data-id="${id}"]`);
-    btns.forEach(btn => {
-        btn.classList.toggle('active');
-        const icon = btn.querySelector('i');
-        if (icon.classList.contains('fa-solid')) {
-            icon.classList.replace('fa-solid', 'fa-regular');
-        } else {
-            icon.classList.replace('fa-regular', 'fa-solid');
-        }
-    });
-
-    if (showFavoritesOnly) {
-        renderNews();
-    }
-}
-
-// ニュース記事へのスクロール
-function scrollToArticle(articleId) {
-    const article = newsData.find(item => item.id === articleId);
-    if (!article) return;
-
-    currentSearchTerm = '';
-    currentCategory = 'all';
-    showFavoritesOnly = false;
-
-    // もし記事がアーカイブなら、アーカイブを広げる
-    if (isArchiveDate(article.date)) {
-        showArchive = true;
-    }
-
-    searchInput.value = '';
-    filterBtns.forEach(b => b.classList.remove('active'));
-    const allFilter = document.querySelector('.filter-btn[data-category="all"]');
-    if (allFilter) allFilter.classList.add('active');
-
-    renderNews();
-
-    setTimeout(() => {
-        const targetCard = newsGrid.querySelector(`.news-card[data-id="${articleId}"]`);
-        if (targetCard) {
-            targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            targetCard.style.transition = 'background-color 0.5s';
-            const originalBg = targetCard.style.backgroundColor;
-            targetCard.style.backgroundColor = '#fff9c4';
-            setTimeout(() => {
-                targetCard.style.backgroundColor = originalBg;
-            }, 1000);
-        }
-    }, 100);
-}
-
-// アーカイブの設定
-function setupArchive() {
-    const archiveBtn = document.getElementById('load-archive-btn');
-    const navArchiveLink = document.getElementById('nav-archive');
-
-    const expandArchive = () => {
-        showArchive = true;
-        renderNews();
-
-        // 描画完了を待ってから、アーカイブ開始地点までスクロール
-        setTimeout(() => {
-            const divider = document.querySelector('.archive-divider');
-            if (divider) {
-                // CSSのscroll-margin-topと連携して、最適な位置に表示
-                divider.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        }, 500);
-    };
-
-    if (archiveBtn) {
-        archiveBtn.addEventListener('click', expandArchive);
-    }
-
-    if (navArchiveLink) {
-        navArchiveLink.addEventListener('click', (e) => {
-            e.preventDefault();
-
-            // フィルター状態を完全にリセットしてからアーカイブを表示
-            currentCategory = 'all';
-            currentSearchTerm = '';
-            if (searchInput) searchInput.value = '';
-            showFavoritesOnly = false;
-
-            // UI表示のリセット
-            filterBtns.forEach(b => b.classList.remove('active'));
-            const allFilter = document.querySelector('.filter-btn[data-category="all"]');
-            if (allFilter) allFilter.classList.add('active');
-
-            // ナビゲーションのactive状態を更新
-            if (homeLink) homeLink.classList.remove('active');
-            updateFavoritesUI(); // お気に入り表示をリセット
-            navArchiveLink.classList.add('active');
-
-            expandArchive();
-        });
-    }
-}
-
-// アーカイブ判定 (7日以上前)
-function isArchiveDate(dateStr) {
-    // getRelativeDateから渡されるようなフォーマット "YYYY.MM.DD" を想定
-    // ただしlife-trend-monitorの初期データはJS内部で生成されている
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    const parts = dateStr.split('.');
-    if (parts.length !== 3) return false;
-    const itemDate = new Date(parts[0], parts[1] - 1, parts[2]);
-
-    const diffTime = today - itemDate;
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-    return diffDays > 7;
-}
-
-// トレンドスコアの計算
-function calculateTrendScore(item) {
-    const base = item.viewCount || 0;
-
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const parts = item.date.split('.');
-    const articleDate = new Date(parts[0], parts[1] - 1, parts[2]);
-    const ageDays = Math.max(0, Math.floor((today - articleDate) / (1000 * 60 * 60 * 24)));
-    const recencyBoost = Math.max(1.0, 2.0 - ageDays * (1.0 / 7));
-
-    const y = today.getFullYear();
-    const m = String(today.getMonth() + 1).padStart(2, '0');
-    const d = String(today.getDate()).padStart(2, '0');
-    const dateSeed = Number(`${y}${m}${d}`);
-
-    const seed = (dateSeed * 31 + item.id * 1000003) % 2147483647;
-    const lcg = ((seed * 1664525 + 1013904223) & 0xffffffff) >>> 0;
-    const dailyFactor = 0.5 + (lcg / 0xffffffff);
-
-    return base * recencyBoost * dailyFactor;
-}
-
-// ニュースカード作成
+// ニュースカードの作成
 function createNewsCard(item, isRanking = false, rank = 0) {
-    const card = document.createElement('div');
-    card.setAttribute('data-id', item.id);
-
-    const isFavorite = favoriteIds.includes(item.id);
-    const favIconClass = isFavorite ? 'fa-solid' : 'fa-regular';
-    const favActiveClass = isFavorite ? 'active' : '';
+    const article = document.createElement('article');
+    // IDを付与（枠外検索用）
+    article.setAttribute('data-id', item.id);
 
     if (isRanking) {
-        card.className = 'ranking-card';
-        card.style.cursor = 'pointer';
-        card.onclick = () => scrollToArticle(item.id);
+        // ランキング用（テキストのみ）
+        article.className = 'ranking-card';
 
+        // バッジ（実際の順位を使用）
         const rankClass = rank <= 3 ? `rank-${rank}` : '';
         const icon = rank === 1 ? '<i class="fa-solid fa-crown"></i>' : rank;
         const badgeHtml = `<div class="rank-badge ${rankClass}">${icon}</div>`;
 
-        const sourceHtml = item.sourceUrl && item.sourceUrl !== '#'
-            ? `<a href="${item.sourceUrl}" target="_blank" rel="noopener noreferrer" class="source-link" onclick="event.stopPropagation()"><i class="fa-solid fa-arrow-up-right-from-square"></i> ${item.source}</a>`
-            : `<i class="fa-solid fa-link"></i> ${item.source}`;
-
-        card.innerHTML = `
-            ${badgeHtml}
-            <div class="ranking-card-content">
-                <h3>${item.title}</h3>
-                <div class="ranking-meta">
-                    <span class="news-category" style="background-color: ${getCategoryColor(item.category)}; position: static; padding: 2px 8px; font-size: 0.7rem;">${item.categoryLabel}</span>
-                    <span class="news-source">${sourceHtml}</span>
-                </div>
-            </div>
+        // お気に入りボタンの生成
+        const isFavorite = favoriteIds.includes(item.id);
+        const favIconClass = isFavorite ? 'fa-solid' : 'fa-regular';
+        const favActiveClass = isFavorite ? 'active' : '';
+        const favBtnHtml = `
             <button class="favorite-btn ${favActiveClass}" data-id="${item.id}" onclick="toggleFavorite(${item.id}, event)">
                 <i class="${favIconClass} fa-heart"></i>
             </button>
         `;
-    } else {
-        const sourceHtml = item.sourceUrl && item.sourceUrl !== '#'
-            ? `<a href="${item.sourceUrl}" target="_blank" rel="noopener noreferrer" class="source-link" onclick="event.stopPropagation()"><i class="fa-solid fa-arrow-up-right-from-square"></i> ${item.source}</a>`
+
+        // ランキングカードの情報源リンク生成
+        const rankingSourceHtml = item.sourceUrl
+            ? `<a href="${item.sourceUrl}" target="_blank" rel="noopener noreferrer" class="source-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> ${item.source}</a>`
             : `<i class="fa-solid fa-link"></i> ${item.source}`;
 
-        card.className = 'news-card';
-        card.innerHTML = `
-            <div class="news-image" style="background: ${item.gradient}">
+        article.innerHTML = `
+            ${badgeHtml}
+            <h3>${item.title}</h3>
+            <div class="ranking-meta">
+                <span class="news-category" style="background-color: ${getCategoryColor(item.category)}; position: static; padding: 3px 8px;">${item.categoryLabel}</span>
+                <span class="news-source">${rankingSourceHtml}</span>
+            </div>
+            ${favBtnHtml}
+        `;
+    } else {
+        // 通常ニュースカード（画像あり）
+        article.className = 'news-card';
+
+        // 通常カードにはバッジを表示しない（重複を避けるため、またはデザイン上）
+        // アイコンとグラデーションを使用
+        const imageStyle = `background: ${item.gradient || item.imageColor};`;
+        const iconClass = item.icon || 'fa-image';
+
+        // お気に入りボタンの生成
+        const isFavorite = favoriteIds.includes(item.id);
+        const favIconClass = isFavorite ? 'fa-solid' : 'fa-regular';
+        const favActiveClass = isFavorite ? 'active' : '';
+        const favBtnHtml = `
+            <button class="favorite-btn ${favActiveClass}" data-id="${item.id}" onclick="toggleFavorite(${item.id}, event)">
+                <i class="${favIconClass} fa-heart"></i>
+            </button>
+        `;
+
+        // 通常カードの情報源リンク生成
+        const sourceHtml = item.sourceUrl
+            ? `<a href="${item.sourceUrl}" target="_blank" rel="noopener noreferrer" class="source-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> ${item.source}</a>`
+            : `<i class="fa-solid fa-link"></i> ${item.source}`;
+
+        article.innerHTML = `
+            <div class="news-image" style="${imageStyle}">
                 <div class="img-content">
-                    <i class="fa-solid ${item.icon}"></i>
+                    <i class="fa-solid ${iconClass} fa-3x"></i>
                 </div>
                 <span class="news-category" style="background-color: ${getCategoryColor(item.category)}">${item.categoryLabel}</span>
             </div>
             <div class="news-content">
                 <div class="news-meta">
-                    <span class="news-source">${sourceHtml}</span>
                     <span class="news-date">${item.date}</span>
+                    <span class="news-source">${sourceHtml}</span>
                 </div>
                 <h3>${item.title}</h3>
                 <p>${item.summary}</p>
-                <button class="favorite-btn ${favActiveClass}" data-id="${item.id}" onclick="toggleFavorite(${item.id}, event)">
-                    <i class="${favIconClass} fa-heart"></i>
-                </button>
+                ${favBtnHtml}
             </div>
         `;
     }
 
-    return card;
+    return article;
 }
 
-// ランキング描写 (Top 3)
-function renderRanking() {
-    rankingGrid.innerHTML = '';
-
-    // スコア計算とフィルタリング
-    const rankingData = newsData
-        .filter(item => item.viewCount && !isArchiveDate(item.date))
-        .sort((a, b) => calculateTrendScore(b) - calculateTrendScore(a))
-        .slice(0, 3);
-
-    rankingData.forEach((item, index) => {
-        const card = createNewsCard(item, true, index + 1);
-        rankingGrid.appendChild(card);
-    });
+// カテゴリに応じた色を返す
+function getCategoryColor(category) {
+    switch (category) {
+        case 'sweets': return '#f1c40f'; // 黄色
+        case 'retail': return '#9b59b6'; // 紫
+        case 'gaishoku': return '#c0392b'; // 濃い赤
+        case 'nakashoku': return '#16a085'; // ティールグリーン
+        case 'health': return '#e84393'; // ピンク
+        case 'saving': return '#f39c12'; // オレンジ
+        case 'z_gen': return '#a29bfe'; // 紫（淡い）
+        case 'asian': return '#ff0099'; // ビビッドピンク
+        case 'sns': return '#e056fd'; // ネオンパープル
+        case 'hiroshima': return '#c0392b'; // 深い赤（もみじ色）
+        case 'fukuoka': return '#ff4d6d'; // 明太ピンク
+        case 'hokkaido': return '#4a90d9'; // 北海道ブルー（雪原・空）
+        default: return '#333';
+    }
 }
 
-
-
-// フィルター設定
+// フィルター機能の設定
 function setupFilters() {
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
+            // アクティブクラスの切り替え
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
+
+            // カテゴリ更新とフィルタ適用
             currentCategory = btn.getAttribute('data-category');
-            renderNews();
+            applyFilters();
         });
     });
 }
 
 // 検索機能の設定
 function setupSearch() {
-    if (!searchInput) return;
     const handleSearch = () => {
         currentSearchTerm = searchInput.value.trim().toLowerCase();
-        renderNews();
+        applyFilters();
     };
+
     searchInput.addEventListener('input', handleSearch);
 }
 
-// お気に入りナビの設定
-function setupFavoritesNav() {
-    const favoritesBtn = document.getElementById('view-favorites');
-    const favoritesOnlyBtn = document.getElementById('filter-favorites-only');
-    const showAllBtn = document.getElementById('filter-show-all');
+// フィルタリングロジック（カテゴリ＋検索）
+function applyFilters() {
+    let filteredData = newsData;
 
-    if (!favoritesBtn) return;
-
-    // 「お気に入りのみ」を選択
-    if (favoritesOnlyBtn) {
-        favoritesOnlyBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            showFavoritesOnly = true;
-            showArchive = false;
-            updateFavoritesUI();
-            renderNews();
-
-            // フィルターのリセット
-            resetOtherFilters();
-        });
-    }
-
-    // 「すべて表示」を選択
-    if (showAllBtn) {
-        showAllBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            showFavoritesOnly = false;
-            updateFavoritesUI();
-            renderNews();
-        });
-    }
-
-    // 親ボタン自体のクリック（トグル動作）
-    favoritesBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-
-        // 従来のトグル動作（表示内容の切り替え）も継続
-        showFavoritesOnly = !showFavoritesOnly;
-        showArchive = false;
-        updateFavoritesUI();
-        renderNews();
-        if (showFavoritesOnly) resetOtherFilters();
-    });
-}
-
-// モバイルメニューの設定
-function setupMobileMenu() {
-    const toggle = document.getElementById('mobile-menu-toggle');
-    const nav = document.querySelector('.main-nav');
-    if (!toggle || !nav) return;
-
-    toggle.addEventListener('click', () => {
-        nav.classList.toggle('active');
-        const icon = toggle.querySelector('i');
-        if (nav.classList.contains('active')) {
-            icon.classList.replace('fa-bars', 'fa-xmark');
-        } else {
-            icon.classList.replace('fa-xmark', 'fa-bars');
-        }
-    });
-
-    // メニューリンククリック時に閉じる
-    const navLinks = nav.querySelectorAll('a');
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            nav.classList.remove('active');
-            const icon = toggle.querySelector('i');
-            if (icon) icon.classList.replace('fa-xmark', 'fa-bars');
-        });
-    });
-}
-
-// お気に入り関連のUI表示更新
-function updateFavoritesUI() {
-    const favoritesBtn = document.getElementById('view-favorites');
-    const favoritesOnlyBtn = document.getElementById('filter-favorites-only');
-    const showAllBtn = document.getElementById('filter-show-all');
-    const archiveLoadBtn = document.getElementById('load-archive-btn');
-
+    // お気に入りフィルタ
     if (showFavoritesOnly) {
-        if (favoritesBtn) favoritesBtn.classList.add('active');
-        if (favoritesOnlyBtn) favoritesOnlyBtn.classList.add('active');
-        if (showAllBtn) showAllBtn.classList.remove('active');
-        if (archiveLoadBtn) archiveLoadBtn.classList.remove('active');
-    } else {
-        if (favoritesBtn) favoritesBtn.classList.remove('active');
-        if (favoritesOnlyBtn) favoritesOnlyBtn.classList.remove('active');
-        if (showAllBtn) showAllBtn.classList.add('active');
+        filteredData = filteredData.filter(item => favoriteIds.includes(item.id));
+    }
+
+    // カテゴリフィルタ
+    if (currentCategory !== 'all') {
+        filteredData = filteredData.filter(item => item.category === currentCategory);
+    }
+
+    // 検索フィルタ
+    if (currentSearchTerm) {
+        filteredData = filteredData.filter(item => {
+            const titleMatch = item.title.toLowerCase().includes(currentSearchTerm);
+            const summaryMatch = item.summary.toLowerCase().includes(currentSearchTerm);
+            const sourceMatch = item.source && item.source.toLowerCase().includes(currentSearchTerm);
+            return titleMatch || summaryMatch || sourceMatch;
+        });
+    }
+
+    renderNews(filteredData);
+
+    // 検索結果がない場合の表示
+    if (filteredData.length === 0) {
+        newsGrid.innerHTML = '<p style="text-align:center; width:100%; color:#666;">該当する記事が見つかりませんでした。</p>';
     }
 }
 
-// お気に入り表示時の他フィルターリセット
-function resetOtherFilters() {
-    currentCategory = 'all';
-    currentSearchTerm = '';
-    if (searchInput) searchInput.value = '';
-    filterBtns.forEach(b => b.classList.remove('active'));
-    const allFilter = document.querySelector('.filter-btn[data-category="all"]');
-    if (allFilter) allFilter.classList.add('active');
-}
+// ========================================
+// コラムデータ（固定4件 ＋ ストックの中から日付で2件選択）
+// ========================================
+const staticColumns = [
+    {
+        id: 1,
+        tag: "市場分析",
+        title: "2026年の食品市場を動かす「5つのメガトレンド」とは",
+        body: `物価高・健康志向・Z世代の台頭・サステナビリティ・デジタル化。この5つのキーワードが今年の食品業界を根底から変えようとしている。
 
-// ========================================
-// デイリー記事プール（ライフスタイル・トレンド）
-// 毎日1件ずつローテーションで選択される
-// ========================================
-const dailyArticlePool = [
-    {
-        id: 3001,
-        title: "睡眠を最適化する『AIスマートアイマスク』、脳波に合わせて音響調整",
-        category: "wellness",
-        categoryLabel: "ウェルネス",
-        summary: "リアルタイムで脳波を測定し、深い眠りへ誘うホワイトノイズや高周波を自動調整。起床時には最もスッキリ目覚められるタイミングで光を放つ最新デバイス。",
-        source: "Tech Health",
-        sourceUrl: "#",
-        icon: "fa-moon",
-        gradient: "linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)",
-        viewCount: 2800
+特にZ世代の価値観は、単なる栄養摂取を超え「社会への貢献」や「自己表現」としての食を求めており、これにどう応えるかが企業の命運を握る。かつてのような大量生産・大量消費のモデルは、もはや通用しない。
+
+具体的なトレンドの一つとして、「機能性の可視化」がある。消費者は自分の体調や目的に合わせ、どの栄養素をどれだけ摂取すべきかを明確にすることを求めている。また、デジタル化は配送の効率化だけでなく、個々の嗜好に基づいた「パーソナライズ・ド・メニュー」の提案をも可能にした。
+
+サステナビリティにおいては、単に「環境にやさしい」だけでなく、それがどのように美味しいのか、どう食卓を豊かにするのかという情緒的価値との融合が必須となる。
+
+各トレンドの相互作用を分析し、これからの時代に企業が取るべき生存戦略と、具体的なアクションプランを専門家の視点から徹底解説する。変化を恐れるのではなく、このパラダイムシフトをいかに自社のチャンスへと昇華させるかが問われている。`,
+        author: { name: "田中 誠一", title: "食品マーケティングアナリスト", initials: "田", color: "#e67e22" },
+        readTime: 8,
+        headerColor: "linear-gradient(to right, #f6d365, #fda085)"
     },
     {
-        id: 3003,
-        title: "自宅で収穫『全自動インドア菜園』、水耕栽培とAIが植物を管理",
-        category: "living",
-        categoryLabel: "リビング",
-        summary: "室内に置くだけでハーブや野菜が育つ。水分や栄養、LED光量をAIが24時間管理。初心者でも失敗せず、常に新鮮な食材をキッチンに提供できる。",
-        source: "Green Life",
-        sourceUrl: "#",
-        icon: "fa-seedling",
-        gradient: "linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%)",
-        viewCount: 2200
+        id: 2,
+        tag: "消費者行動",
+        title: "「節約」と「プチ贅沢」が共存する矛盾した消費者心理",
+        body: `物価上昇が続く中、消費者は日常品を徹底的に節約しながら、特別な体験には惜しみなく投資する「メリハリ消費」を加速させている。
+
+かつての「安ければ良い」という一律のデフレマインドから、価値を感じるものには対価を払うという選択的消費へのシフト。この背景には、日々の生活の中でのストレス解消や、自己肯定感を高めるための「精神的報酬」としての食の役割が大きくなっている。
+
+調査によれば、週に一度の「自分へのご褒美」として高級アイスや銘店監修のデリを購入する割合が、単身世帯を中心に急増している。一方で、主菜以外の副菜については、冷凍食品やプライベートブランドを活用した徹底的なコストカットが行われている。
+
+この複雑で二極化した消費者心理の裏側にある根本的な動機を読み解く。企業は単なる価格競争から脱却し、どの部分で『贅沢感』を演出すべきか、その境界線を考える必要がある。ブランドが提供すべきは「安さ」か、それとも「至福の一時」か。そのポジショニングがかつてないほど重要になっている。`,
+        author: { name: "佐藤 美咲", title: "消費者行動研究家", initials: "佐", color: "#27ae60" },
+        readTime: 6,
+        headerColor: "linear-gradient(to right, #43e97b, #38f9d7)"
     },
     {
-        id: 3004,
-        title: "注目の『デジタル・デトックス・ヴィレッジ』、電波の届かない宿が予約困難に",
-        category: "wellness",
-        categoryLabel: "ウェルネス",
-        summary: "あえて「繋がらない」贅沢。スマホを預け、焚き火や五感を使ったアクティビティに集中。情報の濁流から離れ、精神を回復させるプログラムが多忙な層に支持される。",
-        source: "Mindfulness Today",
-        sourceUrl: "#",
-        icon: "fa-campground",
-        gradient: "linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%)",
-        viewCount: 3500
+        id: 3,
+        tag: "SNS戦略",
+        title: "TikTok・Instagramで「バズる」食品ブランドの共通点",
+        body: `もはやフォロワー数だけが指標ではない。現代のSNSマーケティングで最も重要なのは「共感」と「ユーザー参加型」の設計だ。
+
+ユーザーが思わずカメラを向けたくなる『シズル感』の演出から、UGC（ユーザー生成コンテンツ）を生み出すための仕掛けまで、成功事例には明確な共通項がある。その鍵となるのは「意外性」と「再現性」だ。
+
+例えば、馴染みのある定番商品に少しの工夫を加えて新しい食べ方を提案する投稿は、ユーザーが自分でも試してみたいという欲求を刺激する。また、ブランドの「中の人」の人間味溢れる発信が、企業の透明性を高め、ファンとの直接的なつながりを生んでいる。
+
+マイクロインフルエンサーを巧みに活用し、消費者を共創パートナーとして巻き込む手法。ブランドに対する信頼 and 愛着を育むための、最新SNS戦略のステップを分析・公開する。デジタル上の「バズ」を一過性で終わらせず、いかにしてCRM（顧客関係管理）へと繋げ、ブランドの資産にするかが勝負の分かれ目となる。`,
+        author: { name: "鈴木 健太", title: "フードSNSコンサルタント", initials: "鈴", color: "#9b59b6" },
+        readTime: 5,
+        headerColor: "linear-gradient(to right, #a18cd1, #fbc2eb)"
     },
     {
-        id: 3005,
-        title: "3Dプリントで生成する『自分専用ビタミン剤』、血液データから配合比を決定",
-        category: "wellness",
-        categoryLabel: "ウェルネス",
-        summary: "バイタルデータに基づき、不足している栄養素をAIが分析。その場で自分専用のサプリメントを3Dプリントする定額サービスが登場し、健康管理の形を変えつつある。",
-        source: "Medical News",
-        sourceUrl: "#",
-        icon: "fa-pills",
-        gradient: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)",
-        viewCount: 2650
+        id: 4,
+        tag: "サステナビリティ",
+        title: "「フードロス削減」は義務から競争優位へ",
+        body: `環境への配慮が企業イメージ向上だけでなく、実際のコスト削減と新たな収益源の創出につながる時代が来た。
+
+訳あり商品のEC販売や余剰食材を活用したアップサイクルメニュー開発など、先進企業はすでに利益を生むモデルへと昇華させている。以前は「廃棄」として処理されていたものが、新たな付加価値を持つ「商品」へと生まれ変わるプロセスは、サーキュラーエコノミーの実現に向けた大きな一歩だ。
+
+特に注目すべきは、AIを活用した高度な需要予測システムである。これにより、製造段階での無駄を極限まで減らし、かつ販売チャンスを逃さないという相反する課題を解決している企業が増えている。
+
+単なる社会貢献（CSR）に留まらず、いかにしてサステナビリティを事業の核（コアビジネス）に組み込むか。業界全体が取り組むべき食品リサイクルやロス削減の最新テクノロジー、そして成功している中小企業の優れた知恵を紹介する。これは「守り」の施策ではなく、次世代に選ばれるブランドになるための「攻め」の戦略である。`,
+        author: { name: "山田 花子", title: "サステナブルフード研究者", initials: "山", color: "#16a085" },
+        readTime: 7,
+        headerColor: "linear-gradient(to right, #0ba360, #3cba92)"
+    }
+];
+
+const rollingColumnsStock = [
+    {
+        id: 5,
+        tag: "外食産業",
+        title: "「体験型外食」が生き残る理由——デリバリー全盛時代の逆説",
+        body: `コロナ禍を経てデリバリーが生活に定着した今だからこそ、あえて『その場でしか味わえない体験』を提供する実店舗の価値が再評価されている。
+
+プロの技を目の前で楽しむ演出や、店舗独自のコミュニティ形成、さらには香りや温度といった五感をフルに使った訴求。これらは画面越しでは決して得られない価値だ。デジタルが浸透すればするほど、人々は本物のアナログな体験を希求する傾向にある。
+
+最近の成功店舗に共通しているのは、「目的性」の高さだ。単にお腹を満たすだけでなく、「あそこの、あのサービスを体験しに行こう」と思わせる強い引力が備わっている。内装のこだわりや、スタッフとの対話、顧客自身が料理の仕上げに参加する仕掛けなどが、その体験価値を最大化させている。
+
+デジタルが浸透すればするほど、アナログな対面サービスの希少性が高まる。次世代の外食店が差別化すべきポイントと、生き残るための店舗設計の極意を説く。実店舗はもはや「食事を提供する場所」から「体験の劇場」へと進化しなければならない。`,
+        author: { name: "中村 大輔", title: "外食産業コンサルタント", initials: "中", color: "#c0392b" },
+        readTime: 9,
+        headerColor: "linear-gradient(to right, #f093fb, #f5576c)"
     },
     {
-        id: 3006,
-        title: "『エコ・モジュラーキッチン』、廃棄ロスを減らす新しい調理空間の提案",
-        category: "living",
-        categoryLabel: "リビング",
-        summary: "ライフスタイルの変化に合わせてパーツを組み替え可能。リサイクル素材を使用し、エネルギー消費を最小限に抑えるスマート家電が統合された次世代のキッチン。",
-        source: "Interior Design",
-        sourceUrl: "#",
-        icon: "fa-utensils",
-        gradient: "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)",
-        viewCount: 1980
+        id: 6,
+        tag: "Z世代",
+        title: "Z世代が「昭和レトロ」に惹かれる深層心理",
+        body: `デジタルネイティブであるZ世代が、なぜ昭和の喫茶店文化や不便なほどアナログなパッケージに熱狂するのか。
+
+そこには効率重視の社会が生み出した『本物体験』への強烈な渇望がある。スマホの中の完璧な美しさよりも、あえてノイズのあるものや『エモい』ストーリー性に救いを求める心理状態。また、不便さや手間が、彼らにとっては「自分らしさ」を表現するための新鮮な要素として映っている。
+
+レコードの音、フィルムカメラの質感、そして喫茶店の分厚いナポリタン。これらは単なる過去の遺物ではなく、Z世代にとっては「未知の新しい価値」なのである。このトレンドから読み解けるのは、テクノロジーが進歩すればするほど、人間は五感に訴える根源的な温もりを求めるという普遍的な法則だ。
+
+単なるブームで片付けず、この世代が食に求める『意味』の本質を突くことが、次世代のヒット商品開発の鍵となる。最新のリサーチ結果から見えた、Z世代の心に刺さるアプローチ手法を紐解く。`,
+        author: { name: "小林 さくら", title: "Z世代トレンドリサーチャー", initials: "小", color: "#a29bfe" },
+        readTime: 6,
+        headerColor: "linear-gradient(135deg, #f5f7fa, #c3cfe2)"
     },
     {
-        id: 3007,
-        title: "『メンタルヘルス・スマートリング』、ストレス指数を色の変化で可視化",
-        category: "wellness",
-        categoryLabel: "ウェルネス",
-        summary: "心拍変動からストレスレベルを検知。リングの色が静かに変化し、深呼吸や休息のタイミングを伝える。画面を持たないシンプルなUIが「デバイス疲れ」に響く。",
-        source: "Zen Wear",
-        sourceUrl: "#",
-        icon: "fa-ring",
-        gradient: "linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)",
-        viewCount: 4200
+        id: 7,
+        tag: "フードテック",
+        title: "3Dフードプリンターが変える「介護食」の未来",
+        body: `見た目と食感、そして正確な栄養管理。3Dフードプリンティング技術が、これまでの「ペースト状」だった介護食の概念を覆そうとしている。
+
+食材を分子レベルで再構築することで、飲み込みやすさを維持したまま、本物のステーキや温野菜に見える料理を再現。視覚的な喜びが食欲を刺激し、高齢者のQOL（生活の質）向上に直結している事例が増えている。
+
+単なる効率化ではなく、「食べる喜び」をテクノロジーでいかに支えるか。最新の導入事例から、その可能性を探る。`,
+        author: { name: "田中 健一", title: "フードテック専門家", initials: "田", color: "#3498db" },
+        readTime: 5,
+        headerColor: "linear-gradient(to right, #acb6e5, #86fde8)"
     },
     {
-        id: 3008,
-        title: "シニア向け『VR旅行体験』、介護施設から世界の名所や母校を再訪",
-        category: "wellness",
-        categoryLabel: "ウェルネス",
-        summary: "外出が困難な高齢者に、高精細なVRで旅の感動を。認知症予防やQOL向上への効果も研究されており、各地の施設で導入が加速している。",
-        source: "Silver Tech",
-        sourceUrl: "#",
-        icon: "fa-vr-cardboard",
-        gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-        viewCount: 2300
-    },
-    {
-        id: 3009,
-        title: "洗浄不要？『サステナブル・セルフクリーニングボトル』がエコ民に大ヒット",
-        category: "living",
-        categoryLabel: "リビング",
-        summary: "内蔵されたUV-C LEDが数分おきに自動点滅し、水とボトル内を殺菌。常に清潔を保てるため、洗う手間を減らしつつペットボトルの消費を削減できる。",
-        source: "Sustainable Goods",
-        sourceUrl: "#",
-        icon: "fa-bottle-water",
-        gradient: "linear-gradient(135deg, #2b5876 0%, #4e4376 100%)",
-        viewCount: 3800
-    },
-    {
-        id: 3010,
-        title: "『ノマド・バン・レンタル』、ワーケーションに特化した移動オフィスカーが人気",
-        category: "work",
-        categoryLabel: "ワークスタイル",
-        summary: "高速衛星通信と高容量バッテリーを完備したキャンピングカー。場所を選ばず働き、そのまま旅を続ける新しいライフスタイルがリモートワーカーの間で流行中。",
-        source: "Nomad Life",
-        sourceUrl: "#",
-        icon: "fa-van-shuttle",
-        gradient: "linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)",
-        viewCount: 2950
+        id: 8,
+        tag: "広島・食文化",
+        title: "新サッカースタジアムと連動する「広島ナイトグルメ」の商機",
+        body: `2024年開業の新スタジアムを核に、広島の夜の街が変わりつつある。試合観戦後の「ハシゴ酒」需要をターゲットにした新業態が続々誕生。
+
+お好み焼きだけではない、地産地消のバルや、瀬戸内の魚介を洋風にアレンジしたビストロなど。スポーツと食を掛け合わせた新しい都市回遊モデル。地域の飲食店がいかにしてこの巨大な波を自覚し、活かしていくべきか。`,
+        author: { name: "広島 太郎", title: "地域経済アナリスト", initials: "広", color: "#e74c3c" },
+        readTime: 7,
+        headerColor: "linear-gradient(to right, #ff5f6d, #ffc371)"
     }
 ];
 
 // ========================================
-// 今日の日付に対応するデイリー記事を取得
+// コラムカードのレンダリング
+// ========================================
+function renderColumns() {
+    const columnGrid = document.getElementById('column-grid');
+    if (!columnGrid) return;
+
+    columnGrid.innerHTML = '';
+
+    // 日付に基づいてローテーション枠を選択（3日周期 = 259,200,000ミリ秒）
+    const rotationPeriod = 3 * 24 * 60 * 60 * 1000;
+    const now = Date.now();
+    const sequenceIndex = Math.floor(now / rotationPeriod);
+
+    // ストックから2つ選ぶための計算 (簡単な剰余計算でインデックスを決定)
+    const stockSize = rollingColumnsStock.length;
+    const startIndex = (sequenceIndex * 2) % stockSize;
+
+    const pickedRollingColumns = [];
+    pickedRollingColumns.push(rollingColumnsStock[startIndex]);
+    pickedRollingColumns.push(rollingColumnsStock[(startIndex + 1) % stockSize]);
+
+    // 固定4件 + 動的2件を結合
+    const displayColumns = [...staticColumns, ...pickedRollingColumns];
+
+    displayColumns.forEach(item => {
+        const card = document.createElement('article');
+        card.className = 'column-card';
+
+        // 改行を<br>に変換して表示
+        const formattedBody = item.body.replace(/\n/g, '<br>');
+
+        card.innerHTML = `
+            <div class="column-card-header" style="background: ${item.headerColor};"></div>
+            <div class="column-card-body">
+                <span class="column-tag"># ${item.tag}</span>
+                <h3>${item.title}</h3>
+                <p class="column-text-content">${formattedBody}</p>
+                
+                <div class="column-action">
+                    <button class="btn-column-toggle">
+                        <span class="btn-label">全文を詳しく読む</span> <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                </div>
+
+                <div class="column-card-footer">
+                    <div class="column-author">
+                        <div class="author-avatar" style="background-color: ${item.author.color};">${item.author.initials}</div>
+                        <div class="author-info">
+                            <span class="author-name">${item.author.name}</span>
+                            <span class="author-title">${item.author.title}</span>
+                        </div>
+                    </div>
+                    <span class="column-read-time">
+                        <i class="fa-regular fa-clock"></i> 約${item.readTime}分
+                    </span>
+                </div>
+            </div>
+        `;
+
+        // 展開・格納イベントの設定
+        const toggleBtn = card.querySelector('.btn-column-toggle');
+
+        toggleBtn.addEventListener('click', () => {
+            const isExpanded = card.classList.toggle('expanded');
+            const icon = toggleBtn.querySelector('i');
+            const label = toggleBtn.querySelector('.btn-label');
+
+            if (isExpanded) {
+                label.textContent = '内容を閉じる';
+                icon.className = 'fa-solid fa-chevron-up';
+            } else {
+                label.textContent = '全文を詳しく読む';
+                icon.className = 'fa-solid fa-chevron-down';
+                // 閉じたときにカードの頭までスクロール（UX向上）
+                card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        });
+
+        columnGrid.appendChild(card);
+    });
+}
+
+// ========================================
+// デイリー記事プール（約1か月分のストック）
+// 毎日1件ずつローテーションで選択される
+// ========================================
+const dailyArticlePool = [
+    {
+        id: 201,
+        title: "「発酵バター」ブームが本格到来、国産ブランドが相次ぎ登場",
+        category: "sweets",
+        categoryLabel: "スイーツ",
+        summary: "欧州輸入品が主流だった発酵バターに、国産の新ブランドが参入。乳酸菌の風味と濃厚なコクが、パンやスイーツ好きの間で話題を集めている。",
+        source: "フード・ジャーナル",
+        sourceUrl: "https://www.food-journal.jp/",
+        icon: "fa-star",
+        gradient: "linear-gradient(135deg, #f6d365 0%, #fda085 100%)",
+        imageColor: "#f1c40f",
+        viewCount: 870
+    },
+    {
+        id: 202,
+        title: "コンビニ「おにぎり」に革命、具材が内側から広がる新形状が登場",
+        category: "retail",
+        categoryLabel: "小売・流通",
+        summary: "海苔とご飯の境界を取り払った新発想の形状。食べ進めるごとに具材が口に広がるデザインで、大手コンビニが特許を取得し話題に。",
+        source: "コンビニ・ウォッチャー",
+        sourceUrl: "https://www.convenience-watcher.jp/",
+        icon: "fa-circle-dot",
+        gradient: "linear-gradient(to top, #0ba360 0%, #3cba92 100%)",
+        imageColor: "#27ae60",
+        viewCount: 1320
+    },
+    {
+        id: 203,
+        title: "「ノンアルスパークリング」市場が急拡大、健康志向の20代が牽引",
+        category: "beverage",
+        categoryLabel: "飲料",
+        summary: "飲酒機会を選べる「ソバーキュリアス」トレンドが浸透。ワインのような複雑な風味を持つノンアルコールスパークリングが外食シーンでも定番化しつつある。",
+        source: "ドリンク・トレンドラボ",
+        sourceUrl: "https://www.drink-trendlab.jp/",
+        icon: "fa-champagne-glasses",
+        gradient: "linear-gradient(to right, #00dbde 0%, #fc00ff 100%)",
+        imageColor: "#8e44ad",
+        viewCount: 1050
+    },
+    {
+        id: 204,
+        title: "「スープカレー」が全国区へ、札幌発のチェーン店が首都圏に急展開",
+        category: "gaishoku",
+        categoryLabel: "外食",
+        summary: "スパイスの奥深さとボリューム感が支持され、北海道以外での認知度が急上昇。オープン初日に行列が絶えない店舗が続出している。",
+        source: "グルメログ・プレス",
+        sourceUrl: "https://www.gourmet-log.net/",
+        icon: "fa-bowl-food",
+        gradient: "linear-gradient(to right, #43e97b 0%, #38f9d7 100%)",
+        imageColor: "#16a085",
+        viewCount: 960
+    },
+    {
+        id: 205,
+        title: "食べる「美容液」、コラーゲン配合の高機能スナックが台頭",
+        category: "health",
+        categoryLabel: "健康",
+        summary: "スキンケアと食事を一体化させる「インナービューティー」トレンドが加速。コラーゲンやビタミンCを贅沢に配合したグミやチップスが美容感度の高い層に刺さる。",
+        source: "ビューティー・フード通信",
+        sourceUrl: "https://www.beauty-food.jp/",
+        icon: "fa-heart-pulse",
+        gradient: "linear-gradient(to top, #ff9a9e 0%, #fecfef 99%)",
+        imageColor: "#e84393",
+        viewCount: 1180
+    },
+    {
+        id: 206,
+        title: "「100円均一」の業務用食材店が人気、プロの味を家庭で再現",
+        category: "saving",
+        categoryLabel: "節約",
+        summary: "飲食店向けの業務用スパイスや調味料を小売り販売する店舗が都市部を中心に増加。少量から買えるため、節約しながら本格的な味を楽しめると主婦層に支持。",
+        source: "節約生活マガジン",
+        sourceUrl: "https://www.setsuyaku-mag.jp/",
+        icon: "fa-piggy-bank",
+        gradient: "linear-gradient(to top, #fcc5e4 0%, #fda34b 100%)",
+        imageColor: "#f39c12",
+        viewCount: 790
+    },
+    {
+        id: 207,
+        title: "「#ぼっち飯」投稿が1,000万件突破、おひとり様グルメ文化が成熟",
+        category: "sns",
+        categoryLabel: "SNSトレンド",
+        summary: "一人での外食・テイクアウトを積極的に楽しむ投稿がSNSで爆増。孤食を「楽しみ」として発信するポジティブなムーブメントが、外食業界の一人客対応を後押ししている。",
+        source: "SNSフードレポート",
+        sourceUrl: "https://www.sns-food-report.jp/",
+        icon: "fa-hashtag",
+        gradient: "linear-gradient(to right, #4facfe 0%, #00f2fe 100%)",
+        imageColor: "#3498db",
+        viewCount: 2400
+    },
+    {
+        id: 208,
+        title: "宮島の「もみじ饅頭」進化系、黒トリュフ入り高級版が話題に",
+        category: "hiroshima",
+        categoryLabel: "広島県",
+        summary: "老舗和菓子メーカーが異業種とコラボし、フランス産黒トリュフを餡に練り込んだご当地プレミアムスイーツを限定販売。土産品のイメージを刷新している。",
+        source: "広島フードニュース",
+        sourceUrl: "https://www.hiroshima-food-news.jp/",
+        icon: "fa-leaf",
+        gradient: "linear-gradient(135deg, #FF512F 0%, #DD2476 100%)",
+        imageColor: "#e74c3c",
+        viewCount: 1120
+    },
+    {
+        id: 209,
+        title: "博多の「一蘭」スタイルが輸出モデルに、海外で日本式ラーメン体験が急増",
+        category: "fukuoka",
+        categoryLabel: "福岡県",
+        summary: "個室仕切り・禁会話のコンセプトが欧米で「瞑想ラーメン体験」として再解釈される。没入感を重視した食のスタイルが海外で高級志向の顧客に受け入れられつつある。",
+        source: "グローバル・フードビジネス",
+        sourceUrl: "https://www.global-food-biz.jp/",
+        icon: "fa-fire",
+        gradient: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+        imageColor: "#ff4d6d",
+        viewCount: 1450
+    },
+    {
+        id: 210,
+        title: "「腸活グミ」市場が急成長、プロバイオティクス入りのお菓子が棚を席巻",
+        category: "health",
+        categoryLabel: "健康",
+        summary: "ヨーグルトやサプリではなく、お菓子感覚で腸内環境を整えられるグミが特に若い女性に支持。大手製菓メーカーも相次いで機能性表示食品の申請を進めている。",
+        source: "機能性食品ニュース",
+        sourceUrl: "https://www.functional-food-news.jp/",
+        icon: "fa-capsules",
+        gradient: "linear-gradient(to right, #43e97b 0%, #38f9d7 100%)",
+        imageColor: "#27ae60",
+        viewCount: 980
+    },
+    {
+        id: 211,
+        title: "「サブスク弁当」サービスが拡大、月額定額でオフィスに届く時代",
+        category: "nakashoku",
+        categoryLabel: "中食",
+        summary: "管理栄養士監修の日替わり弁当を職場に届けるサービスが急増。毎日の昼食費と買いに行く手間を削減できる利便性が、特にテレワーク解除後の会社員に響いている。",
+        source: "宅食ウィークリー",
+        sourceUrl: "https://www.takushoku-weekly.jp/",
+        icon: "fa-box-open",
+        gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+        imageColor: "#9b59b6",
+        viewCount: 860
+    },
+    {
+        id: 212,
+        title: "「韓国チキン」の多様化が加速、甘辛以外のフレーバー競争が激化",
+        category: "asian",
+        categoryLabel: "韓国・アジア",
+        summary: "ガンジャンケジャン（醤油漬けカニ）やマラ風味チキンなど、より本格的な韓国フレーバーへの移行が進む。単なる「辛い＝韓国」から脱却した細分化が始まっている。",
+        source: "アジアフードレポート",
+        sourceUrl: "https://www.asia-food-report.jp/",
+        icon: "fa-bowl-rice",
+        gradient: "linear-gradient(to right, #fa709a 0%, #fee140 100%)",
+        imageColor: "#ff0099",
+        viewCount: 1250
+    },
+    {
+        id: 213,
+        title: "Z世代狙い「ブラインドボックス」型食品が登場、何が入っているかわからないお菓子",
+        category: "z_gen",
+        categoryLabel: "Z世代",
+        summary: "フィギュアのガチャ文化を取り入れた、中身が見えない箱入りスナックセット。SNS開封動画との相性が抜群で、コレクション性と共有欲を同時に刺激する新型態。",
+        source: "Z世代マーケティングメモ",
+        sourceUrl: "https://www.zgen-marketing.jp/",
+        icon: "fa-gift",
+        gradient: "linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)",
+        imageColor: "#a29bfe",
+        viewCount: 1780
+    },
+    {
+        id: 214,
+        title: "「タンパク質争奪戦」スーパーフードとしてテンペが再注目",
+        category: "health",
+        categoryLabel: "健康",
+        summary: "インドネシア発の大豆発酵食品「テンペ」が、高タンパク・低脂肪・腸活の三拍子で健康意識の高い消費者に再評価。国内製造メーカーが生産能力を増強中。",
+        source: "スーパーフード・ダイジェスト",
+        sourceUrl: "https://www.superfood-digest.jp/",
+        icon: "fa-seedling",
+        gradient: "linear-gradient(120deg, #f6d365 0%, #fda085 100%)",
+        imageColor: "#e67e22",
+        viewCount: 670
+    },
+    {
+        id: 215,
+        title: "「AIメニュー開発」食品メーカーが導入拡大、ヒット商品の再現性が向上",
+        category: "retail",
+        categoryLabel: "小売・流通",
+        summary: "SNS投稿データと店舗POSデータをAIが解析し、次のトレンド商品を予測する仕組みが普及。人間の勘と経験に依存していた開発プロセスに変革が起きつつある。",
+        source: "フードテック・フォーカス",
+        sourceUrl: "https://www.foodtech-focus.jp/",
+        icon: "fa-microchip",
+        gradient: "linear-gradient(to right, #4facfe 0%, #00f2fe 100%)",
+        imageColor: "#3498db",
+        viewCount: 830
+    },
+    {
+        id: 216,
+        title: "「コーヒーナップ」習慣が広まる、カフェインと仮眠の科学的組み合わせ",
+        category: "beverage",
+        categoryLabel: "飲料",
+        summary: "コーヒーを飲んですぐ20分の仮眠を取る「コーヒーナップ」がビジネスパーソンの間でトレンドに。仮眠前に飲むエスプレッソ専用ブレンドコーヒーが新市場を形成。",
+        source: "コーヒー・カルチャー誌",
+        sourceUrl: "https://www.coffee-culture.jp/",
+        icon: "fa-mug-hot",
+        gradient: "linear-gradient(to top, #d299c2 0%, #fef9d7 100%)",
+        imageColor: "#d35400",
+        viewCount: 910
+    },
+    {
+        id: 217,
+        title: "「スパイス自家調合」ブームが到来、量り売り専門店が全国に拡大",
+        category: "retail",
+        categoryLabel: "小売・流通",
+        summary: "カレーやバーベキューのスパイスを自分でブレンドできる量り売り専門店がEC・実店舗両方で急増。食の「DIY化」が調味料カテゴリにも波及している。",
+        source: "スパイス・マーケット通信",
+        sourceUrl: "https://www.spice-market.jp/",
+        icon: "fa-pepper-hot",
+        gradient: "linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%)",
+        imageColor: "#e67e22",
+        viewCount: 680
+    },
+    {
+        id: 218,
+        title: "「宅飲みプレミアム化」が加速、ワインペアリング家飲みセットが好調",
+        category: "nakashoku",
+        categoryLabel: "中食",
+        summary: "高級レストランのソムリエが選んだワインと料理のペアリングセットをオンラインで注文する新サービスが登場。外食を超えるクオリティの宅飲み体験が新市場を形成。",
+        source: "ホームダイニング・タイムス",
+        sourceUrl: "https://www.home-dining-times.jp/",
+        icon: "fa-wine-glass",
+        gradient: "linear-gradient(to top, #5f72bd 0%, #9b23ea 100%)",
+        imageColor: "#9b59b6",
+        viewCount: 1090
+    },
+    {
+        id: 219,
+        title: "「メープルサップ」が新しい机上の春の飲み物として注目",
+        category: "beverage",
+        categoryLabel: "飲料",
+        summary: "砂糖を作る前の未精製のカエデの樹液「メープルサップ」が、天然電解質飲料として健康志向の消費者にアピール。カナダ産の輸入品がオーガニック系食料品店に登場。",
+        source: "ネイチャー・フード・ニュース",
+        sourceUrl: "https://www.nature-food-news.jp/",
+        icon: "fa-droplet",
+        gradient: "linear-gradient(to right, #ffecd2 0%, #fcb69f 100%)",
+        imageColor: "#d35400",
+        viewCount: 540
+    },
+    {
+        id: 220,
+        title: "「ドライエイジング肉」が家庭に、専用冷蔵庫の低価格帯が登場",
+        category: "gaishoku",
+        categoryLabel: "外食",
+        summary: "レストラン専用だった熟成肉技術を家庭で楽しめる小型専用冷蔵庫が3万円台から登場。肉愛好者がSNSで熟成記録を投稿するコンテンツ消費との相性も抜群。",
+        source: "ミート・トレンド・ジャーナル",
+        sourceUrl: "https://www.meat-trend.jp/",
+        icon: "fa-fire",
+        gradient: "linear-gradient(to right, #f83600 0%, #f9d423 100%)",
+        imageColor: "#c0392b",
+        viewCount: 770
+    },
+    {
+        id: 221,
+        title: "「食育×ゲーミフィケーション」子ども向けアプリ食品が新市場を創造",
+        category: "retail",
+        categoryLabel: "小retail・流通",
+        summary: "スマホアプリと連動し、食べながらキャラクターを育てる仕組みを持つ子ども向けスナックが登場。食育と娯楽を結びつけた次世代食品の先駆けとして注目を集める。",
+        source: "ファミリー・フードテック",
+        sourceUrl: "https://www.family-foodtech.jp/",
+        icon: "fa-gamepad",
+        gradient: "linear-gradient(to right, #92fe9d 0%, #00c9ff 100%)",
+        imageColor: "#2ecc71",
+        viewCount: 620
+    },
+    {
+        id: 222,
+        title: "広島「因島みかん」ハチミツ漬けがギフト市場で急成長",
+        category: "hiroshima",
+        categoryLabel: "広島県",
+        summary: "しまなみ海道の恵みを受けた因島産みかんと地元養蜂場のハチミツを組み合わせたプレミアムギフトセットが贈答品として人気急上昇。EC週間売上が前年比3倍に。",
+        source: "瀬戸内ギフト通信",
+        sourceUrl: "https://www.setouchi-gift.jp/",
+        icon: "fa-sun",
+        gradient: "linear-gradient(to right, #ffecd2 0%, #fcb69f 100%)",
+        imageColor: "#e67e22",
+        viewCount: 880
+    },
+    {
+        id: 223,
+        title: "福岡「糸島野菜」のブランド化が加速、都心の高級スーパーへ進出",
+        category: "fukuoka",
+        categoryLabel: "福岡県",
+        summary: "九州屈指のブランド産地・糸島エリアの農産物が、有名百貨店の食品売場に並び始めた。土壌にこだわったミネラル豊富な野菜として、食の目利きに支持される。",
+        source: "九州農業新報",
+        sourceUrl: "https://www.kyushu-agri-news.jp/",
+        icon: "fa-seedling",
+        gradient: "linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%)",
+        imageColor: "#27ae60",
+        viewCount: 730
+    },
+    {
+        id: 224,
+        title: "「フードバンク2.0」アプリが普及、余剰食品のリアルタイムマッチングが可能に",
+        category: "saving",
+        categoryLabel: "節約",
+        summary: "閉店間近の飲食店がアプリ上で値引き販売し、消費者が超特価で購入できる仕組みが広まっている。食品ロス削減と節約が同時に実現するため、社会的関心も高い。",
+        source: "サステナブル・フード・ジャーナル",
+        sourceUrl: "https://www.sustainable-food-journal.jp/",
+        icon: "fa-mobile-screen",
+        gradient: "linear-gradient(to right, #00dbde 0%, #fc00ff 100%)",
+        imageColor: "#e056fd",
+        viewCount: 1550
+    },
+    {
+        id: 225,
+        title: "「茶道×スペシャルティコーヒー」融合カフェが都心に増殖中",
+        category: "gaishoku",
+        categoryLabel: "外食",
+        summary: "抹茶の点て方にインスパイアされた手法でコーヒーを淹れるカフェが人気化。「間」を楽しむ和の哲学を取り入れた空間設計が、外国人観光客と日本人双方を惹きつける。",
+        source: "カフェ・ビジネス・ニュース",
+        sourceUrl: "https://www.cafe-biz-news.jp/",
+        icon: "fa-mug-hot",
+        gradient: "linear-gradient(to top, #0ba360 0%, #3cba92 100%)",
+        imageColor: "#16a085",
+        viewCount: 1340
+    },
+    {
+        id: 226,
+        title: "「#今日の定食」ハッシュタグが急増、日常食がSNSコンテンツに変身",
+        category: "sns",
+        categoryLabel: "SNSトレンド",
+        summary: "豪華グルメだけでなく、普段の手作り定食を投稿する文化が浸透。食べることへの感謝と日常の豊かさを発信するポジティブなコミュニティが形成されている。",
+        source: "ソーシャル・フード・ウォッチ",
+        sourceUrl: "https://www.social-food-watch.jp/",
+        icon: "fa-camera-retro",
+        gradient: "linear-gradient(to right, #43e97b 0%, #38f9d7 100%)",
+        imageColor: "#27ae60",
+        viewCount: 1680
+    },
+    {
+        id: 227,
+        title: "「高タンパクアイス」が次のブームへ、プロテイン含有量が話題に",
+        category: "sweets",
+        categoryLabel: "スイーツ",
+        summary: "1カップ20g以上のタンパク質を含み、かつアイスクリームの食べ応えを実現した新商品がフィットネス層を超えて一般にも波及。夏の新定番になる可能性大。",
+        source: "スイーツ・フューチャー",
+        sourceUrl: "https://www.sweets-future.jp/",
+        icon: "fa-ice-cream",
+        gradient: "linear-gradient(to top, #ff9a9e 0%, #fecfef 99%)",
+        imageColor: "#e84393",
+        viewCount: 1160
+    },
+    {
+        id: 228,
+        title: "「クリーンラベル」食品への移行が本格化、添加物表示見直しの動き",
+        category: "health",
+        categoryLabel: "健康",
+        summary: "原材料名がシンプルで添加物の少ない「クリーンラベル」食品への消費者ニーズが高まり、メーカー各社がレシピ見直しを加速。透明性の高い情報開示が購買決定の鍵に。",
+        source: "ヘルシーフード・ウィークリー",
+        sourceUrl: "https://www.healthy-food-weekly.jp/",
+        icon: "fa-leaf",
+        gradient: "linear-gradient(to right, #d4fc79 0%, #96e6a1 100%)",
+        imageColor: "#27ae60",
+        viewCount: 920
+    },
+    {
+        id: 229,
+        title: "「メキシコ料理」の本格派ブーム到来、タコスバーが都心を席巻",
+        category: "asian",
+        categoryLabel: "韓国・アジア",
+        summary: "韓国料理に続くアジア・ラテン融合グルメとして、本格的なメキシカン料理が注目。コリアンタコスなどの融合料理も登場し、多様なカルチャーを取り込んだ新業態が急増中。",
+        source: "グローバル・ダイニング・ウォッチ",
+        sourceUrl: "https://www.global-dining-watch.jp/",
+        icon: "fa-pepper-hot",
+        gradient: "linear-gradient(to right, #fa709a 0%, #fee140 100%)",
+        imageColor: "#e74c3c",
+        viewCount: 1040
+    },
+    {
+        id: 230,
+        title: "Z世代が支持する「フードウェイスト」ファッション、食品廃材活用の小物が人気",
+        category: "z_gen",
+        categoryLabel: "Z世代",
+        summary: "コーヒーかすや食品廃材を再利用したバッグや食器がZ世代の支持を集める。食べることと持続可能なライフスタイルを結びつけた新しい消費価値観が生まれている。",
+        source: "Z世代ライフスタイル・ウォッチ",
+        sourceUrl: "https://www.zgen-lifestyle.jp/",
+        icon: "fa-recycle",
+        gradient: "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)",
+        imageColor: "#a29bfe",
+        viewCount: 870
+    },
+    {
+        id: 231,
+        title: "北海道「ジンギスカン」が全国チェーン化、羊肉ブームに乗り急拡大",
+        category: "hokkaido",
+        categoryLabel: "北海道",
+        summary: "ラム肉の栄養価の高さと独特の風味が再評価され、北海道のソウルフード「ジンギスカン」の専門チェーンが全国展開を加速。一人鍋スタイルで若年層の取り込みにも成功している。",
+        source: "北海道グルメ通信",
+        sourceUrl: "https://www.hokkaido-gourmet.jp/",
+        icon: "fa-fire",
+        gradient: "linear-gradient(to right, #48c6ef 0%, #6f86d6 100%)",
+        imageColor: "#4a90d9",
+        viewCount: 1050
+    },
+    {
+        id: 232,
+        title: "十勝乳製品ブランドが躍進、「チーズの聖地」化で欧州品を逆輸入",
+        category: "hokkaido",
+        categoryLabel: "北海道",
+        summary: "北海道十勝エリアの本格ナチュラルチーズが、ヨーロッパのコンクールで受賞相次ぐ。国内はもとより海外から「北海道チーズ」を目当てに訪れる食ツーリズムが活発化している。",
+        source: "乳業産業新報",
+        sourceUrl: "https://www.dairy-industry.jp/",
+        icon: "fa-cow",
+        gradient: "linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)",
+        imageColor: "#4a90d9",
+        viewCount: 890
+    }
+];
+
+// ========================================
+// 今日の日付に対応するデイリー記事を取得する関数
+// 2026年1月1日を起点として経過日数をインデックスに利用
 // ========================================
 function getDailyArticle() {
-    const baseDate = new Date(2026, 0, 1);
+    // 基準日（2026年1月1日）
+    const baseDate = new Date(2026, 0, 1); // 月は0始まりのため0=January
     const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    today.setHours(0, 0, 0, 0); // 時刻を0にして日付だけで比較
 
+    // 経過日数を計算
     const elapsedDays = Math.floor((today - baseDate) / (1000 * 60 * 60 * 24));
+
+    // プール件数でローテーション（負の日数も考慮して Math.abs で処理）
     const index = Math.abs(elapsedDays) % dailyArticlePool.length;
 
+    // 対応する記事を取得し、今日の日付を付与して返す
     const article = { ...dailyArticlePool[index], date: getRelativeDate(0) };
     return article;
 }
 
 // ========================================
-// デイリー記事をnewsDataの先頭に追加
+// デイリー記事をnewsDataの先頭に追加する
+// localStorage を使って1日1回だけ追加し、重複を防ぐ
 // ========================================
 function injectDailyArticle() {
     const todayStr = getRelativeDate(0);
-    const lastInjectedDate = localStorage.getItem('life_trend_daily_article_date');
-    const lastInjectedId = localStorage.getItem('life_trend_daily_article_id');
+    const lastInjectedDate = localStorage.getItem('daily_article_injected_date');
+    const lastInjectedId = localStorage.getItem('daily_article_injected_id');
 
     const article = getDailyArticle();
 
-    // 今日すでに注入済み
+    // すでに今日追加済みの場合は重複しないように既存記事を更新するだけ
     if (lastInjectedDate === todayStr && lastInjectedId) {
         const existingIndex = newsData.findIndex(item => item.id === Number(lastInjectedId));
         if (existingIndex === -1) {
+            // もし削除されていたら再追加
             newsData.unshift(article);
         }
         return;
     }
 
-    // 前日の記事を削除
+    // 前日に注入した記事をnewsDataから取り除く（日を跨いだとき）
     if (lastInjectedId) {
         const prevIndex = newsData.findIndex(item => item.id === Number(lastInjectedId));
         if (prevIndex !== -1) {
@@ -1735,45 +1713,11 @@ function injectDailyArticle() {
         }
     }
 
-    // 先頭に追加
+    // 新しい記事をnewsDataの先頭に追加
     newsData.unshift(article);
 
-    localStorage.setItem('life_trend_daily_article_date', todayStr);
-    localStorage.setItem('life_trend_daily_article_id', String(article.id));
+    // localStorageに記録
+    localStorage.setItem('daily_article_injected_date', todayStr);
+    localStorage.setItem('daily_article_injected_id', String(article.id));
 }
 
-// 朝7時の更新チェック
-function checkDailyUpdate() {
-    const now = new Date();
-    const currentHour = now.getHours();
-    const todayStr = getRelativeDate(0);
-
-    const lastUpdateDate = localStorage.getItem('life_trend_last_update_notified');
-
-    if (currentHour >= 7 && lastUpdateDate !== todayStr) {
-        showUpdateNotification();
-        localStorage.setItem('life_trend_last_update_notified', todayStr);
-    }
-}
-
-// 更新通知の表示
-function showUpdateNotification() {
-    const notification = document.createElement('div');
-    notification.id = 'daily-update-notification';
-    notification.className = 'daily-notification';
-    notification.innerHTML = `
-        <div class="notification-content">
-            <i class="fa-solid fa-bell"></i>
-            <span>本日のライフトレンドを更新しました（07:00更新）</span>
-            <button class="notif-close">OK</button>
-        </div>
-    `;
-    document.body.appendChild(notification);
-
-    const closeBtn = notification.querySelector('.notif-close');
-    closeBtn.onclick = () => notification.remove();
-
-    setTimeout(() => {
-        if (notification.parentElement) notification.remove();
-    }, 10000);
-}
