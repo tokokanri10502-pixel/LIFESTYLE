@@ -1,5 +1,106 @@
+// 補助関数：現在の日付から相対的な日付文字列を生成 (YYYY.MM.DD)
+function getRelativeDate(daysOffset = 0) {
+    const d = new Date();
+    d.setDate(d.getDate() + daysOffset);
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${y}.${m}.${day}`;
+}
+
 // モックデータ：ライフスタイルトレンドニュース
 const newsData = [
+    {
+        id: 1206,
+        title: "2026年のトレンドカラー発表、静寂を象徴する『クラウドダンサー』が選出",
+        category: "color",
+        categoryLabel: "カラー",
+        date: "2026.03.03",
+        summary: "PANTONE社が発表した2026年の色は、柔らかな白色『Cloud Dancer』。情報過多なデジタル社会における「心の再起動」と「静けさ」を象徴する色が、ファッションからインテリアまで席巻する。",
+        source: "Design News",
+        sourceUrl: "#",
+        icon: "fa-palette",
+        gradient: "linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)",
+        viewCount: 5200
+    },
+    {
+        id: 1207,
+        title: "JAFCA、2026年のメッセージカラーに『ハートフェルト・ピンク』を決定",
+        category: "color",
+        categoryLabel: "カラー",
+        date: "2026.03.03",
+        summary: "日本流行色協会が選んだのは、活力を感じさせる明るいピンク。停滞から変化へ、実体験の価値を呼び覚ますようなポジティブなエネルギーが、ライフスタイルのあらゆる場面で取り入れられる。",
+        source: "Color Institute",
+        sourceUrl: "#",
+        icon: "fa-fill-drip",
+        gradient: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)",
+        viewCount: 4800
+    },
+    {
+        id: 1201,
+        title: "ZOZOTOWN、『AIサイズ推論』がさらに進化。試着不要の精度99%へ",
+        category: "ladies",
+        categoryLabel: "レディス",
+        date: "2026.03.03",
+        summary: "数枚の写真から全身のミリ単位の数値を計測。AIがブランドごとの個体差まで計算し、購入後の「サイズ不一致」をゼロにする新サービスを開始。",
+        source: "ZOZO プレス",
+        sourceUrl: "https://corp.zozo.com/news/",
+        icon: "fa-camera",
+        gradient: "linear-gradient(135deg, #000000 0%, #434343 100%)",
+        viewCount: 4500
+    },
+    {
+        id: 1202,
+        title: "IKEA、日本の狭小住宅に特化した『トランスフォーマー家具』を発表",
+        category: "living",
+        categoryLabel: "リビング",
+        date: "2026.03.03",
+        summary: "日中はデスク、夜はベッドへ。AIが居住者の生活リズムを学習し、自動で家具の配置や形状を最適化する次世代の居住体験を提案。",
+        source: "IKEA Japan News",
+        sourceUrl: "https://www.ikea.com/jp/ja/newsroom/",
+        icon: "fa-couch",
+        gradient: "linear-gradient(135deg, #0051ba 0%, #ffda1a 100%)",
+        viewCount: 3800
+    },
+    {
+        id: 1203,
+        title: "アシックス、疲労回復を加速させる『次世代リカバリーシューズ』発売",
+        category: "shoes",
+        categoryLabel: "シューズ",
+        date: "2026.03.02",
+        summary: "歩くたびに足裏をマッサージし、血流を促進する特殊素材を採用。ビジネスシーンでも違和感のないデザインで、働きながら回復を図る。",
+        source: "ASICS ニュース",
+        sourceUrl: "https://corp.asics.com/jp/press/",
+        icon: "fa-shoe-prints",
+        gradient: "linear-gradient(135deg, #001e62 0%, #3498db 100%)",
+        viewCount: 3200
+    },
+    {
+        id: 1204,
+        title: "楽天、サステナブル購入でポイント3倍『グリーン・ポイント』制度を開始",
+        category: "wellness",
+        categoryLabel: "ウェルネス",
+        date: "2026.03.02",
+        summary: "環境負荷の低い商品を選択することでポイント還元率がアップ。消費者の「応援買い」を促進させ、EC市場全体の脱炭素化を加速させる。",
+        source: "楽天グループ プレス",
+        sourceUrl: "https://corp.rakuten.co.jp/news/",
+        icon: "fa-leaf",
+        gradient: "linear-gradient(135deg, #bfd833 0%, #009944 100%)",
+        viewCount: 2900
+    },
+    {
+        id: 1205,
+        title: "SoftBank、全家屋対応の『スマートホームAIハブ』を標準提供へ",
+        category: "living",
+        categoryLabel: "リビング",
+        date: "2026.03.02",
+        summary: "既存の家電をそのままスマート化。音声操作だけでなく、AIが家族の健康状態を察知して室温や照明を自動調節する「見守り」機能を強化。",
+        source: "ソフトバンク ニュース",
+        sourceUrl: "https://www.softbank.jp/corp/news/",
+        icon: "fa-house-signal",
+        gradient: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+        viewCount: 4100
+    },
     {
         id: 2,
         title: "『マインドフル・ネスティング』、自宅を最高の癒やし空間にする新習慣",
@@ -611,7 +712,152 @@ const newsData = [
         gradient: "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)",
         viewCount: 2800
     },
-    // 1月アーカイブ
+    // 2月の追加アーカイブ
+    {
+        id: 4001,
+        title: "ワークマン、『超撥水・防汚オフィスシューズ』がビジネスパーソンに激刺さり",
+        category: "shoes",
+        categoryLabel: "シューズ",
+        date: "2026.02.20",
+        summary: "雨の日の通勤も怖くない。圧倒的な撥水性能と疲れにくいソールを3000円台で実現。SNSで「実用性最強」と拡散され、品薄状態に。",
+        source: "Workman Press",
+        sourceUrl: "https://www.workman.co.jp/news",
+        icon: "fa-shoe-prints",
+        gradient: "linear-gradient(135deg, #2c3e50 0%, #000000 100%)",
+        viewCount: 3800
+    },
+    {
+        id: 4002,
+        title: "『自宅サウナ』が一般家庭へ。10万円台の省スペースモデルがヒット中",
+        category: "wellness",
+        categoryLabel: "ウェルネス",
+        date: "2026.02.18",
+        summary: "サウナブームは「通う」から「自宅でも」へ。コンセント一つで設置できる小型ボックス型が、新築やリフォームの注目設備として急浮上。",
+        source: "Sauna Life",
+        sourceUrl: "#",
+        icon: "fa-fire",
+        gradient: "linear-gradient(135deg, #f83600 0%, #f9d423 100%)",
+        viewCount: 2900
+    },
+    {
+        id: 4003,
+        title: "ソニー、居住者の情緒を読み取る『AIエモーショナル・リビング』を発表",
+        category: "living",
+        categoryLabel: "リビング",
+        date: "2026.02.12",
+        summary: "カメラとセンサーで家族の「表情」や「声のトーン」を分析。落ち込んでいる時にはリラックス効果のある音楽と照明に自動で切り替える未来型システム。",
+        source: "Sony Global News",
+        sourceUrl: "https://www.sony.com/ja/SonyInfo/News/",
+        icon: "fa-brain",
+        gradient: "linear-gradient(135deg, #21d4fd 0%, #b721ff 100%)",
+        viewCount: 4100
+    },
+    {
+        id: 4004,
+        title: "2026年春の新作コスメ『美容液リップ』が予約分で完売続出",
+        category: "cosme",
+        categoryLabel: "コスメ",
+        date: "2026.02.01",
+        summary: "カラーを楽しみながら、唇の微細な荒れを24時間ケア。各ブランドから発表された「インナーケア発想」の新作が、マスクオフの時代に爆発的な支持。",
+        source: "Beauty Online",
+        sourceUrl: "https://www.cosme.net/",
+        icon: "fa-magic",
+        gradient: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)",
+        viewCount: 3500
+    },
+    // 1月の追加アーカイブ
+    {
+        id: 4005,
+        title: "『メタバース出社』が当たり前に。大手企業の3割が仮想空間オフィスを導入",
+        category: "work",
+        categoryLabel: "ワークスタイル",
+        date: "2026.01.28",
+        summary: "アバターによる偶発的な会話が「孤独感」を解消。従来のZoom会議よりもチームの一体感が高まると、リモートワークの課題解決策として定着。",
+        source: "Tech Career",
+        sourceUrl: "#",
+        icon: "fa-vr-cardboard",
+        gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+        viewCount: 5200
+    },
+    {
+        id: 4006,
+        title: "パステルカラーの『フェムテック・ウェア』、春を先取りする機能服が流行",
+        category: "ladies",
+        categoryLabel: "レディス",
+        date: "2026.01.25",
+        summary: "女性特有の悩みに寄り添う構造と、春らしい明るいカラーを両立。都市生活に馴染む「機能性フェミニン」がファッション界の新たな主役に。",
+        source: "Style Media",
+        sourceUrl: "#",
+        icon: "fa-gem",
+        gradient: "linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%)",
+        viewCount: 2800
+    },
+    {
+        id: 4007,
+        title: "子どもの感性を育てる『知育VR絵本』、教育現場での導入が加速",
+        category: "kids",
+        categoryLabel: "キッズ",
+        date: "2026.01.18",
+        summary: "物語の主人公として中に入れる体験。歴史や宇宙を「体験」として学習することで、理解度と探求心が飛躍的に向上すると話題に。",
+        source: "Education Today",
+        sourceUrl: "#",
+        icon: "fa-book-open",
+        gradient: "linear-gradient(135deg, #f6d365 0%, #fda085 100%)",
+        viewCount: 3100
+    },
+    {
+        id: 4008,
+        title: "Instagramで話題の『究極の朝食セット』、産直ECの売上が前年比2倍",
+        category: "sns",
+        categoryLabel: "SNS",
+        date: "2026.01.15",
+        summary: "「丁寧な暮らし」の再評価。地方の農家から直接届く土付き野菜や卵をSNSに投稿し、その背景にある「ストーリー」を味わう消費が一般化。",
+        source: "SNS Report",
+        sourceUrl: "#",
+        icon: "fa-camera-retro",
+        gradient: "linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)",
+        viewCount: 4500
+    },
+    {
+        id: 4009,
+        title: "『スマートベビーカー』登場。自動ブレーキと温度調整機能を搭載",
+        category: "baby",
+        categoryLabel: "ベビー",
+        date: "2026.01.08",
+        summary: "AIが坂道を検知し出力をアシスト。急な手放しには自動ブレーキが作動。赤ちゃんが寝付く最適な温度をシート内部で保つなど、親の不安に寄り添う。",
+        source: "Family News",
+        sourceUrl: "#",
+        icon: "fa-baby-carriage",
+        gradient: "linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%)",
+        viewCount: 2300
+    },
+    {
+        id: 4010,
+        title: "新年の抱負第1位は『睡眠改善』。1月の寝具売上が過去最高を記録",
+        category: "wellness",
+        categoryLabel: "ウェルネス",
+        date: "2026.01.02",
+        summary: "「パフォーマンス向上のための休息」が共通認識に。パーソナライズ枕や高級マットレスへの投資が、20代〜30代の間でも一般的となった1月の商戦。",
+        source: "Store Trends",
+        sourceUrl: "#",
+        icon: "fa-bed",
+        gradient: "linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)",
+        viewCount: 3900
+    },
+    {
+        id: 4011,
+        title: "2026年、暮らしのキーワードは『自分回帰』。パーソナライズ化が加速",
+        category: "living",
+        categoryLabel: "リビング",
+        date: "2026.01.01",
+        summary: "年初のトレンド予測。他人の評価より「自分に合うかどうか」。インドア、健康、キャリア、あらゆる面で自分基準の選択をする傾向が強まる1年に。",
+        source: "Trend Forecast",
+        sourceUrl: "#",
+        icon: "fa-compass",
+        gradient: "linear-gradient(135deg, #cfd9df 0%, #e2ebf0 100%)",
+        viewCount: 5800
+    },
+    // 既存アーカイブ
     {
         id: 1001,
         title: "2026年、ウェルネスの新定番は『デジタル・デトックス・リトリート』",
@@ -653,23 +899,172 @@ const newsData = [
     }
 ];
 
-// コラム用データ
-const columnData = [
+// ========================================
+// コラムデータ（固定4件 ＋ ストックの中から日付で2件選択）
+// ========================================
+const staticColumns = [
     {
-        title: "2026年、私たちの『幸福』はどう定義されるか",
-        author: "トレンドアナリスト 佐藤 氏",
-        summary: "所有から体験、そして「心の平安」へ。マクロデータから読み解く、これからの価値観の変遷。",
-        icon: "fa-brain",
-        gradient: "linear-gradient(to right, #4b6cb7 0%, #182848 100%)"
+        id: 1,
+        tag: "市場分析",
+        title: "2026年、暮らしのキーワードは『自分回帰』",
+        body: `物価高や技術の進化が加速する中、消費者の関心は「他人の評価」から「自分自身の心地よさ」へと明確にシフトしています。
+        
+        かつての「映え」を追求する消費から、自分の体調や精神状態に合わせたパーソナライズされた体験への投資。この『自分回帰』の流れは、住居、ワークスタイル、ウェルネスのあらゆる場面で顕在化しています。
+        
+        特に「家」は単なる居住スペースを超え、AIが健康管理をサポートし、心身を整えるリトリートの場としての役割を深めています。このパラダイムシフトが、2026年のビジネスとライフスタイルのあり方を根本から変えていくでしょう。`,
+        author: { name: "佐藤 健二", title: "トレンドリサーチ所長", initials: "佐", color: "#34495e" },
+        readTime: 6,
+        headerColor: "linear-gradient(to right, #4b6cb7, #182848)"
     },
     {
-        title: "AIと共創する、新しいクリエイティビティの形",
-        author: "テックジャーナリスト 田中 氏",
-        summary: "ツールとしてのAIを超え、パートナーとしてどう向き合うべきか。仕事の楽しみ方を再定義する。",
-        icon: "fa-pencil",
-        gradient: "linear-gradient(to right, #24c6dc 0%, #514a9d 100%)"
+        id: 2,
+        tag: "テクノロジー",
+        title: "AIと共創する、新しい『余白』の楽しみ方",
+        body: `AIが日々のルーチンワークを代替することで生まれる、私たち自身の「余白」。2026年は、この時間をどう使うかが幸福度の鍵を握ります。
+        
+        単なる時短ではなく、AIをクリエイティブなパートナーとして活用し、人間特有の五感を刺激する活動に没頭する。例えば、AIが提案する栄養バランスを元に、あえて時間をかけて手料理を楽しむといった「不便さの再定義」が注目されています。
+        
+        効率を追求するテクノロジーの影で、私たちが人間らしさを取り戻すための新しいライフスタイルが芽吹いています。`,
+        author: { name: "田中 雅也", title: "テックライフ・ジャーナリスト", initials: "田", color: "#3498db" },
+        readTime: 5,
+        headerColor: "linear-gradient(to right, #24c6dc, #514a9d)"
+    },
+    {
+        id: 3,
+        tag: "ワークスタイル",
+        title: "『ノマド・バン』が変える、場所を選ばない働き方の終着点",
+        body: `高速衛星通信と高容量バッテリーの普及により、真の意味で場所の制約がなくなりました。今、注目されているのは、居住と仕事、そして旅を完全に融合させた「ノマド・バン」によるライフスタイルです。
+        
+        都市の利便性を享受しながら、時には大自然の真ん中で重要な会議を開く。この柔軟性が、個人の生産性と精神的充足感を最大化させています。
+        
+        「定住」という従来の概念が揺らぎ、地図そのものが自分自身のオフィスであり家となる。そんな自由な働き方が、2026年の新しいスタンダードになりつつあります。`,
+        author: { name: "鈴木 直樹", title: "ライフスタイル・デザイナー", initials: "鈴", color: "#27ae60" },
+        readTime: 7,
+        headerColor: "linear-gradient(to right, #43e97b, #38f9d7)"
+    },
+    {
+        id: 4,
+        tag: "ウェルネス",
+        title: "『スリープテック』が解き明かす、究極の休息の科学",
+        body: `2026年のウェルネス市場において、最も革新的な進化を遂げたのは「睡眠」です。単なる計測を超え、脳波誘導や環境の自動調整により、短時間で深い眠りを実現する技術が一般的になりました。
+        
+        しかし、技術以上に重要なのは「休息を投資と捉える」意識の変容です。パフォーマンス向上のために戦略的に眠る。この合理的なアプローチが、現代人のメンタルヘルスと創造性を根底から支えています。
+        
+        科学に基づいた休息術が、私たちのポテンシャルをどこまで引き出せるのか。最新の研究事例を紐解きます。`,
+        author: { name: "小林 恵", title: "ウェルネス研究家", initials: "小", color: "#e84393" },
+        readTime: 8,
+        headerColor: "linear-gradient(to right, #f093fb, #f5576c)"
     }
 ];
+
+const rollingColumnsStock = [
+    {
+        id: 5,
+        tag: "サステナブル",
+        title: "『循環型クローゼット』——捨てるから循環するアパレルへ",
+        body: `ファッションの価値は「所有」から「循環」へと大きく舵を切りました。2026年の最先端は、AIが自分のワードローブを把握し、最適なタイミングで中古市場やアップサイクルへ誘導する仕組みです。
+        
+        新品を買うことが悪ではなく、それをいかに美しく使い切り、次へと繋ぐか。この意識がZ世代を中心に広がり、中古品のステータスが新品を凌駕する場面も増えています。
+        
+        クローゼットそのものが生きているように呼吸し、常に自分に最適な形で循環し続ける。そんな新しいお洒落の形を紹介します。`,
+        author: { name: "中村 美咲", title: "サステナブル衣生活アドバイザー", initials: "中", color: "#16a085" },
+        readTime: 6,
+        headerColor: "linear-gradient(135deg, #a1c4fd, #c2e9fb)"
+    },
+    {
+        id: 6,
+        tag: "SNS文化",
+        title: "『スロー・ソーシャル』——繋がりすぎをあえて断つ豊かさ",
+        body: `常に誰かと繋がっている状態に、人々が疲れを感じ始めています。2026年のSNSトレンドは、あえて返信を求めない、あるいは限られた親しい人だけと静かに時間を共有する「スロー・ソーシャル」です。
+        
+        「いいね」の数に一喜一憂するのではなく、自分の感じたことを丁寧に記録し、残す。この日記のような活用法が、メンタルヘルスの安定に繋がると評価されています。
+        
+        デジタルな繋がりの中に、自分だけの静かな場所を確保する。そんな新しいメディアとの付き合い方を提案します。`,
+        author: { name: "渡辺 裕太", title: "メディア文化論研究者", initials: "渡", color: "#f39c12" },
+        readTime: 5,
+        headerColor: "linear-gradient(to right, #ff9a9e, #fecfef)"
+    }
+];
+
+// コラム描画
+function renderColumns() {
+    if (!columnGrid) return;
+    columnGrid.innerHTML = '';
+
+    // 日付に基づいてローテーション枠を選択（3日周期）
+    const rotationPeriod = 3 * 24 * 60 * 60 * 1000;
+    const now = Date.now();
+    const sequenceIndex = Math.floor(now / rotationPeriod);
+
+    const stockSize = rollingColumnsStock.length;
+    const startIndex = (sequenceIndex * 2) % stockSize;
+
+    const pickedRollingColumns = [];
+    if (stockSize > 0) {
+        pickedRollingColumns.push(rollingColumnsStock[startIndex]);
+        if (stockSize > 1) {
+            pickedRollingColumns.push(rollingColumnsStock[(startIndex + 1) % stockSize]);
+        }
+    }
+
+    // 固定 + 動的を結合
+    const displayColumns = [...staticColumns, ...pickedRollingColumns];
+
+    displayColumns.forEach(item => {
+        const card = document.createElement('article');
+        card.className = 'column-card';
+
+        // 改行を処理
+        const formattedBody = item.body.replace(/\n\s+/g, '<br>');
+
+        card.innerHTML = `
+            <div class="column-card-header" style="background: ${item.headerColor};"></div>
+            <div class="column-card-body">
+                <span class="column-tag"># ${item.tag}</span>
+                <h3>${item.title}</h3>
+                <p class="column-text-content">${formattedBody}</p>
+                
+                <div class="column-action">
+                    <button class="btn-column-toggle">
+                        <span class="btn-label">全文を詳しく読む</span> <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                </div>
+
+                <div class="column-card-footer">
+                    <div class="column-author">
+                        <div class="author-avatar" style="background-color: ${item.author.color};">${item.author.initials}</div>
+                        <div class="author-info">
+                            <span class="author-name">${item.author.name}</span>
+                            <span class="author-title">${item.author.title}</span>
+                        </div>
+                    </div>
+                    <span class="column-read-time">
+                        <i class="fa-regular fa-clock"></i> 約${item.readTime}分
+                    </span>
+                </div>
+            </div>
+        `;
+
+        // 展開・格納イベント
+        const toggleBtn = card.querySelector('.btn-column-toggle');
+        toggleBtn.addEventListener('click', () => {
+            const isExpanded = card.classList.toggle('expanded');
+            const icon = toggleBtn.querySelector('i');
+            const label = toggleBtn.querySelector('.btn-label');
+
+            if (isExpanded) {
+                label.textContent = '内容を閉じる';
+                icon.className = 'fa-solid fa-chevron-up';
+            } else {
+                label.textContent = '全文を詳しく読む';
+                icon.className = 'fa-solid fa-chevron-down';
+                card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        });
+
+        columnGrid.appendChild(card);
+    });
+}
 
 const newsGrid = document.getElementById('news-grid');
 const rankingGrid = document.getElementById('ranking-grid');
@@ -694,6 +1089,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function init() {
+    injectDailyArticle(); // デイリー記事を追加（最初に行う）
     renderNews();
     renderRanking();
     renderColumns();
@@ -702,6 +1098,8 @@ function init() {
     setupMobileMenu();
     setupHomeButton();
     setupArchive();
+    setupFavoritesNav();
+    checkDailyUpdate();
 }
 
 // ホーム/ロゴボタンの設定
@@ -713,11 +1111,17 @@ function setupHomeButton() {
         showFavoritesOnly = false;
         showArchive = false;
 
-        searchInput.value = '';
+        if (searchInput) searchInput.value = '';
         filterBtns.forEach(b => b.classList.remove('active'));
         const allFilter = document.querySelector('.filter-btn[data-category="all"]');
         if (allFilter) allFilter.classList.add('active');
 
+        // ナビゲーションのactive状態をリセット
+        if (homeLink) homeLink.classList.add('active');
+        const navArchiveLink = document.getElementById('nav-archive');
+        if (navArchiveLink) navArchiveLink.classList.remove('active');
+
+        updateFavoritesUI(); // UI表示をリセット
         renderNews();
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
@@ -730,14 +1134,16 @@ function setupHomeButton() {
 function renderNews() {
     newsGrid.innerHTML = '';
 
+    // フィルタリング
     const filteredData = newsData.filter(item => {
         const matchesCategory = currentCategory === 'all' || item.category === currentCategory;
-        const matchesSearch = item.title.includes(currentSearchTerm) || item.summary.includes(currentSearchTerm);
+        const matchesSearch = item.title.toLowerCase().includes(currentSearchTerm.toLowerCase()) ||
+            item.summary.toLowerCase().includes(currentSearchTerm.toLowerCase());
         const matchesFavorites = !showFavoritesOnly || favoriteIds.includes(item.id);
         return matchesCategory && matchesSearch && matchesFavorites;
     });
 
-    // 新着とアーカイブを分ける
+    // 新着とアーカイブを分ける (isArchiveDateは7日前かどうかで判定)
     const recentNews = filteredData.filter(item => !isArchiveDate(item.date));
     const archiveNews = filteredData.filter(item => isArchiveDate(item.date));
 
@@ -779,11 +1185,17 @@ function renderNews() {
     // アーカイブボタンの表示制御
     const archiveBtnAction = document.getElementById('archive-action');
     if (archiveBtnAction) {
+        // アーカイブ記事があり、かつ現在は表示していない場合にボタンを出す
         if (archiveNews.length > 0 && !showArchive) {
             archiveBtnAction.style.display = 'flex';
         } else {
             archiveBtnAction.style.display = 'none';
         }
+    }
+
+    // 検索結果がない場合の表示
+    if (filteredData.length === 0) {
+        newsGrid.innerHTML = '<p style="text-align:center; width:100%; color:#666; padding: 40px 0;">該当する記事が見見つかりませんでした。</p>';
     }
 }
 
@@ -800,6 +1212,7 @@ function getCategoryColor(category) {
         case 'sns': return '#e056fd';
         case 'shoes': return '#d35400';
         case 'cosme': return '#ff4d6d';
+        case 'color': return '#ff6b81'; // ハートフェルト・ピンク
         default: return '#333';
     }
 }
@@ -880,13 +1293,14 @@ function setupArchive() {
         showArchive = true;
         renderNews();
 
-        // 少し遅らせて描画を待ってからスクロール
+        // 描画完了を待ってから、アーカイブ開始地点までスクロール
         setTimeout(() => {
             const divider = document.querySelector('.archive-divider');
             if (divider) {
-                divider.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                // CSSのscroll-margin-topと連携して、最適な位置に表示
+                divider.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
-        }, 100);
+        }, 500);
     };
 
     if (archiveBtn) {
@@ -896,10 +1310,23 @@ function setupArchive() {
     if (navArchiveLink) {
         navArchiveLink.addEventListener('click', (e) => {
             e.preventDefault();
-            // お気に入り表示中の場合は解除
-            if (showFavoritesOnly) {
-                showFavoritesOnly = false;
-            }
+
+            // フィルター状態を完全にリセットしてからアーカイブを表示
+            currentCategory = 'all';
+            currentSearchTerm = '';
+            if (searchInput) searchInput.value = '';
+            showFavoritesOnly = false;
+
+            // UI表示のリセット
+            filterBtns.forEach(b => b.classList.remove('active'));
+            const allFilter = document.querySelector('.filter-btn[data-category="all"]');
+            if (allFilter) allFilter.classList.add('active');
+
+            // ナビゲーションのactive状態を更新
+            if (homeLink) homeLink.classList.remove('active');
+            updateFavoritesUI(); // お気に入り表示をリセット
+            navArchiveLink.classList.add('active');
+
             expandArchive();
         });
     }
@@ -1026,29 +1453,7 @@ function renderRanking() {
     });
 }
 
-// コラム描画
-function renderColumns() {
-    columnGrid.innerHTML = '';
-    columnData.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'news-card'; // 同じスタイルを流用
-        card.innerHTML = `
-            <div class="news-image" style="background: ${item.gradient}">
-                <div class="img-content">
-                    <i class="fa-solid ${item.icon}"></i>
-                </div>
-            </div>
-            <div class="news-content">
-                <div class="news-meta">
-                    <span class="news-source">${item.author}</span>
-                </div>
-                <h3>${item.title}</h3>
-                <p>${item.summary}</p>
-            </div>
-        `;
-        columnGrid.appendChild(card);
-    });
-}
+
 
 // フィルター設定
 function setupFilters() {
@@ -1062,21 +1467,313 @@ function setupFilters() {
     });
 }
 
-// 検索設定
+// 検索機能の設定
 function setupSearch() {
-    searchInput.addEventListener('input', (e) => {
-        currentSearchTerm = e.target.value;
+    if (!searchInput) return;
+    const handleSearch = () => {
+        currentSearchTerm = searchInput.value.trim().toLowerCase();
         renderNews();
+    };
+    searchInput.addEventListener('input', handleSearch);
+}
+
+// お気に入りナビの設定
+function setupFavoritesNav() {
+    const favoritesBtn = document.getElementById('view-favorites');
+    const favoritesOnlyBtn = document.getElementById('filter-favorites-only');
+    const showAllBtn = document.getElementById('filter-show-all');
+
+    if (!favoritesBtn) return;
+
+    // 「お気に入りのみ」を選択
+    if (favoritesOnlyBtn) {
+        favoritesOnlyBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            showFavoritesOnly = true;
+            showArchive = false;
+            updateFavoritesUI();
+            renderNews();
+
+            // フィルターのリセット
+            resetOtherFilters();
+        });
+    }
+
+    // 「すべて表示」を選択
+    if (showAllBtn) {
+        showAllBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            showFavoritesOnly = false;
+            updateFavoritesUI();
+            renderNews();
+        });
+    }
+
+    // 親ボタン自体のクリック（トグル動作）
+    favoritesBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        // 従来のトグル動作（表示内容の切り替え）も継続
+        showFavoritesOnly = !showFavoritesOnly;
+        showArchive = false;
+        updateFavoritesUI();
+        renderNews();
+        if (showFavoritesOnly) resetOtherFilters();
     });
 }
 
-// モバイルメニュー
+// モバイルメニューの設定
 function setupMobileMenu() {
     const toggle = document.getElementById('mobile-menu-toggle');
     const nav = document.querySelector('.main-nav');
-    if (toggle && nav) {
-        toggle.addEventListener('click', () => {
-            nav.style.display = nav.style.display === 'block' ? 'none' : 'block';
+    if (!toggle || !nav) return;
+
+    toggle.addEventListener('click', () => {
+        nav.classList.toggle('active');
+        const icon = toggle.querySelector('i');
+        if (nav.classList.contains('active')) {
+            icon.classList.replace('fa-bars', 'fa-xmark');
+        } else {
+            icon.classList.replace('fa-xmark', 'fa-bars');
+        }
+    });
+
+    // メニューリンククリック時に閉じる
+    const navLinks = nav.querySelectorAll('a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            nav.classList.remove('active');
+            const icon = toggle.querySelector('i');
+            if (icon) icon.classList.replace('fa-xmark', 'fa-bars');
         });
+    });
+}
+
+// お気に入り関連のUI表示更新
+function updateFavoritesUI() {
+    const favoritesBtn = document.getElementById('view-favorites');
+    const favoritesOnlyBtn = document.getElementById('filter-favorites-only');
+    const showAllBtn = document.getElementById('filter-show-all');
+    const archiveLoadBtn = document.getElementById('load-archive-btn');
+
+    if (showFavoritesOnly) {
+        if (favoritesBtn) favoritesBtn.classList.add('active');
+        if (favoritesOnlyBtn) favoritesOnlyBtn.classList.add('active');
+        if (showAllBtn) showAllBtn.classList.remove('active');
+        if (archiveLoadBtn) archiveLoadBtn.classList.remove('active');
+    } else {
+        if (favoritesBtn) favoritesBtn.classList.remove('active');
+        if (favoritesOnlyBtn) favoritesOnlyBtn.classList.remove('active');
+        if (showAllBtn) showAllBtn.classList.add('active');
     }
+}
+
+// お気に入り表示時の他フィルターリセット
+function resetOtherFilters() {
+    currentCategory = 'all';
+    currentSearchTerm = '';
+    if (searchInput) searchInput.value = '';
+    filterBtns.forEach(b => b.classList.remove('active'));
+    const allFilter = document.querySelector('.filter-btn[data-category="all"]');
+    if (allFilter) allFilter.classList.add('active');
+}
+
+// ========================================
+// デイリー記事プール（ライフスタイル・トレンド）
+// 毎日1件ずつローテーションで選択される
+// ========================================
+const dailyArticlePool = [
+    {
+        id: 3001,
+        title: "睡眠を最適化する『AIスマートアイマスク』、脳波に合わせて音響調整",
+        category: "wellness",
+        categoryLabel: "ウェルネス",
+        summary: "リアルタイムで脳波を測定し、深い眠りへ誘うホワイトノイズや高周波を自動調整。起床時には最もスッキリ目覚められるタイミングで光を放つ最新デバイス。",
+        source: "Tech Health",
+        sourceUrl: "#",
+        icon: "fa-moon",
+        gradient: "linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)",
+        viewCount: 2800
+    },
+    {
+        id: 3003,
+        title: "自宅で収穫『全自動インドア菜園』、水耕栽培とAIが植物を管理",
+        category: "living",
+        categoryLabel: "リビング",
+        summary: "室内に置くだけでハーブや野菜が育つ。水分や栄養、LED光量をAIが24時間管理。初心者でも失敗せず、常に新鮮な食材をキッチンに提供できる。",
+        source: "Green Life",
+        sourceUrl: "#",
+        icon: "fa-seedling",
+        gradient: "linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%)",
+        viewCount: 2200
+    },
+    {
+        id: 3004,
+        title: "注目の『デジタル・デトックス・ヴィレッジ』、電波の届かない宿が予約困難に",
+        category: "wellness",
+        categoryLabel: "ウェルネス",
+        summary: "あえて「繋がらない」贅沢。スマホを預け、焚き火や五感を使ったアクティビティに集中。情報の濁流から離れ、精神を回復させるプログラムが多忙な層に支持される。",
+        source: "Mindfulness Today",
+        sourceUrl: "#",
+        icon: "fa-campground",
+        gradient: "linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%)",
+        viewCount: 3500
+    },
+    {
+        id: 3005,
+        title: "3Dプリントで生成する『自分専用ビタミン剤』、血液データから配合比を決定",
+        category: "wellness",
+        categoryLabel: "ウェルネス",
+        summary: "バイタルデータに基づき、不足している栄養素をAIが分析。その場で自分専用のサプリメントを3Dプリントする定額サービスが登場し、健康管理の形を変えつつある。",
+        source: "Medical News",
+        sourceUrl: "#",
+        icon: "fa-pills",
+        gradient: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)",
+        viewCount: 2650
+    },
+    {
+        id: 3006,
+        title: "『エコ・モジュラーキッチン』、廃棄ロスを減らす新しい調理空間の提案",
+        category: "living",
+        categoryLabel: "リビング",
+        summary: "ライフスタイルの変化に合わせてパーツを組み替え可能。リサイクル素材を使用し、エネルギー消費を最小限に抑えるスマート家電が統合された次世代のキッチン。",
+        source: "Interior Design",
+        sourceUrl: "#",
+        icon: "fa-utensils",
+        gradient: "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)",
+        viewCount: 1980
+    },
+    {
+        id: 3007,
+        title: "『メンタルヘルス・スマートリング』、ストレス指数を色の変化で可視化",
+        category: "wellness",
+        categoryLabel: "ウェルネス",
+        summary: "心拍変動からストレスレベルを検知。リングの色が静かに変化し、深呼吸や休息のタイミングを伝える。画面を持たないシンプルなUIが「デバイス疲れ」に響く。",
+        source: "Zen Wear",
+        sourceUrl: "#",
+        icon: "fa-ring",
+        gradient: "linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)",
+        viewCount: 4200
+    },
+    {
+        id: 3008,
+        title: "シニア向け『VR旅行体験』、介護施設から世界の名所や母校を再訪",
+        category: "wellness",
+        categoryLabel: "ウェルネス",
+        summary: "外出が困難な高齢者に、高精細なVRで旅の感動を。認知症予防やQOL向上への効果も研究されており、各地の施設で導入が加速している。",
+        source: "Silver Tech",
+        sourceUrl: "#",
+        icon: "fa-vr-cardboard",
+        gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+        viewCount: 2300
+    },
+    {
+        id: 3009,
+        title: "洗浄不要？『サステナブル・セルフクリーニングボトル』がエコ民に大ヒット",
+        category: "living",
+        categoryLabel: "リビング",
+        summary: "内蔵されたUV-C LEDが数分おきに自動点滅し、水とボトル内を殺菌。常に清潔を保てるため、洗う手間を減らしつつペットボトルの消費を削減できる。",
+        source: "Sustainable Goods",
+        sourceUrl: "#",
+        icon: "fa-bottle-water",
+        gradient: "linear-gradient(135deg, #2b5876 0%, #4e4376 100%)",
+        viewCount: 3800
+    },
+    {
+        id: 3010,
+        title: "『ノマド・バン・レンタル』、ワーケーションに特化した移動オフィスカーが人気",
+        category: "work",
+        categoryLabel: "ワークスタイル",
+        summary: "高速衛星通信と高容量バッテリーを完備したキャンピングカー。場所を選ばず働き、そのまま旅を続ける新しいライフスタイルがリモートワーカーの間で流行中。",
+        source: "Nomad Life",
+        sourceUrl: "#",
+        icon: "fa-van-shuttle",
+        gradient: "linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)",
+        viewCount: 2950
+    }
+];
+
+// ========================================
+// 今日の日付に対応するデイリー記事を取得
+// ========================================
+function getDailyArticle() {
+    const baseDate = new Date(2026, 0, 1);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const elapsedDays = Math.floor((today - baseDate) / (1000 * 60 * 60 * 24));
+    const index = Math.abs(elapsedDays) % dailyArticlePool.length;
+
+    const article = { ...dailyArticlePool[index], date: getRelativeDate(0) };
+    return article;
+}
+
+// ========================================
+// デイリー記事をnewsDataの先頭に追加
+// ========================================
+function injectDailyArticle() {
+    const todayStr = getRelativeDate(0);
+    const lastInjectedDate = localStorage.getItem('life_trend_daily_article_date');
+    const lastInjectedId = localStorage.getItem('life_trend_daily_article_id');
+
+    const article = getDailyArticle();
+
+    // 今日すでに注入済み
+    if (lastInjectedDate === todayStr && lastInjectedId) {
+        const existingIndex = newsData.findIndex(item => item.id === Number(lastInjectedId));
+        if (existingIndex === -1) {
+            newsData.unshift(article);
+        }
+        return;
+    }
+
+    // 前日の記事を削除
+    if (lastInjectedId) {
+        const prevIndex = newsData.findIndex(item => item.id === Number(lastInjectedId));
+        if (prevIndex !== -1) {
+            newsData.splice(prevIndex, 1);
+        }
+    }
+
+    // 先頭に追加
+    newsData.unshift(article);
+
+    localStorage.setItem('life_trend_daily_article_date', todayStr);
+    localStorage.setItem('life_trend_daily_article_id', String(article.id));
+}
+
+// 朝7時の更新チェック
+function checkDailyUpdate() {
+    const now = new Date();
+    const currentHour = now.getHours();
+    const todayStr = getRelativeDate(0);
+
+    const lastUpdateDate = localStorage.getItem('life_trend_last_update_notified');
+
+    if (currentHour >= 7 && lastUpdateDate !== todayStr) {
+        showUpdateNotification();
+        localStorage.setItem('life_trend_last_update_notified', todayStr);
+    }
+}
+
+// 更新通知の表示
+function showUpdateNotification() {
+    const notification = document.createElement('div');
+    notification.id = 'daily-update-notification';
+    notification.className = 'daily-notification';
+    notification.innerHTML = `
+        <div class="notification-content">
+            <i class="fa-solid fa-bell"></i>
+            <span>本日のライフトレンドを更新しました（07:00更新）</span>
+            <button class="notif-close">OK</button>
+        </div>
+    `;
+    document.body.appendChild(notification);
+
+    const closeBtn = notification.querySelector('.notif-close');
+    closeBtn.onclick = () => notification.remove();
+
+    setTimeout(() => {
+        if (notification.parentElement) notification.remove();
+    }, 10000);
 }
