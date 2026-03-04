@@ -216,6 +216,7 @@ ul {
     padding: 6px 14px;
     border-radius: 30px;
     font-weight: 500;
+    white-space: nowrap;
 }
 
 .mobile-menu-toggle {
@@ -238,12 +239,18 @@ ul {
     border-bottom: 1px solid var(--border-color);
 }
 
+.ranking-section .section-title {
+    font-size: 1.6rem;
+    /* 急上昇トレンドのタイトルを少し小さく修正 */
+}
+
 .section-lead {
     text-align: center;
     font-size: 1.1rem;
     font-weight: bold;
     color: var(--accent-color);
     margin-bottom: 5px;
+    white-space: nowrap;
 }
 
 .section-title {
@@ -390,6 +397,8 @@ ul {
 
 #search-input {
     width: 100%;
+    box-sizing: border-box;
+    /* パディングを含めて幅を計算するように追加 */
     padding: 16px 28px;
     border: 2px solid var(--border-color);
     border-radius: 50px;
@@ -446,6 +455,7 @@ ul {
     cursor: pointer;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .news-card:hover {
@@ -519,13 +529,15 @@ ul {
 
 /* 予報セクション */
 .forecast-section {
-    padding: 40px 0;
+    padding: 20px 0;
+    /* 40pxから20pxに削減 */
 }
 
 .forecast-banner {
     background: linear-gradient(135deg, #2c3e50 0%, #4ca1af 100%);
     color: white;
-    padding: 40px 60px;
+    padding: 25px 40px;
+    /* 40px 60pxから縮小 */
     border-radius: var(--radius);
     display: flex;
     justify-content: space-between;
@@ -982,8 +994,10 @@ ul {
     .forecast-banner {
         flex-direction: column;
         text-align: center;
-        gap: 30px;
-        padding: 40px 20px;
+        gap: 15px;
+        /* 30pxから15pxに削減 */
+        padding: 20px 15px;
+        /* 40px 20pxから大幅削減 */
     }
 }
 
@@ -994,6 +1008,15 @@ ul {
 
     .logo h1 {
         display: block;
+        font-size: 0.85rem;
+    }
+
+    .update-info {
+        margin-left: 15px;
+        /* さらに右側にずらして調整 */
+    }
+
+    .section-lead {
         font-size: 0.85rem;
     }
 

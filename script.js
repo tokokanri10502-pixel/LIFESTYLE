@@ -609,6 +609,45 @@ const newsData = [
         viewCount: 4600
     },
     {
+        id: 609,
+        title: "2026年春の『透け感マット』リップ、指塗りで仕上げる新しい血色感",
+        category: "cosme",
+        categoryLabel: "コスメ",
+        date: "2026.03.04",
+        summary: "マットなのに透けるような新感覚のテクスチャーが春メイクの主役に。VOCEが提案する、指でポンポンと馴染ませる抜け感リップの最新トレンドを徹底解説。",
+        source: "VOCE Make-up",
+        sourceUrl: "https://i-voce.jp/make-up/",
+        icon: "fa-magic",
+        gradient: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)",
+        viewCount: 4500
+    },
+    {
+        id: 610,
+        title: "大人の肌を救う『ナイアシンアミド』進化系、最新スキンケアの選び方",
+        category: "cosme",
+        categoryLabel: "コスメ",
+        date: "2026.03.04",
+        summary: "シワ改善と美白を同時に叶える成分として定着したナイアシンアミドがさらに進化。VOCE厳選の最新成分と組み合わせた相乗効果で、揺らぎやすい春の肌を根本から立て直す方法。",
+        source: "VOCE Skincare",
+        sourceUrl: "https://i-voce.jp/skincare/",
+        icon: "fa-leaf",
+        gradient: "linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)",
+        viewCount: 5200
+    },
+    {
+        id: 611,
+        title: "美的.com発『骨格別ハイライト』で小顔効果アップ。光と影を操るベースメイク術",
+        category: "cosme",
+        categoryLabel: "コスメ",
+        date: "2026.03.04",
+        summary: "顔の骨格に合わせてハイライトとシェーディングの位置を変えるだけで、驚くほどの小顔効果を実感。美的がプロのメイクアップアーティストと考案した最新ベースメイク理論。",
+        source: "美的.com",
+        sourceUrl: "https://www.biteki.com",
+        icon: "fa-star",
+        gradient: "linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%)",
+        viewCount: 4800
+    },
+    {
         id: 701,
         title: "西川『新生活応援キャンペーン』、睡眠を科学した高機能マットレスが話題",
         category: "wellness",
