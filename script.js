@@ -11,6 +11,58 @@ function getRelativeDate(daysOffset = 0) {
 // モックデータ：ライフスタイルトレンドニュース
 const newsData = [
     {
+        id: 5002,
+        title: "1日8時間働けない「虚弱な私」 告白本に共感の連鎖",
+        category: "wellness",
+        categoryLabel: "ウェルネス",
+        date: "2026.02.28",
+        summary: "身体の不調を抱える女性のエッセー本「虚弱に生きる」が話題。努力しても体力がつかない著者の葛藤に、同様の悩みを持つ読者から「Me too」の連鎖が起きている。",
+        source: "日経MJ",
+        sourceUrl: "https://www.nikkei.com/article/DGXZQOUC307NH0Q6A130C2000000/",
+        icon: "fa-book-open",
+        gradient: "linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%)",
+        viewCount: 4200
+    },
+    {
+        id: 5003,
+        title: "美容支出、メークよりスキンケアへ 美の「土台作り」を重視",
+        category: "cosme",
+        categoryLabel: "コスメ",
+        date: "2026.02.28",
+        summary: "美容医療の普及に伴い、対症療法的なメークよりもスキンケアへの関心が急上昇。2019年比で美容支出が増えた人の多くが「土台作り」への投資を惜しまない傾向に。",
+        source: "日経MJ",
+        sourceUrl: "https://www.nikkei.com/article/DGXZQOUC172VG0X10C26A2000000/",
+        icon: "fa-spa",
+        gradient: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)",
+        viewCount: 3800
+    },
+    {
+        id: 5004,
+        title: "サンスター文具「カセットテープメジャー」 レトロな外観でヒット",
+        category: "living",
+        categoryLabel: "リビング",
+        date: "2026.02.28",
+        summary: "カセットテープを忠実に再現したメジャーが、販売計画の2.5倍を記録するヒット。レトロ・エモな外観と文具としての実用性が、若年層から大人まで幅広く支持されている。",
+        source: "日経MJ",
+        sourceUrl: "https://www.nikkei.com/article/DGXZQOUC30B0M0Q6A130C2000000/",
+        icon: "fa-tape",
+        gradient: "linear-gradient(135deg, #f6d365 0%, #fda085 100%)",
+        viewCount: 2900
+    },
+    {
+        id: 5005,
+        title: "ペット多頭飼い専用マンションが登場 頭数制限なしで入居待ち",
+        category: "living",
+        categoryLabel: "リビング",
+        date: "2026.02.27",
+        summary: "ペットの頭数・種類制限なしで入居できる複合施設が東京郊外に誕生。家賃は相場より3割高いものの、動植物との共生を求める層から入居待ちが出るほどの人気に。",
+        source: "日経MJ",
+        sourceUrl: "https://www.nikkei.com/article/DGXZQOCD136RS0T10C26A1000000/",
+        icon: "fa-paw",
+        gradient: "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)",
+        viewCount: 3500
+    },
+    {
         id: 3001,
         title: "アットコスメショッピングの「クレンジング」売れ筋ランキング発表",
         category: "cosme",
