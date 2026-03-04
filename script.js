@@ -11,6 +11,162 @@ function getRelativeDate(daysOffset = 0) {
 // モックデータ：ライフスタイルトレンドニュース
 const newsData = [
     {
+        id: 3001,
+        title: "アットコスメショッピングの「クレンジング」売れ筋ランキング発表",
+        category: "cosme",
+        categoryLabel: "コスメ",
+        date: "2026.03.04",
+        summary: "今実際に売れているクレンジング製品の最新ランキング情報。ユーザーのリアルな支持が集まるアイテムが明らかに。",
+        source: "@cosmeRanking",
+        sourceUrl: "https://www.cosme.net/ranking/",
+        icon: "fa-award",
+        gradient: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)",
+        viewCount: 5200
+    },
+    {
+        id: 3002,
+        title: "Dior「フォーエヴァー」から進化した新ファンデーションが登場",
+        category: "cosme",
+        categoryLabel: "コスメ",
+        date: "2026.03.04",
+        summary: "すべてが進化したフォーエヴァーの新ファンデ。圧倒的な素肌感と持続力を両立した、Diorの自信作が遂に発売。",
+        source: "@cosmeBrand",
+        sourceUrl: "https://www.cosme.net/brands/46/tieup/00046202602-01/page.html",
+        icon: "fa-magic",
+        gradient: "linear-gradient(135deg, #222222 0%, #444444 100%)",
+        viewCount: 4800
+    },
+    {
+        id: 3003,
+        title: "NARS「毛穴レスで透明感続く」新ファンデ体験キャンペーン開始",
+        category: "cosme",
+        categoryLabel: "コスメ",
+        date: "2026.03.04",
+        summary: "NARSの新作ファンデーションを体験できる500名様プレゼントキャンペーン。理想の肌を叶える技術をいち早く体験。",
+        source: "@cosmeCampaign",
+        sourceUrl: "https://www.cosme.net/brands/2213/tieup/02213202602-02/page.html",
+        icon: "fa-gift",
+        gradient: "linear-gradient(135deg, #000000 0%, #333333 100%)",
+        viewCount: 3900
+    },
+    {
+        id: 3004,
+        title: "dejavu「究極に美しいまつげ」を体験。500名様にプレゼント",
+        category: "cosme",
+        categoryLabel: "コスメ",
+        date: "2026.03.04",
+        summary: "dejavuの新しいまつげ製品の魅力を体験できるプレゼントキャンペーンがスタート。究極の仕上がりをその手に。",
+        source: "@cosmeEvent",
+        sourceUrl: "https://www.cosme.net/brands/353/tieup/00353202602-02/page.html",
+        icon: "fa-eye",
+        gradient: "linear-gradient(135deg, #ff6b6b 0%, #ee5253 100%)",
+        viewCount: 3500
+    },
+    {
+        id: 3005,
+        title: "佐賀で体験型アート展「魔法の美術館」開催。巨大な本に迷い込む体験",
+        category: "living",
+        categoryLabel: "リビング",
+        date: "2026.03.03",
+        summary: "光を奏でる噴水や影と遊ぶ digital art を楽しめる体験型イベント。家族や友人と楽しめる不思議な美術館が登場。",
+        source: "Fashion Press",
+        sourceUrl: "https://www.fashionpress.net/news/131018",
+        icon: "fa-palette",
+        gradient: "linear-gradient(135deg, #6a11cb 0%, #2575fc 100%)",
+        viewCount: 2800
+    },
+    {
+        id: 3006,
+        title: "「トムとジェリー」生誕85周年記念カフェが東京・大阪・名古屋にオープン",
+        category: "living",
+        categoryLabel: "リビング",
+        date: "2026.03.03",
+        summary: "生誕85周年を記念した“穴あきチーズ”バーガーなどの限定メニューが楽しめるコラボカフェ。作品の世界観を満喫。",
+        source: "Fashion Press",
+        sourceUrl: "https://www.fashionpress.net/news/130985",
+        icon: "fa-utensils",
+        gradient: "linear-gradient(135deg, #f6d365 0%, #fda085 100%)",
+        viewCount: 4200
+    },
+    {
+        id: 3007,
+        title: "マルニの新作バッグ「パピエ」登場。折り紙から着想を得た造形美",
+        category: "ladies",
+        categoryLabel: "レディス",
+        date: "2026.03.03",
+        summary: "バイカラーやレオパード柄のスタイリッシュな新作トートバッグ。折り紙のような構造が、日常に芸術的な彩りを添える。",
+        source: "Fashion Press",
+        sourceUrl: "https://www.fashionpress.net/news/131010",
+        icon: "fa-shopping-bag",
+        gradient: "linear-gradient(135deg, #485563 0%, #29323c 100%)",
+        viewCount: 3100
+    },
+    {
+        id: 3008,
+        title: "川崎チッタデッラで「ミモザの祭典」2025開催。春を彩る黄色い街並み",
+        category: "living",
+        categoryLabel: "リビング",
+        date: "2026.03.03",
+        summary: "約100本のミモザと黄色をテーマにした特別メニューが楽しめる。イタリアの春の訪れを祝う伝統的な催しが日本でも。",
+        source: "Fashion Press",
+        sourceUrl: "https://www.fashionpress.net/news/130972",
+        icon: "fa-sun",
+        gradient: "linear-gradient(135deg, #fff700 0%, #ffcc00 100%)",
+        viewCount: 2600
+    },
+    {
+        id: 3009,
+        title: "イケア初、日本の家での暮らしから生まれた「JAPAN コレクション」",
+        category: "living",
+        categoryLabel: "リビング",
+        date: "2026.03.04",
+        summary: "日本の限られた住環境に合わせて開発された、IKEA初の日本限定コレクション。省スペースでも豊かに暮らすヒントが満載。",
+        source: "PR TIMES",
+        sourceUrl: "https://prtimes.jp/main/html/rd/p/000000457.000000190.html",
+        icon: "fa-couch",
+        gradient: "linear-gradient(135deg, #0051ba 0%, #ffda1a 100%)",
+        viewCount: 5500
+    },
+    {
+        id: 3010,
+        title: "脳波から集中度を測定「JINS MEME」の法人向けサービスが進化",
+        category: "wellness",
+        categoryLabel: "ウェルネス",
+        date: "2026.03.04",
+        summary: "ウェアラブルデバイスで従業員の集中度を可視化し、生産性向上を支援。データに基づいた、これからの働き方のスタンダード。",
+        source: "PR TIMES",
+        sourceUrl: "https://prtimes.jp/main/html/rd/p/000000010.000155000.html",
+        icon: "fa-glasses",
+        gradient: "linear-gradient(135deg, #3498db 0%, #2980b9 100%)",
+        viewCount: 3200
+    },
+    {
+        id: 3011,
+        title: "ダイソン、最新技術を駆使したヘアケア製品「Dyson Chitosan」日本上陸",
+        category: "cosme",
+        categoryLabel: "コスメ",
+        date: "2026.03.04",
+        summary: "ダイソンがヘアケアの固定観念を覆す。キトサンに着目した最新ラインが日本に初上陸、テクノロジーで理想のスタイリングへ。",
+        source: "PR TIMES",
+        sourceUrl: "https://prtimes.jp/main/html/rd/p/000000143.000042335.html",
+        icon: "fa-wind",
+        gradient: "linear-gradient(135deg, #ff00cc 0%, #3333ff 100%)",
+        viewCount: 4500
+    },
+    {
+        id: 3012,
+        title: "睡眠の質を向上させる「Sleep & Health Summit 2026」オンライン開催",
+        category: "wellness",
+        categoryLabel: "ウェルネス",
+        date: "2026.03.04",
+        summary: "睡眠の最新知見を共有し、健康寿命の延伸を目指す大規模サミット。最新テクノロジーと専門家のアドバイスが交差する。",
+        source: "PR TIMES",
+        sourceUrl: "https://prtimes.jp/main/html/rd/p/000000109.000030580.html",
+        icon: "fa-moon",
+        gradient: "linear-gradient(135deg, #a8c0ff 0%, #3f2b96 100%)",
+        viewCount: 3800
+    },
+    {
         id: 1206,
         title: "2026年のトレンドカラー発表、静寂を象徴する『クラウドダンサー』が選出",
         category: "color",
@@ -74,32 +230,6 @@ const newsData = [
         icon: "fa-shoe-prints",
         gradient: "linear-gradient(135deg, #001e62 0%, #3498db 100%)",
         viewCount: 3200
-    },
-    {
-        id: 1204,
-        title: "楽天、サステナブル購入でポイント3倍『グリーン・ポイント』制度を開始",
-        category: "wellness",
-        categoryLabel: "ウェルネス",
-        date: "2026.03.02",
-        summary: "環境負荷の低い商品を選択することでポイント還元率がアップ。消費者の「応援買い」を促進させ、EC市場全体の脱炭素化を加速させる。",
-        source: "楽天グループ プレス",
-        sourceUrl: "https://corp.rakuten.co.jp/news/",
-        icon: "fa-leaf",
-        gradient: "linear-gradient(135deg, #bfd833 0%, #009944 100%)",
-        viewCount: 2900
-    },
-    {
-        id: 1205,
-        title: "SoftBank、全家屋対応の『スマートホームAIハブ』を標準提供へ",
-        category: "living",
-        categoryLabel: "リビング",
-        date: "2026.03.02",
-        summary: "既存の家電をそのままスマート化。音声操作だけでなく、AIが家族の健康状態を察知して室温や照明を自動調節する「見守り」機能を強化。",
-        source: "ソフトバンク ニュース",
-        sourceUrl: "https://www.softbank.jp/corp/news/",
-        icon: "fa-house-signal",
-        gradient: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
-        viewCount: 4100
     },
     {
         id: 2,
@@ -936,7 +1066,14 @@ const newsData = [
         gradient: "linear-gradient(135deg, #6a11cb 0%, #2575fc 100%)",
         viewCount: 1980
     }
-];
+].filter(item => {
+    // Fashion PressとPR TIMESの情報はコスメとレディスのみにする
+    if (item.source === 'Fashion Press' || item.source === 'PR TIMES') {
+        return item.category === 'cosme' || item.category === 'ladies';
+    }
+    return true;
+});
+
 
 // ========================================
 // コラムデータ（固定4件 ＋ ストックの中から日付で2件選択）
@@ -1718,18 +1855,7 @@ const dailyArticlePool = [
         gradient: "linear-gradient(135deg, #2b5876 0%, #4e4376 100%)",
         viewCount: 3800
     },
-    {
-        id: 3010,
-        title: "『ノマド・バン・レンタル』、ワーケーションに特化した移動オフィスカーが人気",
-        category: "work",
-        categoryLabel: "ワークスタイル",
-        summary: "高速衛星通信と高容量バッテリーを完備したキャンピングカー。場所を選ばず働き、そのまま旅を続ける新しいライフスタイルがリモートワーカーの間で流行中。",
-        source: "Nomad Life",
-        sourceUrl: "#",
-        icon: "fa-van-shuttle",
-        gradient: "linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)",
-        viewCount: 2950
-    }
+
 ];
 
 // ========================================
