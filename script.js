@@ -1363,13 +1363,16 @@ function renderNews() {
     newsGrid.innerHTML = '';
 
     // フィルタリング
-    const filteredData = newsData.filter(item => {
+    let filteredData = newsData.filter(item => {
         const matchesCategory = currentCategory === 'all' || item.category === currentCategory;
         const matchesSearch = item.title.toLowerCase().includes(currentSearchTerm.toLowerCase()) ||
             item.summary.toLowerCase().includes(currentSearchTerm.toLowerCase());
         const matchesFavorites = !showFavoritesOnly || favoriteIds.includes(item.id);
         return matchesCategory && matchesSearch && matchesFavorites;
     });
+
+    // 日付の降順（新しい順）でソート
+    filteredData.sort((a, b) => b.date.localeCompare(a.date));
 
     // 新着とアーカイブを分ける (isArchiveDateは7日前かどうかで判定)
     const recentNews = filteredData.filter(item => !isArchiveDate(item.date));
@@ -1387,9 +1390,6 @@ function renderNews() {
         divider.className = 'archive-divider';
         divider.innerHTML = '<span>ここから過去の記事</span>';
         newsGrid.appendChild(divider);
-
-        // 日付の降順（新しい順）でソート
-        archiveNews.sort((a, b) => b.date.localeCompare(a.date));
 
         let lastMonth = "";
         archiveNews.forEach(item => {
