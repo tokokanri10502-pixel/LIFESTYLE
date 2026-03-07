@@ -11,6 +11,84 @@ function getRelativeDate(daysOffset = 0) {
 // モックデータ：ライフスタイルトレンドニュース
 const newsData = [
     {
+        id: 6001,
+        title: "「肌悩み」をAIが10秒診断、大手ドラッグストアが新サービス開始",
+        category: "cosme",
+        categoryLabel: "コスメ",
+        date: "2026.03.07",
+        summary: "カメラで肌を撮影するだけで、AIが現在のコンディションを分析。最適なスキンケア商品をその場で提案する次世代型什器が主要都市に導入される。",
+        source: "日経MJ",
+        sourceUrl: "#",
+        icon: "fa-camera",
+        gradient: "linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%)",
+        viewCount: 4200
+    },
+    {
+        id: 6002,
+        title: "スリープテック最前線：脳波誘導で「最短5分」で深い眠りへ",
+        category: "wellness",
+        categoryLabel: "ウェルネス",
+        date: "2026.03.07",
+        summary: "特殊な周波数を用いたサウンド療法が注目。2026年モデルのイヤホン型デバイスは、入眠を劇的に早める効果が臨床データで実証され、予約が殺到している。",
+        source: "Wellness Tech",
+        sourceUrl: "#",
+        icon: "fa-moon",
+        gradient: "linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)",
+        viewCount: 3800
+    },
+    {
+        id: 6003,
+        title: "2026年春、メンズコスメ市場が前年比150%。Z世代の『土台作り』が鍵",
+        category: "cosme",
+        categoryLabel: "コスメ",
+        date: "2026.03.06",
+        summary: "メイクよりも「素肌の綺麗さ」を求める男性が急増。美容医療の低価格化も重なり、20代男性のスキンケアへの月間支出額が過去最高を更新した。",
+        source: "Fashion Press",
+        sourceUrl: "#",
+        icon: "fa-user-tie",
+        gradient: "linear-gradient(135deg, #2c3e50 0%, #4ca1af 100%)",
+        viewCount: 3100
+    },
+    {
+        id: 6004,
+        title: "東京・渋谷に『デジタルデトックス・カフェ』。スマホ預かりでコーヒー割引",
+        category: "living",
+        categoryLabel: "リビング",
+        date: "2026.03.06",
+        summary: "デジタル疲れを感じる若年層の間で、あえてオフラインを楽しむ空間がブームに。入店時にデバイスを預けることで割引されるユニークな仕組みが話題。",
+        source: "渋谷経済新聞",
+        sourceUrl: "#",
+        icon: "fa-coffee",
+        gradient: "linear-gradient(135deg, #f6d365 0%, #fda085 100%)",
+        viewCount: 4500
+    },
+    {
+        id: 6005,
+        title: "「インドア・アウトドア」家具が30代を中心にヒット。自宅でキャンプ気分",
+        category: "living",
+        categoryLabel: "リビング",
+        date: "2026.03.05",
+        summary: "ベランダや室内でも本格的な焚き火気分を味わえる照明や、キャンプ用素材を用いたソファが人気。日常の中に非日常を求める層のニーズを掴んでいる。",
+        source: "PR TIMES",
+        sourceUrl: "#",
+        icon: "fa-campground",
+        gradient: "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)",
+        viewCount: 2900
+    },
+    {
+        id: 6006,
+        title: "無印良品、100%リサイクル素材の「次世代型収納ボックス」を発売",
+        category: "living",
+        categoryLabel: "リビング",
+        date: "2026.03.05",
+        summary: "海洋プラスチックを再利用した、耐久性とデザイン性を両立する新シリーズ。不要になった際の回収・再資源化ルートも確立し、循環型ライフスタイルを提案。",
+        source: "無印良品 ニュース",
+        sourceUrl: "#",
+        icon: "fa-leaf",
+        gradient: "linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)",
+        viewCount: 3500
+    },
+    {
         id: 5002,
         title: "1日8時間働けない「虚弱な私」 告白本に共感の連鎖",
         category: "wellness",
@@ -1911,52 +1989,89 @@ const dailyArticlePool = [
 ];
 
 // ========================================
-// 今日の日付に対応するデイリー記事を取得
+// 指定した日付に対応するデイリー記事を取得
 // ========================================
-function getDailyArticle() {
+function getDailyArticleForDate(dateStr) {
     const baseDate = new Date(2026, 0, 1);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    const parts = dateStr.split('.');
+    const targetDate = new Date(parts[0], parts[1] - 1, parts[2]);
+    targetDate.setHours(0, 0, 0, 0);
 
-    const elapsedDays = Math.floor((today - baseDate) / (1000 * 60 * 60 * 24));
-    const index = Math.abs(elapsedDays) % dailyArticlePool.length;
-
-    const article = { ...dailyArticlePool[index], date: getRelativeDate(0) };
-    return article;
+    const elapsedDays = Math.floor((targetDate - baseDate) / (1000 * 60 * 60 * 24));
+    const poolIndex = Math.abs(elapsedDays) % dailyArticlePool.length;
+    return poolIndex;
 }
 
 // ========================================
-// デイリー記事をnewsDataの先頭に追加
+// ユニークIDを日付から生成（衝突を避けるため90000番台を使用）
+// ========================================
+function getDailyUniqueId(dateStr) {
+    const baseDate = new Date(2026, 0, 1);
+    const parts = dateStr.split('.');
+    const targetDate = new Date(parts[0], parts[1] - 1, parts[2]);
+    targetDate.setHours(0, 0, 0, 0);
+    const elapsedDays = Math.floor((targetDate - baseDate) / (1000 * 60 * 60 * 24));
+    return 90000 + Math.abs(elapsedDays);
+}
+
+// ========================================
+// デイリー記事をnewsDataへ追加（蓄積型）
+// localStorage に履歴配列を保存し最大30日分を維持する
 // ========================================
 function injectDailyArticle() {
+    const STORAGE_KEY = 'life_trend_daily_history';
+    const MAX_DAYS = 30;
     const todayStr = getRelativeDate(0);
-    const lastInjectedDate = localStorage.getItem('life_trend_daily_article_date');
-    const lastInjectedId = localStorage.getItem('life_trend_daily_article_id');
 
-    const article = getDailyArticle();
+    // ── 旧形式キーからのマイグレーション ──
+    const legacyDate = localStorage.getItem('life_trend_daily_article_date');
+    const legacyId = localStorage.getItem('life_trend_daily_article_id');
+    if (legacyDate && legacyId && !localStorage.getItem(STORAGE_KEY)) {
+        const legacyPoolIndex = getDailyArticleForDate(legacyDate);
+        const migratedHistory = [{
+            date: legacyDate,
+            uniqueId: Number(legacyId),
+            poolIndex: legacyPoolIndex
+        }];
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(migratedHistory));
+    }
+    localStorage.removeItem('life_trend_daily_article_date');
+    localStorage.removeItem('life_trend_daily_article_id');
 
-    // 今日すでに注入済み
-    if (lastInjectedDate === todayStr && lastInjectedId) {
-        const existingIndex = newsData.findIndex(item => item.id === Number(lastInjectedId));
-        if (existingIndex === -1) {
-            newsData.unshift(article);
-        }
-        return;
+    // ── 履歴の読み込み ──
+    let history = [];
+    try {
+        history = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    } catch (e) {
+        history = [];
     }
 
-    // 前日の記事を削除
-    if (lastInjectedId) {
-        const prevIndex = newsData.findIndex(item => item.id === Number(lastInjectedId));
-        if (prevIndex !== -1) {
-            newsData.splice(prevIndex, 1);
+    // ── 今日のエントリが未追加なら追加 ──
+    const todayEntry = history.find(entry => entry.date === todayStr);
+    if (!todayEntry) {
+        const poolIndex = getDailyArticleForDate(todayStr);
+        const uniqueId = getDailyUniqueId(todayStr);
+        history.push({ date: todayStr, uniqueId, poolIndex });
+
+        // 上限を超えた古い記事を削除（日付昇順で古い方から）
+        if (history.length > MAX_DAYS) {
+            history = history.slice(-MAX_DAYS);
         }
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
     }
 
-    // 先頭に追加
-    newsData.unshift(article);
-
-    localStorage.setItem('life_trend_daily_article_date', todayStr);
-    localStorage.setItem('life_trend_daily_article_id', String(article.id));
+    // ── 履歴の全エントリを newsData へ注入 ──
+    history.forEach(entry => {
+        // すでに newsData に同じ uniqueId が存在する場合はスキップ
+        const exists = newsData.some(item => item.id === entry.uniqueId);
+        if (!exists) {
+            const template = dailyArticlePool[entry.poolIndex];
+            if (template) {
+                const article = { ...template, id: entry.uniqueId, date: entry.date };
+                newsData.push(article);
+            }
+        }
+    });
 }
 
 // 朝7時の更新チェック
