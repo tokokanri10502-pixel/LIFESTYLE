@@ -1011,6 +1011,58 @@ const newsData = [
         gradient: "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)",
         viewCount: 2800
     },
+    {
+        id: 7001,
+        title: "2026年春の気温予測。平年よりも高めで桜の開花も記録的な早さに",
+        category: "temperature",
+        categoryLabel: "気温予測",
+        date: "2026.03.05",
+        summary: "気象庁の発表によると、今年の春は全国的に平年より気温が高くなる見込み。本格的な春服への衣替えも早期化が予想される。",
+        source: "Weather News",
+        sourceUrl: "#",
+        icon: "fa-sun",
+        gradient: "linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%)",
+        viewCount: 4500
+    },
+    {
+        id: 7002,
+        title: "2026年夏の長期予報。猛暑日日数は昨年に引き続き高水準か",
+        category: "temperature",
+        categoryLabel: "気温予測",
+        date: "2026.03.05",
+        summary: "太平洋高気圧の張り出しが強く、例年以上の厳しい暑さが予想される。熱中症対策グッズやひんやり系コスメの需要が早くも高まっている。",
+        source: "Weather News",
+        sourceUrl: "#",
+        icon: "fa-temperature-high",
+        gradient: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)",
+        viewCount: 3900
+    },
+    {
+        id: 7003,
+        title: "2026年秋の傾向。残暑が厳しく、紅葉シーズンは後ろ倒しに",
+        category: "temperature",
+        categoryLabel: "気温予測",
+        date: "2026.03.05",
+        summary: "夏からの高い気温が長引き、秋の訪れは遅れる見通し。9月・10月も半袖アイテムが活躍するなど、秋服のセールススケジュールにも影響が。",
+        source: "Weather News",
+        sourceUrl: "#",
+        icon: "fa-leaf",
+        gradient: "linear-gradient(135deg, #f6d365 0%, #fda085 100%)",
+        viewCount: 2200
+    },
+    {
+        id: 7004,
+        title: "2026年冬の寒波予測。暖冬傾向なるか、それとも急激な冷え込みか",
+        category: "temperature",
+        categoryLabel: "気温予測",
+        date: "2026.03.05",
+        summary: "エルニーニョ現象の影響で暖冬の傾向があるものの、一時的な強い寒気の南下による大雪のリスクも。防寒具だけでなく、調温アイテムが人気。",
+        source: "Weather News",
+        sourceUrl: "#",
+        icon: "fa-snowflake",
+        gradient: "linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)",
+        viewCount: 1800
+    },
     // 2月の追加アーカイブ
     {
         id: 4001,
@@ -1519,6 +1571,7 @@ function getCategoryColor(category) {
         case 'shoes': return '#d35400';
         case 'cosme': return '#ff4d6d';
         case 'color': return '#ff6b81'; // ハートフェルト・ピンク
+        case 'temperature': return '#1abc9c';
         default: return '#333';
     }
 }
