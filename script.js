@@ -2042,54 +2042,49 @@ const dailyArticlePool = [
 ];
 
 // ========================================
-// 指定した日付に対応するデイリー記事を取得
+// 指定した日付に対応するデイリー記事インデックス配列を取得
+// 毎日3つの異なる記事を選択するように変更
 // ========================================
-function getDailyArticleForDate(dateStr) {
+function getDailyArticleIndicesForDate(dateStr) {
     const baseDate = new Date(2026, 0, 1);
     const parts = dateStr.split('.');
     const targetDate = new Date(parts[0], parts[1] - 1, parts[2]);
     targetDate.setHours(0, 0, 0, 0);
 
     const elapsedDays = Math.floor((targetDate - baseDate) / (1000 * 60 * 60 * 24));
-    const poolIndex = Math.abs(elapsedDays) % dailyArticlePool.length;
-    return poolIndex;
+    const poolSize = dailyArticlePool.length;
+    
+    // 3つの異なるインデックスを生成
+    const indices = [
+        Math.abs(elapsedDays * 3) % poolSize,
+        Math.abs(elapsedDays * 3 + 1) % poolSize,
+        Math.abs(elapsedDays * 3 + 2) % poolSize
+    ];
+    
+    return indices;
 }
 
 // ========================================
-// ユニークIDを日付から生成（衝突を避けるため90000番台を使用）
+// ユニークIDを日付とインデックスから生成
 // ========================================
-function getDailyUniqueId(dateStr) {
+function getDailyUniqueId(dateStr, indexOffset) {
     const baseDate = new Date(2026, 0, 1);
     const parts = dateStr.split('.');
     const targetDate = new Date(parts[0], parts[1] - 1, parts[2]);
     targetDate.setHours(0, 0, 0, 0);
     const elapsedDays = Math.floor((targetDate - baseDate) / (1000 * 60 * 60 * 24));
-    return 90000 + Math.abs(elapsedDays);
+    return 90000 + Math.abs(elapsedDays) * 3 + indexOffset;
 }
 
 // ========================================
 // デイリー記事をnewsDataへ追加（蓄積型）
+// 毎日最低3つのトレンドを収集するように変更
 // localStorage に履歴配列を保存し最大30日分を維持する
 // ========================================
 function injectDailyArticle() {
     const STORAGE_KEY = 'life_trend_daily_history';
     const MAX_DAYS = 30;
     const todayStr = getRelativeDate(0);
-
-    // ── 旧形式キーからのマイグレーション ──
-    const legacyDate = localStorage.getItem('life_trend_daily_article_date');
-    const legacyId = localStorage.getItem('life_trend_daily_article_id');
-    if (legacyDate && legacyId && !localStorage.getItem(STORAGE_KEY)) {
-        const legacyPoolIndex = getDailyArticleForDate(legacyDate);
-        const migratedHistory = [{
-            date: legacyDate,
-            uniqueId: Number(legacyId),
-            poolIndex: legacyPoolIndex
-        }];
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(migratedHistory));
-    }
-    localStorage.removeItem('life_trend_daily_article_date');
-    localStorage.removeItem('life_trend_daily_article_id');
 
     // ── 履歴の読み込み ──
     let history = [];
@@ -2100,22 +2095,23 @@ function injectDailyArticle() {
     }
 
     // ── 今日のエントリが未追加なら追加 ──
-    const todayEntry = history.find(entry => entry.date === todayStr);
-    if (!todayEntry) {
-        const poolIndex = getDailyArticleForDate(todayStr);
-        const uniqueId = getDailyUniqueId(todayStr);
-        history.push({ date: todayStr, uniqueId, poolIndex });
+    const todayEntries = history.filter(entry => entry.date === todayStr);
+    if (todayEntries.length === 0) {
+        const indices = getDailyArticleIndicesForDate(todayStr);
+        indices.forEach((poolIndex, i) => {
+            const uniqueId = getDailyUniqueId(todayStr, i);
+            history.push({ date: todayStr, uniqueId, poolIndex });
+        });
 
-        // 上限を超えた古い記事を削除（日付昇順で古い方から）
-        if (history.length > MAX_DAYS) {
-            history = history.slice(-MAX_DAYS);
+        // 上限を超えた古い記事を削除（記事単位で管理。30日分 = 90記事程度）
+        if (history.length > MAX_DAYS * 3) {
+            history = history.slice(-(MAX_DAYS * 3));
         }
         localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
     }
 
     // ── 履歴の全エントリを newsData へ注入 ──
     history.forEach(entry => {
-        // すでに newsData に同じ uniqueId が存在する場合はスキップ
         const exists = newsData.some(item => item.id === entry.uniqueId);
         if (!exists) {
             const template = dailyArticlePool[entry.poolIndex];
