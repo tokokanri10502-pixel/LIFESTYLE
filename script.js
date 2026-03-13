@@ -2038,12 +2038,62 @@ const dailyArticlePool = [
         gradient: "linear-gradient(135deg, #2b5876 0%, #4e4376 100%)",
         viewCount: 3800
     },
-
+    {
+        id: 3010,
+        title: "パーソナライズ美容液『スキン・マエストロ』、自宅でAIが当日配合",
+        category: "cosme",
+        categoryLabel: "コスメ",
+        summary: "その日の気温、湿度、肌のコンディションに合わせて有効成分の配合比をAIが決定。専用デバイスがその場で1回分の美容液を精製する、究極の個別最適化ケア。",
+        source: "Cosme Tech Now",
+        sourceUrl: "#",
+        icon: "fa-droplet",
+        gradient: "linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%)",
+        viewCount: 3100
+    },
+    {
+        id: 3011,
+        title: "次世代UVケア『透明ヴェール・フィルム』、塗るのではなく「纏う」日焼け止め",
+        category: "cosme",
+        categoryLabel: "コスメ",
+        summary: "超微細繊維を肌に吹き付け、目に見えない薄膜を形成。従来の塗るタイプと異なり、擦れに強く、石鹸で簡単にオフできる画期的なUV遮断技術が注目を集める。",
+        source: "Skincare Journal",
+        sourceUrl: "#",
+        icon: "fa-shield-halved",
+        gradient: "linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)",
+        viewCount: 2900
+    },
+    {
+        id: 3012,
+        title: "ヴィーガン・マスカラ『プラント・パワー』、植物由来成分100%でボリューム実現",
+        category: "cosme",
+        categoryLabel: "コスメ",
+        summary: "石油系成分を一切排除し、お米のワックスと炭の成分だけで驚異のロング・ボリューム効果を実現。目元への優しさと環境配慮を両立した新世代マスカラ。",
+        source: "Eco Beauty",
+        sourceUrl: "#",
+        icon: "fa-eye",
+        gradient: "linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%)",
+        viewCount: 2450
+    },
+    {
+        id: 3013,
+        title: "『ナイトリペア・リップバーム』、ハチミツと発酵成分で翌朝の唇が劇変",
+        category: "cosme",
+        categoryLabel: "コスメ",
+        summary: "寝ている間に集中的に角質層まで浸透。古くなった角質を優しく整え、翌朝には「縦じわが目立たない」プルプルな状態へ導く。SNSでの口コミから即完売が続く。",
+        source: "Lip Trend",
+        sourceUrl: "#",
+        icon: "fa-face-kiss",
+        gradient: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)",
+        viewCount: 4100
+    },
 ];
+
+// 1日あたりの追加記事数
+const ITEMS_PER_DAY = 10;
 
 // ========================================
 // 指定した日付に対応するデイリー記事インデックス配列を取得
-// 毎日3つの異なる記事を選択するように変更
+// 毎日指定された数（ITEMS_PER_DAY）の異なる記事を選択
 // ========================================
 function getDailyArticleIndicesForDate(dateStr) {
     const baseDate = new Date(2026, 0, 1);
@@ -2054,14 +2104,33 @@ function getDailyArticleIndicesForDate(dateStr) {
     const elapsedDays = Math.floor((targetDate - baseDate) / (1000 * 60 * 60 * 24));
     const poolSize = dailyArticlePool.length;
     
-    // 3つの異なるインデックスを生成
-    const indices = [
-        Math.abs(elapsedDays * 3) % poolSize,
-        Math.abs(elapsedDays * 3 + 1) % poolSize,
-        Math.abs(elapsedDays * 3 + 2) % poolSize
-    ];
+    // 異なるインデックスを生成
+    const indices = [];
+    for (let i = 0; i < ITEMS_PER_DAY; i++) {
+        indices.push(Math.abs(elapsedDays * ITEMS_PER_DAY + i) % poolSize);
+    }
     
-    return indices;
+    // レディス、コスメ、シューズを優先
+    const priorityCategories = ['ladies', 'cosme', 'shoes'];
+    
+    priorityCategories.forEach((category, i) => {
+        const hasCategory = indices.some(idx => dailyArticlePool[idx].category === category);
+        
+        if (!hasCategory) {
+            const categoryIndices = dailyArticlePool
+                .map((item, idx) => item.category === category ? idx : -1)
+                .filter(idx => idx !== -1);
+            
+            if (categoryIndices.length > 0) {
+                // 日付に基づいて対象カテゴリーのプールから1つ選択
+                const catIdx = categoryIndices[Math.abs(elapsedDays) % categoryIndices.length];
+                // 後ろからスロットを対象カテゴリーの記事に差し替え
+                indices[ITEMS_PER_DAY - 1 - i] = catIdx;
+            }
+        }
+    });
+    
+    return [ ...new Set(indices) ]; // 重複排除
 }
 
 // ========================================
@@ -2073,12 +2142,13 @@ function getDailyUniqueId(dateStr, indexOffset) {
     const targetDate = new Date(parts[0], parts[1] - 1, parts[2]);
     targetDate.setHours(0, 0, 0, 0);
     const elapsedDays = Math.floor((targetDate - baseDate) / (1000 * 60 * 60 * 24));
-    return 90000 + Math.abs(elapsedDays) * 3 + indexOffset;
+    // 1日あたりの件数増に対応するため、係数を10に変更してIDの衝突を防ぐ
+    return 90000 + Math.abs(elapsedDays) * 10 + indexOffset;
 }
 
 // ========================================
 // デイリー記事をnewsDataへ追加（蓄積型）
-// 毎日最低3つのトレンドを収集するように変更
+// 毎日最低10つのトレンドを収集するように変更
 // localStorage に履歴配列を保存し最大30日分を維持する
 // ========================================
 function injectDailyArticle() {
@@ -2096,16 +2166,22 @@ function injectDailyArticle() {
 
     // ── 今日のエントリが未追加なら追加 ──
     const todayEntries = history.filter(entry => entry.date === todayStr);
-    if (todayEntries.length === 0) {
+    if (todayEntries.length < ITEMS_PER_DAY) {
+        // 足りない分を追加
         const indices = getDailyArticleIndicesForDate(todayStr);
-        indices.forEach((poolIndex, i) => {
+        for (let i = todayEntries.length; i < ITEMS_PER_DAY; i++) {
+            const poolIndex = indices[i];
             const uniqueId = getDailyUniqueId(todayStr, i);
-            history.push({ date: todayStr, uniqueId, poolIndex });
-        });
+            
+            // 既に同じIDが存在しないかチェック
+            if (!history.find(entry => entry.uniqueId === uniqueId)) {
+                history.push({ date: todayStr, uniqueId, poolIndex });
+            }
+        }
 
-        // 上限を超えた古い記事を削除（記事単位で管理。30日分 = 90記事程度）
-        if (history.length > MAX_DAYS * 3) {
-            history = history.slice(-(MAX_DAYS * 3));
+        // 上限を超えた古い記事を削除（記事単位で管理。30日分）
+        if (history.length > MAX_DAYS * ITEMS_PER_DAY) {
+            history = history.slice(-(MAX_DAYS * ITEMS_PER_DAY));
         }
         localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
     }
