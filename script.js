@@ -2086,10 +2086,82 @@ const dailyArticlePool = [
         gradient: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)",
         viewCount: 4100
     },
+    {
+        id: 3101,
+        title: "マルニの新作バッグ「パピエ」登場。折り紙から着想を得た造形美",
+        category: "ladies",
+        categoryLabel: "レディス",
+        summary: "バイカラーやレオパード柄のスタイリッシュな新作トートバッグ。折り紙のような構造が、日常に芸術的な彩りを添える。",
+        source: "Fashion Press",
+        sourceUrl: "#",
+        icon: "fa-shopping-bag",
+        gradient: "linear-gradient(135deg, #485563 0%, #29323c 100%)",
+        viewCount: 3100
+    },
+    {
+        id: 3102,
+        title: "Nike『Air Max』最新作、再生素材を使用した環境対応モデル",
+        category: "shoes",
+        categoryLabel: "シューズ",
+        summary: "圧倒的なクッション性はそのままに、製造工程を見直し環境負荷を低減。機能性と持続可能性を両立させた次世代のアイコン。",
+        source: "Nike News",
+        sourceUrl: "#",
+        icon: "fa-bolt",
+        gradient: "linear-gradient(135deg, #f39c12 0%, #d35400 100%)",
+        viewCount: 3500
+    },
+    {
+        id: 3103,
+        title: "生成AIによる「自分専用キャリアコーチ」が仕事の常識を変える",
+        category: "work",
+        categoryLabel: "ワークスタイル",
+        summary: "個人のスキルと志向を学習し、最適なネクストアクションを提案するパーソナルAI。2026年は、AIに相談するビジネスパーソンが多数派に。",
+        source: "Career Weekly",
+        sourceUrl: "#",
+        icon: "fa-user-tie",
+        gradient: "linear-gradient(135deg, #2c3e50 0%, #4ca1af 100%)",
+        viewCount: 2100
+    },
+    {
+        id: 3104,
+        title: "サステナブルな『おさがり』プラットフォーム、キッズ市場で急成長",
+        category: "kids",
+        categoryLabel: "キッズ",
+        summary: "成長の早い子供服を、品質を維持したまま循環させる新サービス。親世代の環境意識の高まりを受け、リユースが当たり前の選択肢に。",
+        source: "Family Tech",
+        sourceUrl: "#",
+        icon: "fa-child",
+        gradient: "linear-gradient(135deg, #f6d365 0%, #fda085 100%)",
+        viewCount: 1420
+    },
+    {
+        id: 3105,
+        title: "Instagramで話題の『淡色カフェ』、全国各地で集客記録を更新",
+        category: "sns",
+        categoryLabel: "SNS",
+        summary: "ベージュや白を基調とした内装。写真映えだけでなく、その空間での「体験」を共有することがステータスとなるカルチャーの定着。",
+        source: "Insta Vibes",
+        sourceUrl: "#",
+        icon: "fa-brands fa-instagram",
+        gradient: "linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)",
+        viewCount: 4200
+    },
+    {
+        id: 3106,
+        title: "ユニクロ『次世代ライフウェア』、AI分析による究極のフィット感",
+        category: "mens",
+        categoryLabel: "メンズ",
+        summary: "100万人の体型データから導き出した、誰にでも似合う黄金シルエット。ベーシックの枠を超えた「機能美」の到達点。",
+        source: "Uniqlo Press",
+        sourceUrl: "#",
+        icon: "fa-shirt",
+        gradient: "linear-gradient(135deg, #ff0000 0%, #cc0000 100%)",
+        viewCount: 3200
+    },
 ];
 
 // 1日あたりの追加記事数
-const ITEMS_PER_DAY = 10;
+const ITEMS_PER_DAY = 7;
 
 // ========================================
 // 指定した日付に対応するデイリー記事インデックス配列を取得
@@ -2104,33 +2176,64 @@ function getDailyArticleIndicesForDate(dateStr) {
     const elapsedDays = Math.floor((targetDate - baseDate) / (1000 * 60 * 60 * 24));
     const poolSize = dailyArticlePool.length;
     
-    // 異なるインデックスを生成
-    const indices = [];
-    for (let i = 0; i < ITEMS_PER_DAY; i++) {
-        indices.push(Math.abs(elapsedDays * ITEMS_PER_DAY + i) % poolSize);
-    }
-    
-    // レディス、コスメ、シューズを優先
+    // 優先カテゴリー（過去の依頼に基づき優先）
     const priorityCategories = ['ladies', 'cosme', 'shoes'];
+    const indices = [];
+    const usedCategories = new Set();
     
-    priorityCategories.forEach((category, i) => {
-        const hasCategory = indices.some(idx => dailyArticlePool[idx].category === category);
-        
-        if (!hasCategory) {
-            const categoryIndices = dailyArticlePool
-                .map((item, idx) => item.category === category ? idx : -1)
-                .filter(idx => idx !== -1);
+    // 1. 優先カテゴリーから1つずつ選択
+    priorityCategories.forEach(category => {
+        const categoryIndices = dailyArticlePool
+            .map((item, idx) => item.category === category ? idx : -1)
+            .filter(idx => idx !== -1);
             
-            if (categoryIndices.length > 0) {
-                // 日付に基づいて対象カテゴリーのプールから1つ選択
-                const catIdx = categoryIndices[Math.abs(elapsedDays) % categoryIndices.length];
-                // 後ろからスロットを対象カテゴリーの記事に差し替え
-                indices[ITEMS_PER_DAY - 1 - i] = catIdx;
+        if (categoryIndices.length > 0) {
+            // 日付に基づく決定論的な選択
+            const catIdx = categoryIndices[Math.abs(elapsedDays) % categoryIndices.length];
+            if (!indices.includes(catIdx)) {
+                indices.push(catIdx);
+                usedCategories.add(category);
             }
         }
     });
     
-    return [ ...new Set(indices) ]; // 重複排除
+    // 2. 残りのスロットを、まだ使用していないカテゴリーから選択して分類の重複を避ける
+    const allCategories = [...new Set(dailyArticlePool.map(item => item.category))];
+    const remainingCategories = allCategories.filter(cat => !usedCategories.has(cat));
+    
+    // カテゴリーごとに記事をグループ化
+    const poolByCategory = {};
+    dailyArticlePool.forEach((item, idx) => {
+        if (!poolByCategory[item.category]) poolByCategory[item.category] = [];
+        poolByCategory[item.category].push(idx);
+    });
+    
+    // 残りのカテゴリーをローテーションで選択
+    let catOffset = 0;
+    while (indices.length < ITEMS_PER_DAY && catOffset < remainingCategories.length) {
+        const catName = remainingCategories[(Math.abs(elapsedDays) + catOffset) % remainingCategories.length];
+        const catPool = poolByCategory[catName];
+        if (catPool && catPool.length > 0) {
+            const articleIdx = catPool[Math.abs(elapsedDays) % catPool.length];
+            if (!indices.includes(articleIdx)) {
+                indices.push(articleIdx);
+                usedCategories.add(catName);
+            }
+        }
+        catOffset++;
+    }
+    
+    // 3. まだ足りない場合（カテゴリー数が少ない場合など）は、未選択の記事から補充
+    let fallbackOffset = 0;
+    while (indices.length < ITEMS_PER_DAY && fallbackOffset < poolSize) {
+        const idx = (Math.abs(elapsedDays * ITEMS_PER_DAY) + fallbackOffset) % poolSize;
+        if (!indices.includes(idx)) {
+            indices.push(idx);
+        }
+        fallbackOffset++;
+    }
+    
+    return indices.slice(0, ITEMS_PER_DAY);
 }
 
 // ========================================
@@ -2142,7 +2245,7 @@ function getDailyUniqueId(dateStr, indexOffset) {
     const targetDate = new Date(parts[0], parts[1] - 1, parts[2]);
     targetDate.setHours(0, 0, 0, 0);
     const elapsedDays = Math.floor((targetDate - baseDate) / (1000 * 60 * 60 * 24));
-    // 1日あたりの件数増に対応するため、係数を10に変更してIDの衝突を防ぐ
+    // IDの衝突を防ぐため係数は10を維持（1日最大7件）
     return 90000 + Math.abs(elapsedDays) * 10 + indexOffset;
 }
 

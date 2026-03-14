@@ -957,17 +957,20 @@ ul {
 
     /* 通知の調整 */
     .daily-notification {
-        top: 70px;
+        top: 20px;
         bottom: auto;
-        right: 10px;
-        left: 10px;
+        right: 20px;
+        left: auto;
+        width: calc(100% - 40px);
+        max-width: 320px;
         padding: 12px 15px;
         font-size: 0.85rem;
         animation: slideInRight 0.5s ease-out;
+        border-radius: 12px;
     }
 
     .notification-content {
-        justify-content: space-between;
+        justify-content: flex-start;
     }
 
     /* フッター */
@@ -1078,9 +1081,19 @@ ul {
         opacity: 0;
         transform: translateY(30px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
     }
 }
