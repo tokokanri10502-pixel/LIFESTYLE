@@ -10,6 +10,287 @@ function getRelativeDate(daysOffset = 0) {
 
 // モックデータ：ライフスタイルトレンドニュース
 const newsData = [
+    // ── 2026年3月14日（土） ──
+    {
+        id: 7141,
+        title: "「春のデトックス」習慣が注目。白湯＋生姜ルーティンが美容感度高い層に浸透",
+        category: "wellness",
+        categoryLabel: "ウェルネス",
+        date: "2026.03.14",
+        summary: "朝一番の白湯とスライス生姜の組み合わせが腸活・デトックス効果として再評価。SNSで「春のリセット習慣」として拡散され、ドラッグストアでの生姜関連商品が前年比150%の伸びを記録。",
+        source: "Wellness Today",
+        sourceUrl: "#",
+        icon: "fa-mug-hot",
+        gradient: "linear-gradient(135deg, #f6d365 0%, #fda085 100%)",
+        viewCount: 3400
+    },
+    {
+        id: 7142,
+        title: "春コレクション最速レポート：Sacaiが放つ「ハイブリッドウェア」の衝撃",
+        category: "ladies",
+        categoryLabel: "レディス",
+        date: "2026.03.14",
+        summary: "デニムとオーガンザを融合させた新発想のレイヤードウェアが世界中のバイヤーを圧倒。「着る彫刻」とも評される立体的なシルエットが2026年春の最大のトピックに。",
+        source: "Fashion Press",
+        sourceUrl: "#",
+        icon: "fa-shirt",
+        gradient: "linear-gradient(135deg, #485563 0%, #29323c 100%)",
+        viewCount: 4100
+    },
+    {
+        id: 7143,
+        title: "「ながら運動」に使えるスマートシューズ、センサーで歩き方を改善",
+        category: "shoes",
+        categoryLabel: "シューズ",
+        date: "2026.03.14",
+        summary: "インソールに埋め込まれた圧力センサーが歩行バランスをリアルタイム分析。専用アプリで姿勢改善のフィードバックを受けながら、日常の移動時間をトレーニングに転換できる。",
+        source: "Tech Shoes Lab",
+        sourceUrl: "#",
+        icon: "fa-shoe-prints",
+        gradient: "linear-gradient(135deg, #001e62 0%, #3498db 100%)",
+        viewCount: 2800
+    },
+    // ── 2026年3月13日（金） ──
+    {
+        id: 7131,
+        title: "美容医療「ハイフ」の家庭用デバイスが普及期へ。月1回で素肌が変わる",
+        category: "cosme",
+        categoryLabel: "コスメ",
+        date: "2026.03.13",
+        summary: "クリニック専売だった高周波エネルギー照射型の美肌デバイスが一般向けに普及。月1〜2回の使用でリフトアップ効果を実感できるとSNSで評判、需要が急増している。",
+        source: "Beauty Digital",
+        sourceUrl: "#",
+        icon: "fa-spa",
+        gradient: "linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%)",
+        viewCount: 4800
+    },
+    {
+        id: 7132,
+        title: "春ニットの「チョコレートブラウン」旋風 ─ 各ブランドが競い合う新定番色",
+        category: "color",
+        categoryLabel: "カラー",
+        date: "2026.03.13",
+        summary: "深みのある濃褐色「チョコレートブラウン」が今春のキーカラーとして急浮上。温もりを感じさせながらも洗練された印象を与えるとして、ファッション各誌の表紙を席巻している。",
+        source: "Color Forecast",
+        sourceUrl: "#",
+        icon: "fa-fill-drip",
+        gradient: "linear-gradient(135deg, #3e2723 0%, #a1887f 100%)",
+        viewCount: 3600
+    },
+    {
+        id: 7133,
+        title: "「仕事の合間に5分瞑想」デスクワーカーのメンタルリセット術が常識化",
+        category: "work",
+        categoryLabel: "ワークスタイル",
+        date: "2026.03.13",
+        summary: "大手IT各社が就業中の「マインドフルネス休憩」を推奨し始めた。5分間の呼吸瞑想でafter-集中力が23%向上するというデータが内部調査で確認され、制度化の動きが加速。",
+        source: "Work Style Lab",
+        sourceUrl: "#",
+        icon: "fa-user-tie",
+        gradient: "linear-gradient(135deg, #2c3e50 0%, #4ca1af 100%)",
+        viewCount: 3100
+    },
+    // ── 2026年3月12日（木） ──
+    {
+        id: 7121,
+        title: "TikTok「#春コーデ」投稿が1億件突破。Z世代が牽引するトレンドの最前線",
+        category: "sns",
+        categoryLabel: "SNS",
+        date: "2026.03.12",
+        summary: "春の新作コーデをTikTokで披露する「#春コーデ」が累計1億投稿に到達。AIレコメンドとの相乗効果で、「自分スタイル探し」の場としてSNSが機能し始めている。",
+        source: "SNS Trend Watch",
+        sourceUrl: "#",
+        icon: "fa-hashtag",
+        gradient: "linear-gradient(135deg, #00f2fe 0%, #4facfe 100%)",
+        viewCount: 5200
+    },
+    {
+        id: 7122,
+        title: "「グリーン系インテリア」需要が急増。バイオフィリックデザインでリラックス空間",
+        category: "living",
+        categoryLabel: "リビング",
+        date: "2026.03.12",
+        summary: "観葉植物を部屋のデザインに組み込む「バイオフィリックデザイン」が住宅雑誌の特集テーマを独占。植物のグリーンと自然素材の組み合わせが、ストレス社会に対するアンチテーゼとして支持を広げている。",
+        source: "Interior Plus",
+        sourceUrl: "#",
+        icon: "fa-seedling",
+        gradient: "linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%)",
+        viewCount: 3700
+    },
+    {
+        id: 7123,
+        title: "限定コラボシューズが発売初日に完売。スポーツ×ラグジュアリーの融合が加速",
+        category: "shoes",
+        categoryLabel: "シューズ",
+        date: "2026.03.12",
+        summary: "スポーツとラグジュアリーの融合を究極まで高めた限定モデルが世界同時発売。抽選倍率は200倍を超え、フリマアプリでは定価の数倍でのやり取りが横行している。",
+        source: "Sneaker News JP",
+        sourceUrl: "#",
+        icon: "fa-bolt",
+        gradient: "linear-gradient(135deg, #f39c12 0%, #d35400 100%)",
+        viewCount: 6100
+    },
+    // ── 2026年3月11日（水） ──
+    {
+        id: 7111,
+        title: "腸活×美肌の新常識「ポストバイオティクス」、スキンケアに配合する新製品が続々",
+        category: "cosme",
+        categoryLabel: "コスメ",
+        date: "2026.03.11",
+        summary: "生きた菌（プロバイオティクス）ではなく、菌の代謝産物「ポストバイオティクス」をスキンケアに活用する動きが加速。肌のバリア機能を強化する効果が注目を集めている。",
+        source: "Skin Science",
+        sourceUrl: "#",
+        icon: "fa-droplet",
+        gradient: "linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%)",
+        viewCount: 4300
+    },
+    {
+        id: 7112,
+        title: "「ジェンダーレスファッション」が小売市場を本格席巻、大手ブランドも専用ライン",
+        category: "mens",
+        categoryLabel: "メンズ",
+        date: "2026.03.11",
+        summary: "性別を意識させないシルエットとカラーで構成されたコレクションが、幅広い年代に支持されている。国内外の大手ブランドが初のジェンダーフリーラインを相次ぎ発表し、市場への本格参入を宣言。",
+        source: "Fashion Wire",
+        sourceUrl: "#",
+        icon: "fa-shirt",
+        gradient: "linear-gradient(135deg, #bdc3c7 0%, #2c3e50 100%)",
+        viewCount: 3900
+    },
+    {
+        id: 7113,
+        title: "「働く親」を支援するミールキット、定期購読数が前年比200%に急増",
+        category: "work",
+        categoryLabel: "ワークスタイル",
+        date: "2026.03.11",
+        summary: "調理時間を平均20分に抑えた時短ミールキットが共働き家庭を直撃。栄養バランスの管理まで行ってくれるサービスが、子育て世代の強い味方として定着しつつある。",
+        source: "Meal Delivery Report",
+        sourceUrl: "#",
+        icon: "fa-utensils",
+        gradient: "linear-gradient(135deg, #f6d365 0%, #fda085 100%)",
+        viewCount: 2900
+    },
+    // ── 2026年3月10日（月） ──
+    {
+        id: 7101,
+        title: "カーボンフットプリントを「可視化」するショッピングアプリが続々登場",
+        category: "living",
+        categoryLabel: "リビング",
+        date: "2026.03.10",
+        summary: "商品スキャンで一瞬にしてCO₂排出量を算出。環境意識の高い消費者向けに、購入のたびにエコポイントを付与する仕組みが購買行動を変えつつある。",
+        source: "Eco Consumer",
+        sourceUrl: "#",
+        icon: "fa-leaf",
+        gradient: "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)",
+        viewCount: 3300
+    },
+    {
+        id: 7102,
+        title: "「プロテインスイーツ」市場が3年で3倍成長。パティシエ監修で本格化",
+        category: "wellness",
+        categoryLabel: "ウェルネス",
+        date: "2026.03.10",
+        summary: "罪悪感ゼロでスイーツ欲を満たせるプロテイン入り菓子が歯止めなく多様化。有名パティシエが監修したレシピでクオリティが向上し、ジムユーザー以外にも支持層が広がっている。",
+        source: "Health Food Report",
+        sourceUrl: "#",
+        icon: "fa-heart-pulse",
+        gradient: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)",
+        viewCount: 4000
+    },
+    {
+        id: 7103,
+        title: "「美の基準」がSNSで移行中、上品・高貴な「ロワイアルコア」が急上昇",
+        category: "sns",
+        categoryLabel: "SNS",
+        date: "2026.03.10",
+        summary: "コレクションから着想を得た高貴・上品なスタイルを指す「ロワイアルコア」がInstagramで急上昇。深みのある色彩と繊細なレース使いが注目を集めている。",
+        source: "SNS Trend Watch",
+        sourceUrl: "#",
+        icon: "fa-hashtag",
+        gradient: "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)",
+        viewCount: 5500
+    },
+    // ── 2026年3月9日（日） ──
+    {
+        id: 7091,
+        title: "春靴トレンド2026：バレエシューズの「超フラット」回帰がファッションを席巻",
+        category: "shoes",
+        categoryLabel: "シューズ",
+        date: "2026.03.09",
+        summary: "ヒールゼロのフラットバレエシューズが、スカートからパンツまで今季最もコーデしやすいシューズとして台頭。素材のバリエーションが増え、カジュアルからドレスシーンまで活躍する。",
+        source: "Shoes Trend Now",
+        sourceUrl: "#",
+        icon: "fa-shoe-prints",
+        gradient: "linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%)",
+        viewCount: 3800
+    },
+    {
+        id: 7092,
+        title: "「ヴィンテージデニム」ブームが第3波。古着屋への行列が全国規模に",
+        category: "ladies",
+        categoryLabel: "レディス",
+        date: "2026.03.09",
+        summary: "90年代ハイウエストデニムを中心としたヴィンテージ古着への熱狂が再燃。週末の古着市は1000人規模の来場者を記録し、若い世代がサステナブルな消費の最前線を走っている。",
+        source: "Vintage Fashion Report",
+        sourceUrl: "#",
+        icon: "fa-recycle",
+        gradient: "linear-gradient(135deg, #3498db 0%, #2980b9 100%)",
+        viewCount: 4600
+    },
+    {
+        id: 7093,
+        title: "「森林浴アロマ」がリモートワーカーのデスクを席巻。生産性向上効果も実証",
+        category: "wellness",
+        categoryLabel: "ウェルネス",
+        date: "2026.03.09",
+        summary: "ヒノキや杉などの天然木成分を配合したアロマディフューザーが在宅ワーカーに人気爆発。森林浴の「フィトンチッド」効果をオフィスで再現できるとして、集中力維持に活用するケースが増加。",
+        source: "Work From Home Magazine",
+        sourceUrl: "#",
+        icon: "fa-campground",
+        gradient: "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)",
+        viewCount: 3200
+    },
+    // ── 2026年3月8日（土） ──
+    {
+        id: 7081,
+        title: "「ラベンダー」と「ミントグリーン」が2026年春モードの2大カラーに浮上",
+        category: "color",
+        categoryLabel: "カラー",
+        date: "2026.03.08",
+        summary: "パリコレとミラノコレを席巻した柔らかな紫とクールな緑。互いにリラクゼーションを連想させるこのコンビが、ファッションからインテリア・コスメまで春の色彩シーンをリードする。",
+        source: "Color Forecast 2026",
+        sourceUrl: "#",
+        icon: "fa-fill-drip",
+        gradient: "linear-gradient(135deg, #d7aefb 0%, #a8d8a8 100%)",
+        viewCount: 4200
+    },
+    {
+        id: 7082,
+        title: "ユニクロ・春限定カラーが即完売。定番品のカラー戦略が加速",
+        category: "ladies",
+        categoryLabel: "レディス",
+        date: "2026.03.08",
+        summary: "毎年完売を記録するシリーズが春限定カラーを拡充。コーラルピンクとセージグリーンが登場初日に完売し、早期予約枠の導入を検討する声が上がっている。",
+        source: "UNIQLO Press",
+        sourceUrl: "#",
+        icon: "fa-shirt",
+        gradient: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)",
+        viewCount: 5100
+    },
+    {
+        id: 7083,
+        title: "キッズシューズに「成長対応」機能。サイズアジャスター内蔵で廃棄ロスを削減",
+        category: "kids",
+        categoryLabel: "キッズ",
+        date: "2026.03.08",
+        summary: "足の成長に合わせてフィット感を調整できる子供靴が登場。廃棄ロスを減らしながら経済的な負担も軽減する、新しいサステナブルシューズが注目を集める。",
+        source: "Kids Fashion News",
+        sourceUrl: "#",
+        icon: "fa-child",
+        gradient: "linear-gradient(135deg, #f6d365 0%, #fda085 100%)",
+        viewCount: 2900
+    },
+    // ── ここから既存データ ──
     {
         id: 6001,
         title: "「肌悩み」をAIが10秒診断、大手ドラッグストアが新サービス開始",
@@ -1457,7 +1738,6 @@ function init() {
     setupHomeButton();
     setupArchive();
     setupFavoritesNav();
-    checkDailyUpdate();
 }
 
 // ホーム/ロゴボタンの設定
@@ -2166,6 +2446,7 @@ const ITEMS_PER_DAY = 7;
 // ========================================
 // 指定した日付に対応するデイリー記事インデックス配列を取得
 // 毎日指定された数（ITEMS_PER_DAY）の異なる記事を選択
+// 2日間で重複しないように、日付をベースにしたローテーションを強化
 // ========================================
 function getDailyArticleIndicesForDate(dateStr) {
     const baseDate = new Date(2026, 0, 1);
@@ -2176,64 +2457,16 @@ function getDailyArticleIndicesForDate(dateStr) {
     const elapsedDays = Math.floor((targetDate - baseDate) / (1000 * 60 * 60 * 24));
     const poolSize = dailyArticlePool.length;
     
-    // 優先カテゴリー（過去の依頼に基づき優先）
-    const priorityCategories = ['ladies', 'cosme', 'shoes'];
+    // 日付に基づいた開始位置を決定（1日あたりITEMS_PER_DAYずつずらす）
+    // これにより、poolSizeが ITEMS_PER_DAY * 2 以上あれば、2日間は完全に被らない
+    const dayOffset = Math.abs(elapsedDays) * ITEMS_PER_DAY;
+    
     const indices = [];
-    const usedCategories = new Set();
-    
-    // 1. 優先カテゴリーから1つずつ選択
-    priorityCategories.forEach(category => {
-        const categoryIndices = dailyArticlePool
-            .map((item, idx) => item.category === category ? idx : -1)
-            .filter(idx => idx !== -1);
-            
-        if (categoryIndices.length > 0) {
-            // 日付に基づく決定論的な選択
-            const catIdx = categoryIndices[Math.abs(elapsedDays) % categoryIndices.length];
-            if (!indices.includes(catIdx)) {
-                indices.push(catIdx);
-                usedCategories.add(category);
-            }
-        }
-    });
-    
-    // 2. 残りのスロットを、まだ使用していないカテゴリーから選択して分類の重複を避ける
-    const allCategories = [...new Set(dailyArticlePool.map(item => item.category))];
-    const remainingCategories = allCategories.filter(cat => !usedCategories.has(cat));
-    
-    // カテゴリーごとに記事をグループ化
-    const poolByCategory = {};
-    dailyArticlePool.forEach((item, idx) => {
-        if (!poolByCategory[item.category]) poolByCategory[item.category] = [];
-        poolByCategory[item.category].push(idx);
-    });
-    
-    // 残りのカテゴリーをローテーションで選択
-    let catOffset = 0;
-    while (indices.length < ITEMS_PER_DAY && catOffset < remainingCategories.length) {
-        const catName = remainingCategories[(Math.abs(elapsedDays) + catOffset) % remainingCategories.length];
-        const catPool = poolByCategory[catName];
-        if (catPool && catPool.length > 0) {
-            const articleIdx = catPool[Math.abs(elapsedDays) % catPool.length];
-            if (!indices.includes(articleIdx)) {
-                indices.push(articleIdx);
-                usedCategories.add(catName);
-            }
-        }
-        catOffset++;
+    for (let i = 0; i < ITEMS_PER_DAY; i++) {
+        indices.push((dayOffset + i) % poolSize);
     }
     
-    // 3. まだ足りない場合（カテゴリー数が少ない場合など）は、未選択の記事から補充
-    let fallbackOffset = 0;
-    while (indices.length < ITEMS_PER_DAY && fallbackOffset < poolSize) {
-        const idx = (Math.abs(elapsedDays * ITEMS_PER_DAY) + fallbackOffset) % poolSize;
-        if (!indices.includes(idx)) {
-            indices.push(idx);
-        }
-        fallbackOffset++;
-    }
-    
-    return indices.slice(0, ITEMS_PER_DAY);
+    return indices;
 }
 
 // ========================================
@@ -2302,38 +2535,3 @@ function injectDailyArticle() {
     });
 }
 
-// 朝7時の更新チェック
-function checkDailyUpdate() {
-    const now = new Date();
-    const currentHour = now.getHours();
-    const todayStr = getRelativeDate(0);
-
-    const lastUpdateDate = localStorage.getItem('life_trend_last_update_notified');
-
-    if (currentHour >= 7 && lastUpdateDate !== todayStr) {
-        showUpdateNotification();
-        localStorage.setItem('life_trend_last_update_notified', todayStr);
-    }
-}
-
-// 更新通知の表示
-function showUpdateNotification() {
-    const notification = document.createElement('div');
-    notification.id = 'daily-update-notification';
-    notification.className = 'daily-notification';
-    notification.innerHTML = `
-        <div class="notification-content">
-            <i class="fa-solid fa-bell"></i>
-            <span>本日のライフトレンドを更新しました（07:00更新）</span>
-            <button class="notif-close">OK</button>
-        </div>
-    `;
-    document.body.appendChild(notification);
-
-    const closeBtn = notification.querySelector('.notif-close');
-    closeBtn.onclick = () => notification.remove();
-
-    setTimeout(() => {
-        if (notification.parentElement) notification.remove();
-    }, 10000);
-}
