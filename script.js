@@ -2455,15 +2455,33 @@ function getDailyArticleIndicesForDate(dateStr) {
     targetDate.setHours(0, 0, 0, 0);
 
     const elapsedDays = Math.floor((targetDate - baseDate) / (1000 * 60 * 60 * 24));
-    const poolSize = dailyArticlePool.length;
+    const dayOffset = Math.abs(elapsedDays);
     
-    // 日付に基づいた開始位置を決定（1日あたりITEMS_PER_DAYずつずらす）
-    // これにより、poolSizeが ITEMS_PER_DAY * 2 以上あれば、2日間は完全に被らない
-    const dayOffset = Math.abs(elapsedDays) * ITEMS_PER_DAY;
-    
+    const cosmeIndices = [];
+    const otherIndices = [];
+    dailyArticlePool.forEach((article, index) => {
+        if (article.category === 'cosme') {
+            cosmeIndices.push(index);
+        } else {
+            otherIndices.push(index);
+        }
+    });
+
     const indices = [];
-    for (let i = 0; i < ITEMS_PER_DAY; i++) {
-        indices.push((dayOffset + i) % poolSize);
+    
+    // コスメ記事を必ず2つ選ぶ
+    for (let i = 0; i < 2; i++) {
+        if (cosmeIndices.length > 0) {
+            indices.push(cosmeIndices[(dayOffset * 2 + i) % cosmeIndices.length]);
+        }
+    }
+    
+    // 残りをその他の記事から選ぶ
+    const remainingCount = ITEMS_PER_DAY - indices.length;
+    for (let i = 0; i < remainingCount; i++) {
+        if (otherIndices.length > 0) {
+            indices.push(otherIndices[(dayOffset * remainingCount + i) % otherIndices.length]);
+        }
     }
     
     return indices;
