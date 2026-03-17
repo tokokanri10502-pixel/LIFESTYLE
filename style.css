@@ -1015,3 +1015,60 @@ ul {
     }
 }
 
+
+/* 更新通知ポップアップ */
+#daily-update-notification {
+    position: fixed;
+    top: 90px;
+    right: 20px;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    animation: slideInRight 0.5s ease-out;
+}
+
+.notif-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.notif-content button {
+    background: white;
+    border: none;
+    color: var(--primary-color);
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    #daily-update-notification {
+        top: 70px;
+        right: 10px;
+        left: 10px;
+        padding: 12px 15px;
+        font-size: 0.85rem;
+    }
+
+    .notif-content {
+        justify-content: space-between;
+    }
+}

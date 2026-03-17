@@ -1738,6 +1738,7 @@ function init() {
     setupHomeButton();
     setupArchive();
     setupFavoritesNav();
+    checkDailyUpdate(); // 朝7時の更新チェック
 }
 
 // ホーム/ロゴボタンの設定
@@ -2551,5 +2552,40 @@ function injectDailyArticle() {
             }
         }
     });
+}
+
+// 朝7時の更新チェック
+function checkDailyUpdate() {
+    const now = new Date();
+    const currentHour = now.getHours();
+    const todayStr = getRelativeDate(0);
+
+    // ローカルストレージで最後に更新通知を出した日を記録
+    const lastUpdateDate = localStorage.getItem('life_trend_last_daily_update_notified');
+
+    // 7時以降かつ、今日まだ通知を出していない場合
+    if (currentHour >= 7 && lastUpdateDate !== todayStr) {
+        showUpdateNotification();
+        localStorage.setItem('life_trend_last_daily_update_notified', todayStr);
+    }
+}
+
+// 更新通知の表示
+function showUpdateNotification() {
+    const notification = document.createElement('div');
+    notification.id = 'daily-update-notification';
+    notification.innerHTML = `
+        <div class="notif-content">
+            <i class="fa-solid fa-bell"></i>
+            <span>本日のトレンド情報をピックアップしました（07:00更新）</span>
+            <button onclick="this.parentElement.parentElement.remove()">OK</button>
+        </div>
+    `;
+    document.body.appendChild(notification);
+
+    // 10秒後に自動消去
+    setTimeout(() => {
+        if (notification.parentElement) notification.remove();
+    }, 10000);
 }
 
