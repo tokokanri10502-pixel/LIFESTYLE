@@ -2248,30 +2248,6 @@ const dailyArticlePool = [
         viewCount: 2200
     },
     {
-        id: 3004,
-        title: "注目の『デジタル・デトックス・ヴィレッジ』、電波の届かない宿が予約困難に",
-        category: "wellness",
-        categoryLabel: "ウェルネス",
-        summary: "あえて「繋がらない」贅沢。スマホを預け、焚き火や五感を使ったアクティビティに集中。情報の濁流から離れ、精神を回復させるプログラムが多忙な層に支持される。",
-        source: "Mindfulness Today",
-        sourceUrl: "#",
-        icon: "fa-campground",
-        gradient: "linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%)",
-        viewCount: 3500
-    },
-    {
-        id: 3005,
-        title: "3Dプリントで生成する『自分専用ビタミン剤』、血液データから配合比を決定",
-        category: "wellness",
-        categoryLabel: "ウェルネス",
-        summary: "バイタルデータに基づき、不足している栄養素をAIが分析。その場で自分専用のサプリメントを3Dプリントする定額サービスが登場し、健康管理の形を変えつつある。",
-        source: "Medical News",
-        sourceUrl: "#",
-        icon: "fa-pills",
-        gradient: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)",
-        viewCount: 2650
-    },
-    {
         id: 3006,
         title: "『エコ・モジュラーキッチン』、廃棄ロスを減らす新しい調理空間の提案",
         category: "living",
@@ -2282,30 +2258,6 @@ const dailyArticlePool = [
         icon: "fa-utensils",
         gradient: "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)",
         viewCount: 1980
-    },
-    {
-        id: 3007,
-        title: "『メンタルヘルス・スマートリング』、ストレス指数を色の変化で可視化",
-        category: "wellness",
-        categoryLabel: "ウェルネス",
-        summary: "心拍変動からストレスレベルを検知。リングの色が静かに変化し、深呼吸や休息のタイミングを伝える。画面を持たないシンプルなUIが「デバイス疲れ」に響く。",
-        source: "Zen Wear",
-        sourceUrl: "#",
-        icon: "fa-ring",
-        gradient: "linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)",
-        viewCount: 4200
-    },
-    {
-        id: 3008,
-        title: "シニア向け『VR旅行体験』、介護施設から世界の名所や母校を再訪",
-        category: "wellness",
-        categoryLabel: "ウェルネス",
-        summary: "外出が困難な高齢者に、高精細なVRで旅の感動を。認知症予防やQOL向上への効果も研究されており、各地の施設で導入が加速している。",
-        source: "Silver Tech",
-        sourceUrl: "#",
-        icon: "fa-vr-cardboard",
-        gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-        viewCount: 2300
     },
     {
         id: 3009,
@@ -2439,6 +2391,114 @@ const dailyArticlePool = [
         gradient: "linear-gradient(135deg, #ff0000 0%, #cc0000 100%)",
         viewCount: 3200
     },
+    {
+        id: 3107,
+        title: "TikTok発『#今日のコーデ』、10億再生超えで街のファッションを変える",
+        category: "sns",
+        categoryLabel: "SNS",
+        summary: "毎朝の着こなしを15秒動画でシェアするトレンドが爆発的拡散。ハイブランドとプチプラの組み合わせが評価される「民主化ファッション」の象徴となっている。",
+        source: "TikTok Trends",
+        sourceUrl: "#",
+        icon: "fa-brands fa-tiktok",
+        gradient: "linear-gradient(135deg, #010101 0%, #69c9d0 50%, #ee1d52 100%)",
+        viewCount: 5100
+    },
+    {
+        id: 3108,
+        title: "X（旧Twitter）で急拡散『スキンケアルーティン』、専門家解説が100万RT",
+        category: "sns",
+        categoryLabel: "SNS",
+        summary: "皮膚科医によるシンプルケア解説スレッドが爆発的に拡散。「引き算スキンケア」への支持が高まり、多機能コスメより単機能アイテムの売上を押し上げている。",
+        source: "X Trend Watch",
+        sourceUrl: "#",
+        icon: "fa-brands fa-x-twitter",
+        gradient: "linear-gradient(135deg, #141414 0%, #434343 100%)",
+        viewCount: 4600
+    },
+    {
+        id: 3109,
+        title: "Pinterest急上昇『クワイエットラグジュアリー』、シンプル上質が検索1位に",
+        category: "sns",
+        categoryLabel: "SNS",
+        summary: "ロゴ・装飾を排した上質素材コーデが国内外で急増。過剰なトレンド消費からの反動として「長く着られる一枚」への関心が高まり、購買行動にも変化が生まれている。",
+        source: "Pinterest Japan",
+        sourceUrl: "#",
+        icon: "fa-brands fa-pinterest",
+        gradient: "linear-gradient(135deg, #e60023 0%, #ad081b 100%)",
+        viewCount: 3900
+    },
+    {
+        id: 3110,
+        title: "YouTubeで人気急上昇『プチプラ＆ハイブランドMIXコーデ』術",
+        category: "sns",
+        categoryLabel: "SNS",
+        summary: "1万円以下アイテムとブランドバッグを組み合わせる「リアルクローゼット」動画が急増。視聴者の共感を呼び、紹介商品がその日のうちに売り切れる現象が続く。",
+        source: "YouTube Fashion",
+        sourceUrl: "#",
+        icon: "fa-brands fa-youtube",
+        gradient: "linear-gradient(135deg, #ff0000 0%, #ff6b6b 100%)",
+        viewCount: 4300
+    },
+    {
+        id: 3111,
+        title: "2026春夏注目トレンド『ボタニカルプリント』、花柄が新世代へアップデート",
+        category: "ladies",
+        categoryLabel: "レディス",
+        summary: "デジタル加工でリアルな質感を持つ植物柄が登場。淡いトーンのワンピースやシャツへの展開が相次ぎ、オフィス〜カジュアルまで幅広いシーンで採用されている。",
+        source: "Vogue Japan",
+        sourceUrl: "#",
+        icon: "fa-leaf",
+        gradient: "linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)",
+        viewCount: 3600
+    },
+    {
+        id: 3112,
+        title: "『バレエコアスタイル』がSNSから路上へ、リボン＆チュールが主役",
+        category: "ladies",
+        categoryLabel: "レディス",
+        summary: "バレエシューズ、チュールスカート、リボンアクセサリーを取り入れたガーリーなスタイルが若年層を中心に急拡散。フェミニンの再解釈として各ブランドが続々展開。",
+        source: "ELLE Japan",
+        sourceUrl: "#",
+        icon: "fa-star",
+        gradient: "linear-gradient(135deg, #fbc2eb 0%, #f7a8d2 100%)",
+        viewCount: 4000
+    },
+    {
+        id: 3113,
+        title: "大人女性に人気『ニュートラルベーシック』、色を引き算するコーデ術",
+        category: "ladies",
+        categoryLabel: "レディス",
+        summary: "ベージュ・アイボリー・グレージュのワントーンコーデが30〜40代に支持拡大。アクセサリー1点だけで印象を変える「シンプル×上質」スタイルがSNSで共感を集める。",
+        source: "Oggi Style",
+        sourceUrl: "#",
+        icon: "fa-circle-half-stroke",
+        gradient: "linear-gradient(135deg, #e0e0e0 0%, #c9b99a 100%)",
+        viewCount: 3300
+    },
+    {
+        id: 3114,
+        title: "メンズに広がる『スキンケアファースト』、グルーミング市場が過去最高を更新",
+        category: "mens",
+        categoryLabel: "メンズ",
+        summary: "洗顔・美容液・日焼け止めを毎日のルーティンに取り入れる男性が急増。コンビニでも男性向けスキンケアコーナーが拡大し、セルフケアへの意識変化が数字に表れている。",
+        source: "Men's Beauty",
+        sourceUrl: "#",
+        icon: "fa-spa",
+        gradient: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+        viewCount: 3700
+    },
+    {
+        id: 3115,
+        title: "『Y2Kメンズファッション』復活、低腰デニム＆ロゴTが20代を席巻",
+        category: "mens",
+        categoryLabel: "メンズ",
+        summary: "2000年代初頭のストリートスタイルが現代解釈で再登場。ビンテージ感のあるロゴTシャツ、バギーシルエット、チェーンアクセサリーがZ世代男性の定番スタイルに。",
+        source: "Street Snap",
+        sourceUrl: "#",
+        icon: "fa-denim",
+        gradient: "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)",
+        viewCount: 3400
+    },
 ];
 
 // 1日あたりの追加記事数
@@ -2459,24 +2519,32 @@ function getDailyArticleIndicesForDate(dateStr) {
     const dayOffset = Math.abs(elapsedDays);
     
     const cosmeIndices = [];
+    const snsIndices = [];
     const otherIndices = [];
     dailyArticlePool.forEach((article, index) => {
         if (article.category === 'cosme') {
             cosmeIndices.push(index);
+        } else if (article.category === 'sns') {
+            snsIndices.push(index);
         } else {
             otherIndices.push(index);
         }
     });
 
     const indices = [];
-    
-    // コスメ記事を必ず2つ選ぶ
-    for (let i = 0; i < 2; i++) {
+
+    // コスメ記事を必ず3つ選ぶ
+    for (let i = 0; i < 3; i++) {
         if (cosmeIndices.length > 0) {
-            indices.push(cosmeIndices[(dayOffset * 2 + i) % cosmeIndices.length]);
+            indices.push(cosmeIndices[(dayOffset * 3 + i) % cosmeIndices.length]);
         }
     }
-    
+
+    // SNS記事を必ず1つ選ぶ
+    if (snsIndices.length > 0) {
+        indices.push(snsIndices[dayOffset % snsIndices.length]);
+    }
+
     // 残りをその他の記事から選ぶ
     const remainingCount = ITEMS_PER_DAY - indices.length;
     for (let i = 0; i < remainingCount; i++) {
@@ -2484,7 +2552,7 @@ function getDailyArticleIndicesForDate(dateStr) {
             indices.push(otherIndices[(dayOffset * remainingCount + i) % otherIndices.length]);
         }
     }
-    
+
     return indices;
 }
 
