@@ -219,6 +219,75 @@ ul {
     white-space: nowrap;
 }
 
+/* PWA アップデートトースト */
+#sw-update-toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #2c3e50;
+    color: white;
+    padding: 14px 20px;
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    z-index: 9999;
+    animation: slideInBottom 0.4s ease-out;
+    white-space: nowrap;
+}
+
+#sw-update-toast .notif-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#sw-update-toast .notif-content .fa-rotate {
+    font-size: 1.1rem;
+    color: #3498db;
+}
+
+#sw-update-btn {
+    background: #3498db;
+    border: none;
+    color: white;
+    padding: 5px 14px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background 0.2s;
+}
+
+#sw-update-btn:hover {
+    background: #2980b9;
+}
+
+#sw-update-close {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 2px 4px;
+    line-height: 1;
+}
+
+#sw-update-close:hover {
+    color: white;
+}
+
+@keyframes slideInBottom {
+    from {
+        transform: translateX(-50%) translateY(80px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
 .mobile-menu-toggle {
     display: none;
     background: none;

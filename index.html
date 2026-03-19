@@ -148,12 +148,62 @@
 
     <script src="script.js"></script>
     <script>
+        // ---- PWA アップデート通知 ----
+        function showSWUpdateToast(worker) {
+            const existing = document.getElementById('sw-update-toast');
+            if (existing) existing.remove();
+
+            const toast = document.createElement('div');
+            toast.id = 'sw-update-toast';
+            toast.innerHTML = `
+                <div class="notif-content">
+                    <i class="fa-solid fa-rotate"></i>
+                    <span>新しいバージョンが公開されました</span>
+                    <button id="sw-update-btn">今すぐ更新</button>
+                    <button id="sw-update-close" aria-label="閉じる"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            `;
+            document.body.appendChild(toast);
+
+            document.getElementById('sw-update-btn').addEventListener('click', () => {
+                worker.postMessage({ type: 'SKIP_WAITING' });
+                toast.remove();
+            });
+            document.getElementById('sw-update-close').addEventListener('click', () => {
+                toast.remove();
+            });
+        }
+
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js').then(registration => {
-                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                }, err => {
-                    console.log('ServiceWorker registration failed: ', err);
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => {
+                        console.log('ServiceWorker registration successful with scope: ', reg.scope);
+
+                        // ページ再読み込み時に既に waiting 中の SW がある場合
+                        if (reg.waiting) {
+                            showSWUpdateToast(reg.waiting);
+                        }
+
+                        // 新しい SW のインストールを検知
+                        reg.addEventListener('updatefound', () => {
+                            const newWorker = reg.installing;
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    showSWUpdateToast(newWorker);
+                                }
+                            });
+                        });
+                    })
+                    .catch(err => console.log('ServiceWorker registration failed: ', err));
+
+                // SW が切り替わったらページをリロードして最新版を適用
+                let refreshing = false;
+                navigator.serviceWorker.addEventListener('controllerchange', () => {
+                    if (!refreshing) {
+                        refreshing = true;
+                        window.location.reload();
+                    }
                 });
             });
         }
