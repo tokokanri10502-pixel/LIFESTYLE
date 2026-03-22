@@ -1739,6 +1739,8 @@ function init() {
     setupArchive();
     setupFavoritesNav();
     checkDailyUpdate(); // 朝7時の更新チェック
+    setupMonthlyReport();
+    checkMonthlyReport();
 }
 
 // ホーム/ロゴボタンの設定
@@ -2657,3 +2659,323 @@ function showUpdateNotification() {
     }, 10000);
 }
 
+
+// ===== 月間ライフトレンドレポート機能 =====
+// ========================================
+
+// カテゴリ名ラベルマップ
+const CATEGORY_LABELS = {
+    wellness: 'ウェルネス', ladies: 'レディス', shoes: 'シューズ',
+    cosme: 'コスメ', color: 'カラー', work: 'ワークスタイル',
+    sns: 'SNS', living: 'リビング', mens: 'メンズ', kids: 'キッズ',
+    baby: 'ベビー', temperature: '気温予測'
+};
+
+/**
+ * 指定した「YYYY.MM」形式の月に属する newsData 記事を返す
+ */
+function getArticlesForMonth(yearMonth) {
+    return newsData.filter(item => item.date && item.date.startsWith(yearMonth));
+}
+
+/**
+ * 前月の "YYYY.MM" 文字列を返す
+ */
+function getPreviousMonthStr() {
+    const now = new Date();
+    const y = now.getMonth() === 0 ? now.getFullYear() - 1 : now.getFullYear();
+    const m = now.getMonth() === 0 ? 12 : now.getMonth();
+    return `${y}.${String(m).padStart(2, '0')}`;
+}
+
+/**
+ * カテゴリ別件数を集計して降順配列で返す
+ */
+function aggregateCategories(articles) {
+    const map = {};
+    articles.forEach(a => {
+        if (a.category) map[a.category] = (map[a.category] || 0) + 1;
+    });
+    return Object.entries(map)
+        .sort((a, b) => b[1] - a[1])
+        .map(([cat, count]) => ({ cat, label: CATEGORY_LABELS[cat] || cat, count }));
+}
+
+/**
+ * モックAI要約を生成する（実データから定型文を組み合わせ）
+ */
+function generateMockSummary(articles, yearMonth) {
+    if (articles.length === 0) {
+        return '<p>この月のデータが見つかりませんでした。</p>';
+    }
+
+    const cats = aggregateCategories(articles);
+    const top1 = cats[0] || { label: '不明', count: 0 };
+    const top2 = cats[1] || { label: '不明', count: 0 };
+    const topArticle = [...articles].sort((a, b) => (b.viewCount || 0) - (a.viewCount || 0))[0];
+
+    // 平均閲覧数
+    const avgView = Math.round(
+        articles.reduce((s, a) => s + (a.viewCount || 0), 0) / articles.length
+    );
+
+    // 翌月のカテゴリ予測（2位のカテゴリを提案）
+    const nextForecast = top2.label;
+
+    const parts = yearMonth.split('.');
+    const label = `${parts[0]}年${parseInt(parts[1])}月`;
+
+    const points = [
+        `📌 <strong>${label}は「${top1.label}」カテゴリが最多で、全体 ${articles.length}件中 <strong>${top1.count}件</strong> を占め、消費者の関心が集まりました。`,
+        `🔍 「${top2.label}」も注目度が高く ${top2.count}件 の記事が掲載されました。価格意識と体験価値が融合した消費動向が見られます。`,
+        `🏆 最も反響が大きかったのは「<strong>${topArticle ? topArticle.title : '（データなし）'}</strong>」で、閲覧数 ${topArticle ? topArticle.viewCount.toLocaleString() : '-'} を記録しました。`,
+        `📈 平均閲覧数は <strong>${avgView.toLocaleString()}</strong> PV。来月は「${nextForecast}」関連の動向に引き続き注目が集まると予測されます。`
+    ];
+
+    return points.map(p => `<p class="report-point">${p}</p>`).join('');
+}
+
+/**
+ * localStorage にレポートを保存する
+ */
+function saveMonthlyReport(yearMonth, summary, topArticles, cats, articleCount) {
+    const KEY = 'ltm_monthly_reports';
+    let reports = {};
+    try { reports = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { reports = {}; }
+    reports[yearMonth] = {
+        summary, topArticles, cats, articleCount,
+        savedAt: new Date().toISOString()
+    };
+    localStorage.setItem(KEY, JSON.stringify(reports));
+}
+
+/**
+ * localStorage から全レポートを取得する
+ */
+function loadMonthlyReports() {
+    try {
+        return JSON.parse(localStorage.getItem('ltm_monthly_reports') || '{}');
+    } catch (e) { return {}; }
+}
+
+/**
+ * モーダルを開き、指定月のレポートを描画する
+ */
+function showMonthlyReportModal(yearMonth) {
+    const modal = document.getElementById('monthly-report-modal');
+    if (!modal) return;
+
+    const parts = yearMonth.split('.');
+    const label = `${parts[0]}年${parseInt(parts[1])}月`;
+
+    const subtitle = document.getElementById('modal-subtitle');
+    if (subtitle) subtitle.textContent = `${label}のライフトレンド総集編`;
+
+    // 対象月の記事取得
+    const articles = getArticlesForMonth(yearMonth);
+
+    // トップ3記事（閲覧数順）
+    const topArticles = [...articles]
+        .sort((a, b) => (b.viewCount || 0) - (a.viewCount || 0))
+        .slice(0, 3);
+
+    // カテゴリ集計
+    const cats = aggregateCategories(articles);
+
+    // モックAI要約
+    const summary = generateMockSummary(articles, yearMonth);
+
+    // KPIカード描画
+    const kpiRow = document.getElementById('report-kpi-row');
+    if (kpiRow) {
+        const totalViews = articles.reduce((s, a) => s + (a.viewCount || 0), 0);
+        const avgView = articles.length > 0 ? Math.round(totalViews / articles.length) : 0;
+        kpiRow.innerHTML = `
+            <div class="kpi-card">
+                <i class="fa-solid fa-newspaper kpi-icon"></i>
+                <div class="kpi-value">${articles.length}<span class="kpi-unit">件</span></div>
+                <div class="kpi-label">掲載記事数</div>
+            </div>
+            <div class="kpi-card">
+                <i class="fa-solid fa-eye kpi-icon"></i>
+                <div class="kpi-value">${totalViews.toLocaleString()}<span class="kpi-unit">PV</span></div>
+                <div class="kpi-label">合計閲覧数</div>
+            </div>
+            <div class="kpi-card">
+                <i class="fa-solid fa-layer-group kpi-icon"></i>
+                <div class="kpi-value">${cats.length}<span class="kpi-unit">種</span></div>
+                <div class="kpi-label">カテゴリ数</div>
+            </div>
+            <div class="kpi-card">
+                <i class="fa-solid fa-arrow-trend-up kpi-icon"></i>
+                <div class="kpi-value">${avgView.toLocaleString()}<span class="kpi-unit">PV</span></div>
+                <div class="kpi-label">平均閲覧数</div>
+            </div>
+        `;
+    }
+
+    // AI要約テキスト描画
+    const summaryEl = document.getElementById('report-summary-text');
+    if (summaryEl) {
+        summaryEl.innerHTML = '';
+        setTimeout(() => {
+            summaryEl.innerHTML = summary;
+            summaryEl.classList.add('fade-in');
+        }, 150);
+    }
+
+    // TOP3記事描画
+    const topList = document.getElementById('report-top-articles-list');
+    if (topList) {
+        if (topArticles.length === 0) {
+            topList.innerHTML = '<p style="color:#aaa;">データがありません</p>';
+        } else {
+            topList.innerHTML = topArticles.map((a, i) => `
+                <div class="report-top-item">
+                    <div class="report-rank">${i === 0 ? '🥇' : i === 1 ? '🥈' : '🥉'}</div>
+                    <div class="report-top-info">
+                        <div class="report-top-category" style="background:${getCategoryColor(a.category)}">${a.categoryLabel || ''}</div>
+                        <div class="report-top-title">${a.title}</div>
+                        <div class="report-top-views"><i class="fa-solid fa-eye"></i> ${(a.viewCount || 0).toLocaleString()} PV</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+    }
+
+    // カテゴリバー描画
+    const catBars = document.getElementById('report-category-bars');
+    if (catBars) {
+        const max = cats[0] ? cats[0].count : 1;
+        catBars.innerHTML = cats.slice(0, 8).map(c => `
+            <div class="cat-bar-row">
+                <span class="cat-bar-label">${c.label}</span>
+                <div class="cat-bar-track">
+                    <div class="cat-bar-fill" style="width:${Math.round(c.count / max * 100)}%; background:${getCategoryColor(c.cat)};"></div>
+                </div>
+                <span class="cat-bar-count">${c.count}件</span>
+            </div>
+        `).join('');
+    }
+
+    // 履歴ボタン描画
+    renderHistoryButtons(yearMonth);
+
+    // LocalStorage に保存
+    saveMonthlyReport(yearMonth, summary, topArticles.map(a => a.id), cats, articles.length);
+
+    // モーダルを表示
+    modal.classList.add('visible');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+}
+
+/**
+ * 過去レポート履歴ボタンを描画する
+ */
+function renderHistoryButtons(activeMonth) {
+    const reports = loadMonthlyReports();
+    const historySection = document.getElementById('modal-history-section');
+    const historyBtns = document.getElementById('modal-history-btns');
+    if (!historyBtns) return;
+
+    const months = Object.keys(reports).sort().reverse();
+    if (months.length <= 1) {
+        if (historySection) historySection.style.display = 'none';
+        return;
+    }
+    if (historySection) historySection.style.display = 'flex';
+
+    historyBtns.innerHTML = months.map(m => {
+        const p = m.split('.');
+        const lbl = `${parseInt(p[1])}月`;
+        const isActive = m === activeMonth;
+        return `<button class="history-btn ${isActive ? 'active' : ''}" data-month="${m}">${lbl}</button>`;
+    }).join('');
+
+    historyBtns.querySelectorAll('.history-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            showMonthlyReportModal(btn.dataset.month);
+        });
+    });
+}
+
+/**
+ * モーダルを閉じる
+ */
+function closeMonthlyReportModal() {
+    const modal = document.getElementById('monthly-report-modal');
+    if (!modal) return;
+    modal.classList.remove('visible');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+}
+
+/**
+ * 月初に前月レポートを自動で表示するチェック（月が変わった最初の起動時のみ）
+ */
+function checkMonthlyReport() {
+    const now = new Date();
+    const dayOfMonth = now.getDate();
+    // 月初3日以内のみ自動表示
+    if (dayOfMonth > 3) return;
+
+    const prevMonth = getPreviousMonthStr();
+    const KEY_SHOWN = 'ltm_monthly_report_shown';
+    const lastShown = localStorage.getItem(KEY_SHOWN);
+    if (lastShown === prevMonth) return; // 今月分はもう表示済み
+
+    // 前月にデータがあれば表示
+    const prevArticles = getArticlesForMonth(prevMonth);
+    if (prevArticles.length === 0) return;
+
+    setTimeout(() => {
+        showMonthlyReportModal(prevMonth);
+        localStorage.setItem(KEY_SHOWN, prevMonth);
+    }, 2000);
+}
+
+/**
+ * 月間レポートのナビとモーダルイベントを初期化する
+ */
+function setupMonthlyReport() {
+    // 「月間レポート」ナビリンク
+    const navBtn = document.getElementById('nav-monthly-report');
+    if (navBtn) {
+        navBtn.addEventListener('click', e => {
+            e.preventDefault();
+            const prevMonth = getPreviousMonthStr();
+            const prevArticles = getArticlesForMonth(prevMonth);
+            const now = new Date();
+            const curYM = `${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, '0')}`;
+            showMonthlyReportModal(prevArticles.length > 0 ? prevMonth : curYM);
+
+            // モバイルメニューを閉じる
+            const nav = document.querySelector('.main-nav');
+            const toggle = document.getElementById('mobile-menu-toggle');
+            if (nav && nav.classList.contains('active')) {
+                nav.classList.remove('active');
+                if (toggle) toggle.querySelector('i').classList.replace('fa-xmark', 'fa-bars');
+            }
+        });
+    }
+
+    // モーダルを閉じるボタン
+    ['modal-close', 'modal-close-footer'].forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) btn.addEventListener('click', closeMonthlyReportModal);
+    });
+
+    // オーバーレイクリックで閉じる
+    const modal = document.getElementById('monthly-report-modal');
+    if (modal) {
+        modal.addEventListener('click', e => {
+            if (e.target === modal) closeMonthlyReportModal();
+        });
+    }
+
+    // ESCキーで閉じる
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeMonthlyReportModal();
+    });
+}
