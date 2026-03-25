@@ -1,4 +1,4 @@
-const CACHE_NAME = 'life-trend-monitor-v1';
+const CACHE_NAME = 'life-trend-monitor-v2';
 const urlsToCache = [
   './',
   './index.html',
@@ -41,13 +41,25 @@ self.addEventListener('message', event => {
 });
 
 self.addEventListener('fetch', event => {
+  const url = new URL(event.request.url);
+
+  // script.js は毎回ネットワークから取得（データ更新を確実に反映）
+  if (url.pathname.endsWith('script.js')) {
+    event.respondWith(
+      fetch(event.request)
+        .then(response => {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+          return response;
+        })
+        .catch(() => caches.match(event.request))
+    );
+    return;
+  }
+
+  // それ以外はキャッシュ優先（従来通り）
   event.respondWith(
     caches.match(event.request)
-      .then(response => {
-        if (response) {
-          return response;
-        }
-        return fetch(event.request);
-      })
+      .then(response => response || fetch(event.request))
   );
 });
