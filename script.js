@@ -1539,135 +1539,268 @@ const newsData = [
 
 
 // ========================================
-// コラムデータ（固定4件 ＋ ストックの中から日付で2件選択）
+// コラム統一プール
+// 鮮度の高い順に自動選出され、期限切れは自動的に非表示になる
+// 新しいコラムを追加するだけで古いものと自動的に入れ替わる
 // ========================================
-const staticColumns = [
+const columnPool = [
+    // --- 最新コラム（2026年3月〜） ---
+    {
+        id: 7,
+        tag: "住まい",
+        title: "『マイクロリビング』が都市の住み方を再定義する",
+        body: `20平米以下の超小型住居が、都市部の若年層を中心に急速に支持を広げています。背景にあるのは、住居費の高騰だけではありません。
+
+        「本当に必要なモノだけと暮らす」というミニマリズムの深化です。AIが収納を最適化し、家具は多機能で変形可能。限られたスペースが逆に創造性を刺激するという声も。
+
+        さらに共有スペースの充実により、個室は「眠る・集中する」場所、共有部は「繋がる・楽しむ」場所という分離が確立しつつあります。所有面積ではなく、体験の密度で住まいの価値を測る時代が到来しています。`,
+        author: { name: "藤田 陽子", title: "都市住居デザイナー", initials: "藤", color: "#2c3e50" },
+        readTime: 6,
+        headerColor: "linear-gradient(to right, #2c3e50, #4ca1af)",
+        publishedDate: "2026.03.25",
+        expiresInDays: 90
+    },
+    {
+        id: 8,
+        tag: "教育",
+        title: "『リスキリング・サブスク』が変える、学び直しの民主化",
+        body: `月額制で専門スキルを学び放題のプラットフォームが、社会人の学び直しを劇的に加速させています。特に40〜50代の利用率が前年比3倍に急増。
+
+        従来の「資格取得型」の学習から、実務に直結する「プロジェクト型」の学習へとパラダイムが変化。AIメンターが個人の経験やスキルギャップを分析し、最適なカリキュラムを自動生成する仕組みが支持されています。
+
+        「学び」が一部のエリートの特権ではなく、誰もがいつでもキャリアを再構築できる社会インフラとなりつつあります。`,
+        author: { name: "山本 太一", title: "人材開発コンサルタント", initials: "山", color: "#8e44ad" },
+        readTime: 5,
+        headerColor: "linear-gradient(to right, #8e44ad, #3498db)",
+        publishedDate: "2026.03.20",
+        expiresInDays: 90
+    },
+    {
+        id: 9,
+        tag: "家計・マネー",
+        title: "『見えない支出』を可視化する——サブスク断捨離の最前線",
+        body: `平均的な世帯が契約するサブスクリプションは月12件、合計月額1.8万円に達するという調査結果が話題を呼んでいます。多くの人が「使っていないのに払い続けている」状態に気づいていません。
+
+        この問題に対し、AIが銀行口座やクレジットカードの明細を自動分析し、利用頻度の低いサブスクを特定・解約提案するサービスが急成長。「断捨離」の概念が、モノから定額支出へと拡張されています。
+
+        家計の最適化は、単なる節約ではなく「自分が本当に価値を感じるものに集中投資する」行為。この意識変革が、消費行動全体に波及しつつあります。`,
+        author: { name: "吉田 奈々", title: "家計見直しアドバイザー", initials: "吉", color: "#e67e22" },
+        readTime: 6,
+        headerColor: "linear-gradient(to right, #f39c12, #e74c3c)",
+        publishedDate: "2026.03.15",
+        expiresInDays: 90
+    },
+    {
+        id: 10,
+        tag: "フィットネス",
+        title: "『ゼロジム』時代——器具なし・場所なしで完結するフィットネス革命",
+        body: `ジムに通わず、自宅でも公園でも、身一つで高強度トレーニングを完結させる「ゼロジム」スタイルが世界的に拡大しています。
+
+        ARグラスがパーソナルトレーナーの動きをリアルタイムで投影し、AIがフォームを補正。場所や器具の制約を完全に取り払ったフィットネスが、忙しい現代人の運動習慣を根本から変えています。
+
+        この流れは従来のフィットネス産業に大きなインパクトを与えています。ジムの価値は「設備」から「コミュニティと体験」へとシフトし、生き残りをかけた業態転換が始まっています。`,
+        author: { name: "高橋 翔", title: "フィットネス・イノベーター", initials: "高", color: "#e74c3c" },
+        readTime: 5,
+        headerColor: "linear-gradient(to right, #eb3349, #f45c43)",
+        publishedDate: "2026.03.10",
+        expiresInDays: 90
+    },
+    // --- 2026年3月上旬〜2月 ---
     {
         id: 1,
         tag: "市場分析",
         title: "2026年、暮らしのキーワードは『自分回帰』",
         body: `物価高や技術の進化が加速する中、消費者の関心は「他人の評価」から「自分自身の心地よさ」へと明確にシフトしています。
-        
+
         かつての「映え」を追求する消費から、自分の体調や精神状態に合わせたパーソナライズされた体験への投資。この『自分回帰』の流れは、住居、ワークスタイル、ウェルネスのあらゆる場面で顕在化しています。
-        
+
         特に「家」は単なる居住スペースを超え、AIが健康管理をサポートし、心身を整えるリトリートの場としての役割を深めています。このパラダイムシフトが、2026年のビジネスとライフスタイルのあり方を根本から変えていくでしょう。`,
         author: { name: "佐藤 健二", title: "トレンドリサーチ所長", initials: "佐", color: "#34495e" },
         readTime: 6,
-        headerColor: "linear-gradient(to right, #4b6cb7, #182848)"
+        headerColor: "linear-gradient(to right, #4b6cb7, #182848)",
+        publishedDate: "2026.03.01",
+        expiresInDays: 90
     },
     {
         id: 2,
         tag: "テクノロジー",
         title: "AIと共創する、新しい『余白』の楽しみ方",
         body: `AIが日々のルーチンワークを代替することで生まれる、私たち自身の「余白」。2026年は、この時間をどう使うかが幸福度の鍵を握ります。
-        
+
         単なる時短ではなく、AIをクリエイティブなパートナーとして活用し、人間特有の五感を刺激する活動に没頭する。例えば、AIが提案する栄養バランスを元に、あえて時間をかけて手料理を楽しむといった「不便さの再定義」が注目されています。
-        
+
         効率を追求するテクノロジーの影で、私たちが人間らしさを取り戻すための新しいライフスタイルが芽吹いています。`,
         author: { name: "田中 雅也", title: "テックライフ・ジャーナリスト", initials: "田", color: "#3498db" },
         readTime: 5,
-        headerColor: "linear-gradient(to right, #24c6dc, #514a9d)"
+        headerColor: "linear-gradient(to right, #24c6dc, #514a9d)",
+        publishedDate: "2026.02.15",
+        expiresInDays: 90
     },
     {
         id: 3,
         tag: "ワークスタイル",
         title: "『ノマド・バン』が変える、場所を選ばない働き方の終着点",
         body: `高速衛星通信と高容量バッテリーの普及により、真の意味で場所の制約がなくなりました。今、注目されているのは、居住と仕事、そして旅を完全に融合させた「ノマド・バン」によるライフスタイルです。
-        
+
         都市の利便性を享受しながら、時には大自然の真ん中で重要な会議を開く。この柔軟性が、個人の生産性と精神的充足感を最大化させています。
-        
+
         「定住」という従来の概念が揺らぎ、地図そのものが自分自身のオフィスであり家となる。そんな自由な働き方が、2026年の新しいスタンダードになりつつあります。`,
         author: { name: "鈴木 直樹", title: "ライフスタイル・デザイナー", initials: "鈴", color: "#27ae60" },
         readTime: 7,
-        headerColor: "linear-gradient(to right, #43e97b, #38f9d7)"
+        headerColor: "linear-gradient(to right, #43e97b, #38f9d7)",
+        publishedDate: "2026.02.01",
+        expiresInDays: 90
     },
+    // --- 2026年1月 ---
     {
         id: 4,
         tag: "ウェルネス",
         title: "『スリープテック』が解き明かす、究極の休息の科学",
         body: `2026年のウェルネス市場において、最も革新的な進化を遂げたのは「睡眠」です。単なる計測を超え、脳波誘導や環境の自動調整により、短時間で深い眠りを実現する技術が一般的になりました。
-        
+
         しかし、技術以上に重要なのは「休息を投資と捉える」意識の変容です。パフォーマンス向上のために戦略的に眠る。この合理的なアプローチが、現代人のメンタルヘルスと創造性を根底から支えています。
-        
+
         科学に基づいた休息術が、私たちのポテンシャルをどこまで引き出せるのか。最新の研究事例を紐解きます。`,
         author: { name: "小林 恵", title: "ウェルネス研究家", initials: "小", color: "#e84393" },
         readTime: 8,
-        headerColor: "linear-gradient(to right, #f093fb, #f5576c)"
-    }
-];
-
-const rollingColumnsStock = [
+        headerColor: "linear-gradient(to right, #f093fb, #f5576c)",
+        publishedDate: "2026.01.15",
+        expiresInDays: 90
+    },
+    // --- 2025年12月以前（古いコラム） ---
     {
         id: 5,
         tag: "サステナブル",
         title: "『循環型クローゼット』——捨てるから循環するアパレルへ",
         body: `ファッションの価値は「所有」から「循環」へと大きく舵を切りました。2026年の最先端は、AIが自分のワードローブを把握し、最適なタイミングで中古市場やアップサイクルへ誘導する仕組みです。
-        
+
         新品を買うことが悪ではなく、それをいかに美しく使い切り、次へと繋ぐか。この意識がZ世代を中心に広がり、中古品のステータスが新品を凌駕する場面も増えています。
-        
+
         クローゼットそのものが生きているように呼吸し、常に自分に最適な形で循環し続ける。そんな新しいお洒落の形を紹介します。`,
         author: { name: "中村 美咲", title: "サステナブル衣生活アドバイザー", initials: "中", color: "#16a085" },
         readTime: 6,
-        headerColor: "linear-gradient(135deg, #a1c4fd, #c2e9fb)"
+        headerColor: "linear-gradient(135deg, #a1c4fd, #c2e9fb)",
+        publishedDate: "2025.12.10",
+        expiresInDays: 90
     },
     {
         id: 6,
         tag: "SNS文化",
         title: "『スロー・ソーシャル』——繋がりすぎをあえて断つ豊かさ",
         body: `常に誰かと繋がっている状態に、人々が疲れを感じ始めています。2026年のSNSトレンドは、あえて返信を求めない、あるいは限られた親しい人だけと静かに時間を共有する「スロー・ソーシャル」です。
-        
+
         「いいね」の数に一喜一憂するのではなく、自分の感じたことを丁寧に記録し、残す。この日記のような活用法が、メンタルヘルスの安定に繋がると評価されています。
-        
+
         デジタルな繋がりの中に、自分だけの静かな場所を確保する。そんな新しいメディアとの付き合い方を提案します。`,
         author: { name: "渡辺 裕太", title: "メディア文化論研究者", initials: "渡", color: "#f39c12" },
         readTime: 5,
-        headerColor: "linear-gradient(to right, #ff9a9e, #fecfef)"
+        headerColor: "linear-gradient(to right, #ff9a9e, #fecfef)",
+        publishedDate: "2025.11.20",
+        expiresInDays: 90
     }
 ];
 
-// コラム描画
+// ========================================
+// コラム鮮度判定
+// ========================================
+function getColumnFreshness(column) {
+    const now = new Date();
+    const published = new Date(column.publishedDate.replace(/\./g, '-'));
+    const expiresInDays = column.expiresInDays || 90;
+    const daysSincePublished = Math.floor((now - published) / (1000 * 60 * 60 * 24));
+    const daysUntilExpiry = expiresInDays - daysSincePublished;
+
+    if (daysSincePublished < 0) return { status: 'fresh', label: 'NEW', daysInfo: '公開前' };
+    if (daysSincePublished <= 30) return { status: 'fresh', label: 'NEW', daysInfo: `公開${daysSincePublished}日目` };
+    if (daysUntilExpiry > 30) return { status: 'active', label: '', daysInfo: `残り${daysUntilExpiry}日` };
+    if (daysUntilExpiry > 0) return { status: 'aging', label: '更新推奨', daysInfo: `残り${daysUntilExpiry}日` };
+    return { status: 'expired', label: '要差替', daysInfo: `${Math.abs(daysUntilExpiry)}日超過` };
+}
+
+// ========================================
+// コラムカードのレンダリング
+// ========================================
 function renderColumns() {
     if (!columnGrid) return;
     columnGrid.innerHTML = '';
 
-    // 日付に基づいてローテーション枠を選択（3日周期）
-    const rotationPeriod = 3 * 24 * 60 * 60 * 1000;
-    const now = Date.now();
-    const sequenceIndex = Math.floor(now / rotationPeriod);
+    // プールから期限切れを除外し、鮮度順（公開日の新しい順）にソートして6件選出
+    const DISPLAY_COUNT = 6;
+    const freshPool = columnPool
+        .filter(col => getColumnFreshness(col).status !== 'expired')
+        .sort((a, b) => {
+            const dateA = new Date(a.publishedDate.replace(/\./g, '-'));
+            const dateB = new Date(b.publishedDate.replace(/\./g, '-'));
+            return dateB - dateA;
+        });
 
-    const stockSize = rollingColumnsStock.length;
-    const startIndex = (sequenceIndex * 2) % stockSize;
+    // 期限切れコラムはバックフィルしない（空きスロットで改廃を促進）
+    const displayColumns = freshPool.slice(0, DISPLAY_COUNT);
+    const emptySlots = DISPLAY_COUNT - displayColumns.length;
 
-    const pickedRollingColumns = [];
-    if (stockSize > 0) {
-        pickedRollingColumns.push(rollingColumnsStock[startIndex]);
-        if (stockSize > 1) {
-            pickedRollingColumns.push(rollingColumnsStock[(startIndex + 1) % stockSize]);
+    // 鮮度サマリーを計算（プール全体が対象）
+    let agingCount = 0;
+    let expiredCount = 0;
+    columnPool.forEach(col => {
+        const f = getColumnFreshness(col);
+        if (f.status === 'aging') agingCount++;
+        if (f.status === 'expired') expiredCount++;
+    });
+
+    const summaryEl = document.getElementById('column-freshness-summary');
+    if (summaryEl) {
+        if (agingCount === 0 && expiredCount === 0) {
+            summaryEl.innerHTML = '<span class="freshness-summary-ok"><i class="fa-solid fa-circle-check"></i> すべてのコラムは最新です</span>';
+        } else {
+            let parts = [];
+            if (agingCount > 0) parts.push(`<span class="freshness-summary-aging"><i class="fa-solid fa-triangle-exclamation"></i> 更新推奨: ${agingCount}件</span>`);
+            if (expiredCount > 0) parts.push(`<span class="freshness-summary-expired"><i class="fa-solid fa-circle-xmark"></i> 要差替: ${expiredCount}件</span>`);
+            summaryEl.innerHTML = parts.join('<span class="freshness-summary-divider"> / </span>');
         }
     }
 
-    // 固定 + 動的を結合
-    const displayColumns = [...staticColumns, ...pickedRollingColumns];
-
     displayColumns.forEach(item => {
+        const freshness = getColumnFreshness(item);
         const card = document.createElement('article');
-        card.className = 'column-card';
+        card.className = `column-card${freshness.status === 'expired' ? ' column-expired' : ''}`;
 
         // 改行を処理
         const formattedBody = item.body.replace(/\n\s+/g, '<br>');
 
+        // 鮮度バッジHTML
+        let badgeHtml = '';
+        if (freshness.status === 'fresh') {
+            badgeHtml = `<span class="column-freshness-badge badge-fresh"><i class="fa-solid fa-sparkles"></i> ${freshness.label}</span>`;
+        } else if (freshness.status === 'aging') {
+            badgeHtml = `<span class="column-freshness-badge badge-aging"><i class="fa-solid fa-triangle-exclamation"></i> ${freshness.label}</span>`;
+        } else if (freshness.status === 'expired') {
+            badgeHtml = `<span class="column-freshness-badge badge-expired"><i class="fa-solid fa-circle-xmark"></i> ${freshness.label}</span>`;
+        }
+
+        // 期限切れ警告メッセージ
+        const expiredMsg = freshness.status === 'expired'
+            ? `<div class="column-expired-notice"><i class="fa-solid fa-rotate"></i> このコラムは掲載期限を過ぎています（${freshness.daysInfo}）</div>`
+            : '';
+
         card.innerHTML = `
-            <div class="column-card-header" style="background: ${item.headerColor};"></div>
+            <div class="column-card-header" style="background: ${item.headerColor};">
+                ${badgeHtml}
+            </div>
             <div class="column-card-body">
-                <span class="column-tag"># ${item.tag}</span>
+                <div class="column-tag-row">
+                    <span class="column-tag"># ${item.tag}</span>
+                    <span class="column-pub-date"><i class="fa-regular fa-calendar"></i> ${item.publishedDate}</span>
+                </div>
                 <h3>${item.title}</h3>
                 <p class="column-text-content">${formattedBody}</p>
-                
+
                 <div class="column-action">
                     <button class="btn-column-toggle">
                         <span class="btn-label">全文を詳しく読む</span> <i class="fa-solid fa-chevron-down"></i>
                     </button>
                 </div>
+
+                ${expiredMsg}
 
                 <div class="column-card-footer">
                     <div class="column-author">
@@ -1703,6 +1836,22 @@ function renderColumns() {
 
         columnGrid.appendChild(card);
     });
+
+    // 空きスロットにプレースホルダーを表示（改廃を促進）
+    for (let i = 0; i < emptySlots; i++) {
+        const placeholder = document.createElement('article');
+        placeholder.className = 'column-card column-placeholder';
+        placeholder.innerHTML = `
+            <div class="column-card-header" style="background: linear-gradient(135deg, #dfe6e9, #b2bec3);">
+            </div>
+            <div class="column-card-body" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:200px;text-align:center;color:#636e72;">
+                <i class="fa-solid fa-pen-to-square" style="font-size:2.5rem;margin-bottom:12px;color:#b2bec3;"></i>
+                <h3 style="color:#636e72;font-size:1rem;">新しいコラムを募集中</h3>
+                <p style="font-size:0.85rem;margin-top:8px;color:#95a5a6;">期限切れコラムが差し替えられました。<br>新しい専門家コラムの寄稿をお待ちしています。</p>
+            </div>
+        `;
+        columnGrid.appendChild(placeholder);
+    }
 }
 
 const newsGrid = document.getElementById('news-grid');
@@ -2083,11 +2232,19 @@ function createNewsCard(item, isRanking = false, rank = 0) {
 function renderRanking() {
     rankingGrid.innerHTML = '';
 
-    // スコア計算とフィルタリング
-    const rankingData = newsData
+    // スコア計算とフィルタリング（同一タイトルの重複排除）
+    const sorted = newsData
         .filter(item => item.viewCount && !isArchiveDate(item.date))
-        .sort((a, b) => calculateTrendScore(b) - calculateTrendScore(a))
-        .slice(0, 3);
+        .sort((a, b) => calculateTrendScore(b) - calculateTrendScore(a));
+
+    const seenTitles = new Set();
+    const rankingData = [];
+    for (const item of sorted) {
+        if (seenTitles.has(item.title)) continue;
+        seenTitles.add(item.title);
+        rankingData.push(item);
+        if (rankingData.length >= 3) break;
+    }
 
     rankingData.forEach((item, index) => {
         const card = createNewsCard(item, true, index + 1);

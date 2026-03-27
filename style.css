@@ -790,6 +790,124 @@ ul {
     white-space: nowrap;
 }
 
+/* コラム鮮度管理 */
+.column-card-header {
+    position: relative;
+}
+
+.column-freshness-badge {
+    position: absolute;
+    top: -4px;
+    right: 12px;
+    padding: 4px 12px;
+    border-radius: 0 0 8px 8px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+.badge-fresh {
+    background: #27ae60;
+    color: #fff;
+}
+
+.badge-aging {
+    background: #f39c12;
+    color: #fff;
+    animation: pulse-aging 2s ease-in-out infinite;
+}
+
+.badge-expired {
+    background: #e74c3c;
+    color: #fff;
+    animation: pulse-expired 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-aging {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+@keyframes pulse-expired {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+.column-expired {
+    opacity: 0.55;
+    filter: grayscale(0.3);
+    transition: opacity 0.3s, filter 0.3s;
+}
+
+.column-expired:hover {
+    opacity: 0.85;
+    filter: grayscale(0);
+}
+
+.column-expired-notice {
+    background: #fdecea;
+    color: #c0392b;
+    border: 1px solid #e74c3c33;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.column-tag-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.column-tag-row .column-tag {
+    margin-bottom: 0;
+}
+
+.column-pub-date {
+    font-size: 0.72rem;
+    color: #aaa;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.column-freshness-summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: 12px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    vertical-align: middle;
+}
+
+.freshness-summary-ok {
+    color: #27ae60;
+}
+
+.freshness-summary-aging {
+    color: #f39c12;
+}
+
+.freshness-summary-expired {
+    color: #e74c3c;
+}
+
+.freshness-summary-divider {
+    color: #ccc;
+    margin: 0 2px;
+}
+
 /* アーカイブ用スタイル */
 .archive-action {
     display: flex;
