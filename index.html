@@ -4,6 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <script>
+    // v11: 古いデイリー履歴を強制クリア（重複修正のため）
+    (function() {
+        var VER = 'v11_backfill';
+        if (localStorage.getItem('life_trend_logic_version') !== VER) {
+            localStorage.removeItem('life_trend_daily_history');
+            localStorage.setItem('life_trend_logic_version', VER);
+        }
+    })();
+    </script>
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="white">
@@ -199,7 +212,7 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=2026.03.28.v11"></script>
     <script>
         // ---- PWA アップデート通知 ----
         function showSWUpdateToast(worker) {
@@ -225,6 +238,20 @@
             document.getElementById('sw-update-close').addEventListener('click', () => {
                 toast.remove();
             });
+        }
+
+        // 強制的に古いService Workerを解除して最新を取得
+        if (window.location.search.indexOf('refresh=true') === -1) {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistrations().then(registrations => {
+                    for (let registration of registrations) {
+                        registration.unregister();
+                    }
+                    if (registrations.length > 0) {
+                        window.location.href = window.location.href + (window.location.href.indexOf('?') === -1 ? '?' : '&') + 'refresh=true';
+                    }
+                });
+            }
         }
 
         if ('serviceWorker' in navigator) {
@@ -261,6 +288,10 @@
             });
         }
     </script>
+    <!-- デバッグ用バージョン表示 -->
+    <div id="debug-version-badge" style="position: fixed; bottom: 5px; right: 5px; font-size: 10px; color: rgba(255,255,255,0.3); z-index: 9999; pointer-events: none;">
+        Build: 2026.03.28.v6
+    </div>
 </body>
 
 </html>

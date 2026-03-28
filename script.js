@@ -1933,7 +1933,21 @@ function renderNews() {
         return matchesCategory && matchesSearch && matchesFavorites;
     });
 
-    // 日付の降順（新しい順）でソート
+    // ★ タイトル重複を表示直前に排除（同じタイトルは最新日付のものを優先）
+    // 完全一致＋類似タイトル（先頭15文字が同じ）も排除する
+    filteredData.sort((a, b) => b.date.localeCompare(a.date)); // まず日付降順で並べ
+    const seenTitles = new Set();
+    const seenPrefixes = new Set();
+    filteredData = filteredData.filter(item => {
+        const t = item.title.trim();
+        const prefix = t.substring(0, 15); // 類似判定用の先頭15文字
+        if (seenTitles.has(t) || seenPrefixes.has(prefix)) return false;
+        seenTitles.add(t);
+        seenPrefixes.add(prefix);
+        return true;
+    });
+
+    // 日付の降順（新しい順）でソート（重複排除後に再ソート）
     filteredData.sort((a, b) => b.date.localeCompare(a.date));
 
     // 新着とアーカイブを分ける (isArchiveDateは7日前かどうかで判定)
@@ -2479,78 +2493,6 @@ const dailyArticlePool = [
         viewCount: 4100
     },
     {
-        id: 3101,
-        title: "マルニの新作バッグ「パピエ」登場。折り紙から着想を得た造形美",
-        category: "ladies",
-        categoryLabel: "レディス",
-        summary: "バイカラーやレオパード柄のスタイリッシュな新作トートバッグ。折り紙のような構造が、日常に芸術的な彩りを添える。",
-        source: "Fashion Press",
-        sourceUrl: "#",
-        icon: "fa-shopping-bag",
-        gradient: "linear-gradient(135deg, #485563 0%, #29323c 100%)",
-        viewCount: 3100
-    },
-    {
-        id: 3102,
-        title: "Nike『Air Max』最新作、再生素材を使用した環境対応モデル",
-        category: "shoes",
-        categoryLabel: "シューズ",
-        summary: "圧倒的なクッション性はそのままに、製造工程を見直し環境負荷を低減。機能性と持続可能性を両立させた次世代のアイコン。",
-        source: "Nike News",
-        sourceUrl: "#",
-        icon: "fa-bolt",
-        gradient: "linear-gradient(135deg, #f39c12 0%, #d35400 100%)",
-        viewCount: 3500
-    },
-    {
-        id: 3103,
-        title: "生成AIによる「自分専用キャリアコーチ」が仕事の常識を変える",
-        category: "work",
-        categoryLabel: "ワークスタイル",
-        summary: "個人のスキルと志向を学習し、最適なネクストアクションを提案するパーソナルAI。2026年は、AIに相談するビジネスパーソンが多数派に。",
-        source: "Career Weekly",
-        sourceUrl: "#",
-        icon: "fa-user-tie",
-        gradient: "linear-gradient(135deg, #2c3e50 0%, #4ca1af 100%)",
-        viewCount: 2100
-    },
-    {
-        id: 3104,
-        title: "サステナブルな『おさがり』プラットフォーム、キッズ市場で急成長",
-        category: "kids",
-        categoryLabel: "キッズ",
-        summary: "成長の早い子供服を、品質を維持したまま循環させる新サービス。親世代の環境意識の高まりを受け、リユースが当たり前の選択肢に。",
-        source: "Family Tech",
-        sourceUrl: "#",
-        icon: "fa-child",
-        gradient: "linear-gradient(135deg, #f6d365 0%, #fda085 100%)",
-        viewCount: 1420
-    },
-    {
-        id: 3105,
-        title: "Instagramで話題の『淡色カフェ』、全国各地で集客記録を更新",
-        category: "sns",
-        categoryLabel: "SNS",
-        summary: "ベージュや白を基調とした内装。写真映えだけでなく、その空間での「体験」を共有することがステータスとなるカルチャーの定着。",
-        source: "Insta Vibes",
-        sourceUrl: "#",
-        icon: "fa-brands fa-instagram",
-        gradient: "linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)",
-        viewCount: 4200
-    },
-    {
-        id: 3106,
-        title: "ユニクロ『次世代ライフウェア』、AI分析による究極のフィット感",
-        category: "mens",
-        categoryLabel: "メンズ",
-        summary: "100万人の体型データから導き出した、誰にでも似合う黄金シルエット。ベーシックの枠を超えた「機能美」の到達点。",
-        source: "Uniqlo Press",
-        sourceUrl: "#",
-        icon: "fa-shirt",
-        gradient: "linear-gradient(135deg, #ff0000 0%, #cc0000 100%)",
-        viewCount: 3200
-    },
-    {
         id: 3107,
         title: "TikTok発『#今日のコーデ』、10億再生超えで街のファッションを変える",
         category: "sns",
@@ -2658,128 +2600,359 @@ const dailyArticlePool = [
         gradient: "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)",
         viewCount: 3400
     },
+    {
+        id: 3201,
+        title: "『脳疲労ケア』の重要性が浸透。デジタルデトックス・アイマスクがヒット",
+        category: "wellness",
+        categoryLabel: "ウェルネス",
+        summary: "情報過多による脳の疲れを癒やす専用アイマスクが登場。微弱な振動と温熱効果で、視覚情報から解放される「静寂の10分間」を提案する新習慣がビジネス層に支持。",
+        source: "Health Tech Japan",
+        sourceUrl: "#",
+        icon: "fa-brain",
+        gradient: "linear-gradient(135deg, #6a11cb 0%, #2575fc 100%)",
+        viewCount: 4100
+    },
+    {
+        id: 3202,
+        title: "ビーガンネイル『植物由来80%』、爪に優しい美しさが新基準に",
+        category: "cosme",
+        categoryLabel: "コスメ",
+        summary: "トウモロコシやジャガイモなどの植物成分を主原料としたネイルカラーが急増。ツンとした臭いがなく、セルフネイル派の間で「罪悪感のない美容」として定着。",
+        source: "Beauty Eco",
+        sourceUrl: "#",
+        icon: "fa-hand-sparkles",
+        gradient: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)",
+        viewCount: 3200
+    },
+    {
+        id: 3203,
+        title: "Threads発の『#深夜の考察』がトレンド。長文テキスト文化が再燃",
+        category: "sns",
+        categoryLabel: "SNS",
+        summary: "映像よりもテキスト。Threadsで夜な夜な繰り広げられる深い考察投稿が、若年層の間で「静かなSNS」として人気。短尺動画疲れの反動が起きている。",
+        source: "Social Reporter",
+        sourceUrl: "#",
+        icon: "fa-brands fa-threads",
+        gradient: "linear-gradient(135deg, #000000 0%, #ffffff 100%)",
+        viewCount: 5200
+    },
+    {
+        id: 3204,
+        title: "『防災インテリア』が普及。家具と避難グッズが融合した新スタイル",
+        category: "living",
+        categoryLabel: "リビング",
+        summary: "一見お洒落なクッションがそのまま防災頭巾に。普段はスツールとして使い、緊急時は簡易トイレに。日常に溶け込む防災思想が、都市部マンション層に浸透。",
+        source: "Interior Plus",
+        sourceUrl: "#",
+        icon: "fa-house-shield",
+        gradient: "linear-gradient(135deg, #f6d365 0%, #fda085 100%)",
+        viewCount: 3800
+    },
+    {
+        id: 3205,
+        title: "『AI副業』マッチングサービスが登場。スキルアップと実益を両立",
+        category: "work",
+        categoryLabel: "ワークスタイル",
+        summary: "AIツールを駆使した文章作成や画像生成の案件をAIが自動提案。本業の傍らでAIリテラシーを高めたい層が急増し、既存のクラウドソーシングを凌駕する勢い。",
+        source: "New Work Era",
+        sourceUrl: "#",
+        icon: "fa-laptop-code",
+        gradient: "linear-gradient(135deg, #2c3e50 0%, #000000 100%)",
+        viewCount: 4500
+    },
+    {
+        id: 3206,
+        title: "キッズ向け『AI学習トイ』、子どもの興味に合わせて物語が変化",
+        category: "kids",
+        categoryLabel: "キッズ",
+        summary: "子どもが話しかける内容によって、絵本の結末や学習クイズの難易度がAIで変動。強制的な学習ではなく「好奇心の拡張」を目的とした次世代教育玩具が話題。",
+        source: "EduTech Kids",
+        sourceUrl: "#",
+        icon: "fa-puzzle-piece",
+        gradient: "linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%)",
+        viewCount: 2900
+    },
+    {
+        id: 3207,
+        title: "『週末断食リトリート』、スマホを取り上げられるデジタルデトックス付き",
+        category: "wellness",
+        categoryLabel: "ウェルネス",
+        summary: "都心から1時間の古民家で行われる週末断食。入室時にスマホを預けることで、完全に自分自身の内面と向き合う。2ヶ月先まで予約が埋まるほどの人気を見せている。",
+        source: "Wellness Guide",
+        sourceUrl: "#",
+        icon: "fa-leaf",
+        gradient: "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)",
+        viewCount: 3400
+    },
+    {
+        id: 3208,
+        title: "『パーソナルカラーAI』対応コスメ什器、ドラッグストアに一斉導入",
+        category: "cosme",
+        categoryLabel: "コスメ",
+        summary: "鏡の前に立つだけでAIが似合うアイシャドウやリップを瞬時に提案。その場でテスターを使わずにシミュレーションできる衛生的な購入体験が、若年層の心を掴んでいる。",
+        source: "Cosme Stats",
+        sourceUrl: "#",
+        icon: "fa-wand-magic-sparkles",
+        gradient: "linear-gradient(135deg, #f6d365 0%, #fda085 100%)",
+        viewCount: 6200
+    },
+    {
+        id: 3209,
+        title: "TikTok発『#手ぶら散歩』が海外でも流行。極小ミニポーチが完売",
+        category: "sns",
+        categoryLabel: "SNS",
+        summary: "スマホ1台と鍵だけで外出するミニマリストな散歩動画が流行。アクセサリー感覚で身に付ける極小ポーチが、有名ブランドから続々と発表され、モード界のトレンドへ。",
+        source: "Global Viral News",
+        sourceUrl: "#",
+        icon: "fa-person-walking",
+        gradient: "linear-gradient(135deg, #cfd9df 0%, #e2ebf0 100%)",
+        viewCount: 4800
+    },
+    {
+        id: 3210,
+        title: "音響家具『サウンドソファ』、座るだけで身体全体で音楽を体感",
+        category: "living",
+        categoryLabel: "リビング",
+        summary: "ソファ内部に専用スピーカーと振動ユニットを内蔵。映画鑑賞やゲーム時に、まるで映画館のような臨場感を自宅で味わえる。ホームシアターの新しい形として注目。",
+        source: "Sound Life",
+        sourceUrl: "#",
+        icon: "fa-couch",
+        gradient: "linear-gradient(135deg, #485563 0%, #29323c 100%)",
+        viewCount: 3100
+    },
+    {
+        id: 3211,
+        title: "『デジタル名刺』がビジネスの新常識。QRコード1つで全てのSNSを共有",
+        category: "work",
+        categoryLabel: "ワークスタイル",
+        summary: "名刺を渡すのではなく、スマホ同士をかざすだけ。経歴、ポートフォリオ、SNSを瞬時に同期。紙の削減だけでなく、その後のコンタクト漏れを防ぐツールとして普及。",
+        source: "Biz Tech JP",
+        sourceUrl: "#",
+        icon: "fa-address-card",
+        gradient: "linear-gradient(135deg, #bdc3c7 0%, #2c3e50 100%)",
+        viewCount: 2700
+    },
+    {
+        id: 3212,
+        title: "『スマートプランター』が植物の「声」をLINEで通知。枯れない園芸へ",
+        category: "living",
+        categoryLabel: "リビング",
+        summary: "「お腹空いた（肥料不足）」「喉乾いた（水不足）」などの植物の状態を擬人化してスマホに通知。初心者でも愛着を持って育てられる仕組みが、在宅勤務層の間で大ヒット。",
+        source: "Green Living",
+        sourceUrl: "#",
+        icon: "fa-seedling",
+        gradient: "linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%)",
+        viewCount: 2500
+    },
+    {
+        id: 3213,
+        title: "『サウナ飯』専門アプリが登場。ととのった後の最高の一杯を提案",
+        category: "wellness",
+        categoryLabel: "ウェルネス",
+        summary: "サウナの場所、水風呂の温度に合わせて、近隣の至高のサ飯をAIがレコメンド。サウナ愛好家（サウナー）同士のコミュニティ機能も搭載し、新しい食文化を形成中。",
+        source: "Sauna Digest",
+        sourceUrl: "#",
+        icon: "fa-utensils",
+        gradient: "linear-gradient(135deg, #f83600 0%, #f9d423 100%)",
+        viewCount: 3900
+    },
+    {
+        id: 3214,
+        title: "『バーチャルメイク』の精度が極まる。肌の凹凸までリアルに再現",
+        category: "cosme",
+        categoryLabel: "コスメ",
+        summary: "カメラ越しの顔に一瞬でメイクを施すAR技術が進化。従来よりもリアルな質感を再現し、リモート会議の「身だしなみツール」として、もはや欠かせない存在に。",
+        source: "AR Beauty Hub",
+        sourceUrl: "#",
+        icon: "fa-video",
+        gradient: "linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%)",
+        viewCount: 4300
+    },
+    {
+        id: 3215,
+        title: "『ショート動画編集』を習い事にするZ世代。自己表現スキルの必須化",
+        category: "sns",
+        categoryLabel: "SNS",
+        summary: "英会話やピアノと同じ感覚で、動画編集を学ぶ若者が急増。個人の発信力がキャリアに直結する時代、より高度な演出とストーリーテリングを求めるニーズが爆発している。",
+        source: "Creator Economy",
+        sourceUrl: "#",
+        icon: "fa-film",
+        gradient: "linear-gradient(135deg, #ff0000 0%, #ff6b6b 100%)",
+        viewCount: 5500
+    },
 ];
 
 // 1日あたりの追加記事数
 const ITEMS_PER_DAY = 7;
 
 // ========================================
-// 指定した日付に対応するデイリー記事インデックス配列を取得
-// 毎日指定された数（ITEMS_PER_DAY）の異なる記事を選択
-// 2日間で重複しないように、日付をベースにしたローテーションを強化
+// [v8] 日付に基づくシード乱数（xorshift）
 // ========================================
-function getDailyArticleIndicesForDate(dateStr) {
-    const baseDate = new Date(2026, 0, 1);
-    const parts = dateStr.split('.');
-    const targetDate = new Date(parts[0], parts[1] - 1, parts[2]);
-    targetDate.setHours(0, 0, 0, 0);
+function xorshiftRand(seed) {
+    let s = (seed ^ 0x9e3779b9) >>> 0;
+    if (s === 0) s = 1;
+    s ^= s << 13;
+    s ^= s >> 17;
+    s ^= s << 5;
+    return (s >>> 0) / 4294967296;
+}
 
-    const elapsedDays = Math.floor((targetDate - baseDate) / (1000 * 60 * 60 * 24));
-    const dayOffset = Math.abs(elapsedDays);
-    
-    const cosmeIndices = [];
-    const snsIndices = [];
-    const otherIndices = [];
-    dailyArticlePool.forEach((article, index) => {
-        if (article.category === 'cosme') {
-            cosmeIndices.push(index);
-        } else if (article.category === 'sns') {
-            snsIndices.push(index);
+// ========================================
+// [v8] シードシャッフル（xorshiftベース）
+// ========================================
+function seededShuffle(array, seed) {
+    const shuffled = [...array];
+    let s = (seed + 1) >>> 0;
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        s ^= s << 13; s ^= s >> 17; s ^= s << 5; s = s >>> 0;
+        const j = s % (i + 1);
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
+// ========================================
+// [v8] 日付文字列から日数オフセットを取得
+// ========================================
+function getDayNumber(dateStr) {
+    const parts = dateStr.split('.');
+    const d = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+    d.setHours(0, 0, 0, 0);
+    const epoch = new Date(2026, 0, 1);
+    return Math.round((d - epoch) / 86400000);
+}
+
+// ========================================
+// [v8] 指定日のデイリー記事インデックスを取得
+// excludePoolIndices: 前日のインデックスSet（直接除外）
+// ========================================
+function getDailyArticleIndicesForDate(dateStr, excludePoolIndices = new Set()) {
+    const dayNum = getDayNumber(dateStr);
+
+    // ハードコード記事のタイトルセット（プールから除外）
+    const hardcodedTitles = new Set(newsData.map(d => d.title.trim()));
+
+    // 候補リスト：前日インデックスとハードコードタイトルの両方を除外
+    const preferred = [];  // 前日と被らないもの
+    const fallback  = [];  // 前日と被るが必要なら使えるもの
+
+    dailyArticlePool.forEach((article, idx) => {
+        if (hardcodedTitles.has(article.title.trim())) return; // ハードコードと被る→除外
+        if (excludePoolIndices.has(idx)) {
+            fallback.push(idx);  // 前日と被る→フォールバック
         } else {
-            otherIndices.push(index);
+            preferred.push(idx); // 前日と被らない→優先
         }
     });
 
-    const indices = [];
+    // 日付シードでシャッフル
+    const shuffledPreferred = seededShuffle(preferred, dayNum * 1000 + 7);
+    const shuffledFallback  = seededShuffle(fallback,  dayNum * 1000 + 13);
 
-    // コスメ記事を必ず3つ選ぶ
-    for (let i = 0; i < 3; i++) {
-        if (cosmeIndices.length > 0) {
-            indices.push(cosmeIndices[(dayOffset * 3 + i) % cosmeIndices.length]);
-        }
+    // 優先リストから増やし、足りなければフォールバックを使う
+    const result = [...shuffledPreferred.slice(0, ITEMS_PER_DAY)];
+    if (result.length < ITEMS_PER_DAY) {
+        const need = ITEMS_PER_DAY - result.length;
+        result.push(...shuffledFallback.slice(0, need));
     }
 
-    // SNS記事を必ず1つ選ぶ
-    if (snsIndices.length > 0) {
-        indices.push(snsIndices[dayOffset % snsIndices.length]);
-    }
-
-    // 残りをその他の記事から選ぶ
-    const remainingCount = ITEMS_PER_DAY - indices.length;
-    for (let i = 0; i < remainingCount; i++) {
-        if (otherIndices.length > 0) {
-            indices.push(otherIndices[(dayOffset * remainingCount + i) % otherIndices.length]);
-        }
-    }
-
-    return indices;
+    return result;
 }
 
 // ========================================
 // ユニークIDを日付とインデックスから生成
 // ========================================
 function getDailyUniqueId(dateStr, indexOffset) {
-    const baseDate = new Date(2026, 0, 1);
-    const parts = dateStr.split('.');
-    const targetDate = new Date(parts[0], parts[1] - 1, parts[2]);
-    targetDate.setHours(0, 0, 0, 0);
-    const elapsedDays = Math.floor((targetDate - baseDate) / (1000 * 60 * 60 * 24));
-    // IDの衝突を防ぐため係数は10を維持（1日最大7件）
-    return 90000 + Math.abs(elapsedDays) * 10 + indexOffset;
+    const dayNum = getDayNumber(dateStr);
+    return 90000 + Math.abs(dayNum) * 10 + indexOffset;
 }
 
 // ========================================
-// デイリー記事をnewsDataへ追加（蓄積型）
-// 毎日最低10つのトレンドを収集するように変更
-// localStorage に履歴配列を保存し最大30日分を維持する
+// [v8] デイリー記事をnewsDataへ追加
+// 「おそってたらやり直す」ではなく、「おそかない方法」で今日分だけを生成
 // ========================================
 function injectDailyArticle() {
-    const STORAGE_KEY = 'life_trend_daily_history';
-    const MAX_DAYS = 30;
-    const todayStr = getRelativeDate(0);
+    const STORAGE_KEY    = 'life_trend_daily_history';
+    const VERSION_KEY    = 'life_trend_logic_version';
+    const CURRENT_VER    = 'v11_backfill';
+    const KEEP_DAYS      = 14;
 
-    // ── 履歴の読み込み ──
+    const todayStr     = getRelativeDate(0);
+
+    // 履歴読み込み
     let history = [];
     try {
         history = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-    } catch (e) {
+    } catch (e) { history = []; }
+
+    // バージョン変更時は全履歴をリセット（プールのインデックスがずれるため）
+    if (localStorage.getItem(VERSION_KEY) !== CURRENT_VER) {
         history = [];
+        localStorage.setItem(VERSION_KEY, CURRENT_VER);
     }
 
-    // ── 今日のエントリが未追加なら追加 ──
-    const todayEntries = history.filter(entry => entry.date === todayStr);
-    if (todayEntries.length < ITEMS_PER_DAY) {
-        // 足りない分を追加
-        const indices = getDailyArticleIndicesForDate(todayStr);
-        for (let i = todayEntries.length; i < ITEMS_PER_DAY; i++) {
-            const poolIndex = indices[i];
-            const uniqueId = getDailyUniqueId(todayStr, i);
-            
-            // 既に同じIDが存在しないかチェック
-            if (!history.find(entry => entry.uniqueId === uniqueId)) {
-                history.push({ date: todayStr, uniqueId, poolIndex });
-            }
+    // 過去14日分＋今日分をバックフィル
+    let changed = false;
+    for (let d = KEEP_DAYS; d >= 0; d--) {
+        const dateStr = getRelativeDate(-d);
+        const dayEntries = history.filter(e => e.date === dateStr);
+        if (dayEntries.length >= ITEMS_PER_DAY) continue;
+
+        // 直近3日間のインデックスを除外
+        const recentIndicesSet = new Set();
+        for (let r = 1; r <= 3; r++) {
+            const pastStr = getRelativeDate(-d - r);
+            history.filter(e => e.date === pastStr).forEach(e => recentIndicesSet.add(e.poolIndex));
         }
 
-        // 上限を超えた古い記事を削除（記事単位で管理。30日分）
-        if (history.length > MAX_DAYS * ITEMS_PER_DAY) {
-            history = history.slice(-(MAX_DAYS * ITEMS_PER_DAY));
+        const selectedIndices = getDailyArticleIndicesForDate(dateStr, recentIndicesSet);
+        const dayIndexSet = new Set(dayEntries.map(e => e.poolIndex));
+
+        let slot = dayEntries.length;
+        for (const poolIndex of selectedIndices) {
+            if (slot >= ITEMS_PER_DAY) break;
+            if (dayIndexSet.has(poolIndex)) continue;
+            const uniqueId = getDailyUniqueId(dateStr, slot);
+            if (!history.find(e => e.uniqueId === uniqueId)) {
+                history.push({ date: dateStr, uniqueId, poolIndex });
+                dayIndexSet.add(poolIndex);
+                changed = true;
+            }
+            slot++;
         }
+    }
+
+    // 古い履歴を削除して保存
+    const cutoffStr = getRelativeDate(-KEEP_DAYS);
+    history = history.filter(e => e.date >= cutoffStr);
+    if (changed) {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
     }
 
-    // ── 履歴の全エントリを newsData へ注入 ──
-    history.forEach(entry => {
-        const exists = newsData.some(item => item.id === entry.uniqueId);
-        if (!exists) {
-            const template = dailyArticlePool[entry.poolIndex];
-            if (template) {
-                const article = { ...template, id: entry.uniqueId, date: entry.date };
-                newsData.push(article);
-            }
-        }
+    // newsDataへ注入（同タイトルは最新日付のもののみ）
+    const sorted = [...history].sort((a, b) => b.date.localeCompare(a.date));
+    const existingIds    = new Set(newsData.map(d => d.id));
+    const existingTitles = new Set(newsData.map(d => d.title.trim()));
+
+    sorted.forEach(entry => {
+        if (existingIds.has(entry.uniqueId)) return;
+
+        const tpl = dailyArticlePool[entry.poolIndex];
+        if (!tpl) return;
+        if (existingTitles.has(tpl.title.trim())) return;
+
+        const article = { ...tpl, id: entry.uniqueId, date: entry.date };
+        newsData.push(article);
+        existingIds.add(entry.uniqueId);
+        existingTitles.add(tpl.title.trim());
     });
+
+    // 画面にビルド番号を表示
+    const badge = document.getElementById('debug-version-badge');
+    if (badge) badge.textContent = 'Build: ' + CURRENT_VER;
 }
+
+
 
 // 朝7時の更新チェック
 function checkDailyUpdate() {
